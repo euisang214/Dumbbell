@@ -14,6 +14,27 @@
 		022E02A321D3865F0052501A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 022E02A121D3865F0052501A /* LaunchScreen.storyboard */; };
 		022E02AE21D3865F0052501A /* Microbit_test_0_2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022E02AD21D3865F0052501A /* Microbit_test_0_2Tests.swift */; };
 		022E02B921D3865F0052501A /* Microbit_test_0_2UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022E02B821D3865F0052501A /* Microbit_test_0_2UITests.swift */; };
+		022E02CA21D388110052501A /* RecordsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022E02C821D388110052501A /* RecordsView.swift */; };
+		022E02CB21D388110052501A /* RecordsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 022E02C921D388110052501A /* RecordsView.xib */; };
+		022E02CE21D389720052501A /* LiveAnalysis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022E02CC21D389720052501A /* LiveAnalysis.swift */; };
+		022E02CF21D389720052501A /* LiveAnalysis.xib in Resources */ = {isa = PBXBuildFile; fileRef = 022E02CD21D389720052501A /* LiveAnalysis.xib */; };
+		022E02D221D38D6F0052501A /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022E02D021D38D6F0052501A /* Home.swift */; };
+		022E02D321D38D6F0052501A /* Home.xib in Resources */ = {isa = PBXBuildFile; fileRef = 022E02D121D38D6F0052501A /* Home.xib */; };
+		024EA95021D705690050CCAD /* RangeOfMotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024EA94F21D705690050CCAD /* RangeOfMotion.swift */; };
+		024EA95221D81B410050CCAD /* Speed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024EA95121D81B410050CCAD /* Speed.swift */; };
+		02A943F321D4301B001E925A /* MicrobitAccelerometer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A943F021D4301B001E925A /* MicrobitAccelerometer.swift */; };
+		02A943F421D4301B001E925A /* Microbit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A943F121D4301B001E925A /* Microbit.swift */; };
+		02A943F521D4301B001E925A /* MicrobitController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A943F221D4301B001E925A /* MicrobitController.swift */; };
+		02A943FE21D43074001E925A /* Similarity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A943F921D43073001E925A /* Similarity.swift */; };
+		02A943FF21D43074001E925A /* DataHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A943FA21D43073001E925A /* DataHolder.swift */; };
+		02A9440021D43074001E925A /* DataCollecter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A943FB21D43074001E925A /* DataCollecter.swift */; };
+		02A9440121D43074001E925A /* DetectPause.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A943FC21D43074001E925A /* DetectPause.swift */; };
+		02A9440221D43074001E925A /* RepCount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A943FD21D43074001E925A /* RepCount.swift */; };
+		02D2765821D6216E003B2B7B /* microbitPic.png in Resources */ = {isa = PBXBuildFile; fileRef = 02D2765721D6216E003B2B7B /* microbitPic.png */; };
+		02D2765A21D621E3003B2B7B /* microbitPic2.png in Resources */ = {isa = PBXBuildFile; fileRef = 02D2765921D621E3003B2B7B /* microbitPic2.png */; };
+		2BB3009FC1D02776A08DE5D5 /* Pods_Microbit_test_0_2UITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E163E64323E54CA5A641769D /* Pods_Microbit_test_0_2UITests.framework */; };
+		C08E78642750D4F2256EF244 /* Pods_Microbit_test_0_2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9428C09B2CACCDA519D99FB8 /* Pods_Microbit_test_0_2.framework */; };
+		E86373FA5E8D9DB973CA8631 /* Pods_Microbit_test_0_2Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBC3E0286539D97CCE843D2B /* Pods_Microbit_test_0_2Tests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +68,33 @@
 		022E02B421D3865F0052501A /* Microbit_test_0.2UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Microbit_test_0.2UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		022E02B821D3865F0052501A /* Microbit_test_0_2UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Microbit_test_0_2UITests.swift; sourceTree = "<group>"; };
 		022E02BA21D3865F0052501A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		022E02C821D388110052501A /* RecordsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordsView.swift; sourceTree = "<group>"; };
+		022E02C921D388110052501A /* RecordsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecordsView.xib; sourceTree = "<group>"; };
+		022E02CC21D389720052501A /* LiveAnalysis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveAnalysis.swift; sourceTree = "<group>"; };
+		022E02CD21D389720052501A /* LiveAnalysis.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LiveAnalysis.xib; sourceTree = "<group>"; };
+		022E02D021D38D6F0052501A /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
+		022E02D121D38D6F0052501A /* Home.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Home.xib; sourceTree = "<group>"; };
+		024EA94F21D705690050CCAD /* RangeOfMotion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RangeOfMotion.swift; sourceTree = "<group>"; };
+		024EA95121D81B410050CCAD /* Speed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Speed.swift; sourceTree = "<group>"; };
+		02A943F021D4301B001E925A /* MicrobitAccelerometer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MicrobitAccelerometer.swift; sourceTree = "<group>"; };
+		02A943F121D4301B001E925A /* Microbit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Microbit.swift; sourceTree = "<group>"; };
+		02A943F221D4301B001E925A /* MicrobitController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MicrobitController.swift; sourceTree = "<group>"; };
+		02A943F921D43073001E925A /* Similarity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Similarity.swift; sourceTree = "<group>"; };
+		02A943FA21D43073001E925A /* DataHolder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataHolder.swift; sourceTree = "<group>"; };
+		02A943FB21D43074001E925A /* DataCollecter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataCollecter.swift; sourceTree = "<group>"; };
+		02A943FC21D43074001E925A /* DetectPause.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetectPause.swift; sourceTree = "<group>"; };
+		02A943FD21D43074001E925A /* RepCount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepCount.swift; sourceTree = "<group>"; };
+		02D2765721D6216E003B2B7B /* microbitPic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = microbitPic.png; sourceTree = "<group>"; };
+		02D2765921D621E3003B2B7B /* microbitPic2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = microbitPic2.png; sourceTree = "<group>"; };
+		7882FFE7699FA2166F8594FC /* Pods-Microbit_test_0.2UITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Microbit_test_0.2UITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Microbit_test_0.2UITests/Pods-Microbit_test_0.2UITests.debug.xcconfig"; sourceTree = "<group>"; };
+		91C35B7D4D491D0FF4CCD1EA /* Pods-Microbit_test_0.2.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Microbit_test_0.2.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Microbit_test_0.2/Pods-Microbit_test_0.2.debug.xcconfig"; sourceTree = "<group>"; };
+		925C8FA7C8CF1549865F17AD /* Pods-Microbit_test_0.2Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Microbit_test_0.2Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Microbit_test_0.2Tests/Pods-Microbit_test_0.2Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		9428C09B2CACCDA519D99FB8 /* Pods_Microbit_test_0_2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Microbit_test_0_2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A764B878A185EA062D4C91FD /* Pods-Microbit_test_0.2UITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Microbit_test_0.2UITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Microbit_test_0.2UITests/Pods-Microbit_test_0.2UITests.release.xcconfig"; sourceTree = "<group>"; };
+		C5FC891BFF2ECE9C940A5AC7 /* Pods-Microbit_test_0.2Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Microbit_test_0.2Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Microbit_test_0.2Tests/Pods-Microbit_test_0.2Tests.release.xcconfig"; sourceTree = "<group>"; };
+		E163E64323E54CA5A641769D /* Pods_Microbit_test_0_2UITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Microbit_test_0_2UITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EBC3E0286539D97CCE843D2B /* Pods_Microbit_test_0_2Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Microbit_test_0_2Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FFE92FF83BA857891C9B84B5 /* Pods-Microbit_test_0.2.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Microbit_test_0.2.release.xcconfig"; path = "Pods/Target Support Files/Pods-Microbit_test_0.2/Pods-Microbit_test_0.2.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +102,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C08E78642750D4F2256EF244 /* Pods_Microbit_test_0_2.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -61,6 +110,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E86373FA5E8D9DB973CA8631 /* Pods_Microbit_test_0_2Tests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -68,6 +118,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2BB3009FC1D02776A08DE5D5 /* Pods_Microbit_test_0_2UITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,6 +132,8 @@
 				022E02AC21D3865F0052501A /* Microbit_test_0.2Tests */,
 				022E02B721D3865F0052501A /* Microbit_test_0.2UITests */,
 				022E029621D3865D0052501A /* Products */,
+				0AF50BFAC94C7D26812F7381 /* Pods */,
+				6D4F82704F0A5E0B60E35419 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -97,6 +150,10 @@
 		022E029721D3865D0052501A /* Microbit_test_0.2 */ = {
 			isa = PBXGroup;
 			children = (
+				02D2765421D61C41003B2B7B /* Photos */,
+				02A943EF21D4301B001E925A /* Microbit */,
+				02A943F821D43054001E925A /* DataHandlers */,
+				02A943EE21D42F79001E925A /* Views */,
 				022E029821D3865D0052501A /* AppDelegate.swift */,
 				022E029A21D3865D0052501A /* ViewController.swift */,
 				022E029C21D3865D0052501A /* Main.storyboard */,
@@ -125,6 +182,75 @@
 			path = Microbit_test_0.2UITests;
 			sourceTree = "<group>";
 		};
+		02A943EE21D42F79001E925A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				022E02CC21D389720052501A /* LiveAnalysis.swift */,
+				022E02CD21D389720052501A /* LiveAnalysis.xib */,
+				022E02C821D388110052501A /* RecordsView.swift */,
+				022E02C921D388110052501A /* RecordsView.xib */,
+				022E02D021D38D6F0052501A /* Home.swift */,
+				022E02D121D38D6F0052501A /* Home.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		02A943EF21D4301B001E925A /* Microbit */ = {
+			isa = PBXGroup;
+			children = (
+				02A943F121D4301B001E925A /* Microbit.swift */,
+				02A943F021D4301B001E925A /* MicrobitAccelerometer.swift */,
+				02A943F221D4301B001E925A /* MicrobitController.swift */,
+			);
+			path = Microbit;
+			sourceTree = "<group>";
+		};
+		02A943F821D43054001E925A /* DataHandlers */ = {
+			isa = PBXGroup;
+			children = (
+				02A943FA21D43073001E925A /* DataHolder.swift */,
+				02A943FB21D43074001E925A /* DataCollecter.swift */,
+				024EA94F21D705690050CCAD /* RangeOfMotion.swift */,
+				02A943FC21D43074001E925A /* DetectPause.swift */,
+				02A943FD21D43074001E925A /* RepCount.swift */,
+				024EA95121D81B410050CCAD /* Speed.swift */,
+				02A943F921D43073001E925A /* Similarity.swift */,
+			);
+			path = DataHandlers;
+			sourceTree = "<group>";
+		};
+		02D2765421D61C41003B2B7B /* Photos */ = {
+			isa = PBXGroup;
+			children = (
+				02D2765721D6216E003B2B7B /* microbitPic.png */,
+				02D2765921D621E3003B2B7B /* microbitPic2.png */,
+			);
+			path = Photos;
+			sourceTree = "<group>";
+		};
+		0AF50BFAC94C7D26812F7381 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				91C35B7D4D491D0FF4CCD1EA /* Pods-Microbit_test_0.2.debug.xcconfig */,
+				FFE92FF83BA857891C9B84B5 /* Pods-Microbit_test_0.2.release.xcconfig */,
+				925C8FA7C8CF1549865F17AD /* Pods-Microbit_test_0.2Tests.debug.xcconfig */,
+				C5FC891BFF2ECE9C940A5AC7 /* Pods-Microbit_test_0.2Tests.release.xcconfig */,
+				7882FFE7699FA2166F8594FC /* Pods-Microbit_test_0.2UITests.debug.xcconfig */,
+				A764B878A185EA062D4C91FD /* Pods-Microbit_test_0.2UITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		6D4F82704F0A5E0B60E35419 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9428C09B2CACCDA519D99FB8 /* Pods_Microbit_test_0_2.framework */,
+				EBC3E0286539D97CCE843D2B /* Pods_Microbit_test_0_2Tests.framework */,
+				E163E64323E54CA5A641769D /* Pods_Microbit_test_0_2UITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -132,9 +258,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 022E02BD21D3865F0052501A /* Build configuration list for PBXNativeTarget "Microbit_test_0.2" */;
 			buildPhases = (
+				18C1750402AAED9F4E851E64 /* [CP] Check Pods Manifest.lock */,
 				022E029121D3865D0052501A /* Sources */,
 				022E029221D3865D0052501A /* Frameworks */,
 				022E029321D3865D0052501A /* Resources */,
+				1834FFB0DEC7293769690F3B /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -149,6 +277,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 022E02C021D3865F0052501A /* Build configuration list for PBXNativeTarget "Microbit_test_0.2Tests" */;
 			buildPhases = (
+				CE989E8F576676053B0EA571 /* [CP] Check Pods Manifest.lock */,
 				022E02A521D3865F0052501A /* Sources */,
 				022E02A621D3865F0052501A /* Frameworks */,
 				022E02A721D3865F0052501A /* Resources */,
@@ -167,6 +296,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 022E02C321D3865F0052501A /* Build configuration list for PBXNativeTarget "Microbit_test_0.2UITests" */;
 			buildPhases = (
+				1512A081BADFBDFAF2844C12 /* [CP] Check Pods Manifest.lock */,
 				022E02B021D3865F0052501A /* Sources */,
 				022E02B121D3865F0052501A /* Frameworks */,
 				022E02B221D3865F0052501A /* Resources */,
@@ -230,8 +360,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				022E02A321D3865F0052501A /* LaunchScreen.storyboard in Resources */,
+				022E02CB21D388110052501A /* RecordsView.xib in Resources */,
+				02D2765A21D621E3003B2B7B /* microbitPic2.png in Resources */,
 				022E02A021D3865F0052501A /* Assets.xcassets in Resources */,
 				022E029E21D3865D0052501A /* Main.storyboard in Resources */,
+				022E02D321D38D6F0052501A /* Home.xib in Resources */,
+				022E02CF21D389720052501A /* LiveAnalysis.xib in Resources */,
+				02D2765821D6216E003B2B7B /* microbitPic.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -251,12 +386,100 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		1512A081BADFBDFAF2844C12 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Microbit_test_0.2UITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		1834FFB0DEC7293769690F3B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Microbit_test_0.2/Pods-Microbit_test_0.2-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/MBCircularProgressBar/MBCircularProgressBar.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBCircularProgressBar.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Microbit_test_0.2/Pods-Microbit_test_0.2-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		18C1750402AAED9F4E851E64 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Microbit_test_0.2-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CE989E8F576676053B0EA571 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Microbit_test_0.2Tests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		022E029121D3865D0052501A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02A943F521D4301B001E925A /* MicrobitController.swift in Sources */,
+				02A943FF21D43074001E925A /* DataHolder.swift in Sources */,
+				02A9440021D43074001E925A /* DataCollecter.swift in Sources */,
+				024EA95221D81B410050CCAD /* Speed.swift in Sources */,
+				02A9440121D43074001E925A /* DetectPause.swift in Sources */,
+				02A943F321D4301B001E925A /* MicrobitAccelerometer.swift in Sources */,
+				022E02CA21D388110052501A /* RecordsView.swift in Sources */,
+				02A943FE21D43074001E925A /* Similarity.swift in Sources */,
+				022E02CE21D389720052501A /* LiveAnalysis.swift in Sources */,
+				02A943F421D4301B001E925A /* Microbit.swift in Sources */,
+				022E02D221D38D6F0052501A /* Home.swift in Sources */,
+				024EA95021D705690050CCAD /* RangeOfMotion.swift in Sources */,
 				022E029B21D3865D0052501A /* ViewController.swift in Sources */,
+				02A9440221D43074001E925A /* RepCount.swift in Sources */,
 				022E029921D3865D0052501A /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -430,9 +653,11 @@
 		};
 		022E02BE21D3865F0052501A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 91C35B7D4D491D0FF4CCD1EA /* Pods-Microbit_test_0.2.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = UG74W2TLJ8;
 				INFOPLIST_FILE = Microbit_test_0.2/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -447,9 +672,11 @@
 		};
 		022E02BF21D3865F0052501A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FFE92FF83BA857891C9B84B5 /* Pods-Microbit_test_0.2.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = UG74W2TLJ8;
 				INFOPLIST_FILE = Microbit_test_0.2/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -464,6 +691,7 @@
 		};
 		022E02C121D3865F0052501A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 925C8FA7C8CF1549865F17AD /* Pods-Microbit_test_0.2Tests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -484,6 +712,7 @@
 		};
 		022E02C221D3865F0052501A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C5FC891BFF2ECE9C940A5AC7 /* Pods-Microbit_test_0.2Tests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -504,6 +733,7 @@
 		};
 		022E02C421D3865F0052501A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7882FFE7699FA2166F8594FC /* Pods-Microbit_test_0.2UITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -523,6 +753,7 @@
 		};
 		022E02C521D3865F0052501A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A764B878A185EA062D4C91FD /* Pods-Microbit_test_0.2UITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
