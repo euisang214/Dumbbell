@@ -47,18 +47,33 @@ class RangeOfMotion
         if standardDifference != nil
         {
             recentDifference = Double( abs(Int32(recentRange![0]-recentRange![1])) )
+            if recentDifference < standardDifference! { rangeOfMotionSimilarity.append(Int16 (recentDifference/standardDifference!*Double(100) )) }
+            else
+            {
+                standardDifference = recentDifference
+                rangeOfMotionSimilarity.append(100)
+            }
             //getting percentage
-            rangeOfMotionSimilarity.append(Int16 (recentDifference/standardDifference!*Double(100) ))
             dataHolder.rangeOfMotion = rangeOfMotionSimilarity.last!
         }
         else
         {
+            print("Standard difference calculation for \(name): " + recentRange![0].description + " " + recentRange![1].description)
             standardDifference = Double( abs(Int32(recentRange![0]-recentRange![1])) )*0.98
-            dataHolder.rangeOfMotion = -1
+            dataHolder.rangeOfMotion = 100
         }
+        
+        if dataHolder.rangeOfMotion > 100 { print(name + " " + recentRange![0].description + " " + recentRange![1].description + "  " + standardDifference!.description) }
 
         recentRange?.removeAll()
         recentReps?.removeAll()
+    }
     
+    public func resetData()
+    {
+        recentReps?.removeAll()
+        recentRange?.removeAll()
+        standardDifference = nil
+        rangeOfMotionSimilarity.removeAll()
     }
 }

@@ -8,7 +8,14 @@
 
 import UIKit
 
+protocol HomeDelegate
+{
+    func prepareForNextSet()
+}
+
 class Home: UIViewController, UpdateConnectionStatLabelDelegate, LiveAnalysisDelegate {
+    
+    public static var delegate:HomeDelegate?
 
     //  @IBOutlet weak var logView: UITextView!
 
@@ -32,7 +39,7 @@ class Home: UIViewController, UpdateConnectionStatLabelDelegate, LiveAnalysisDel
     
     @IBAction func disconnect(_ sender: UIButton)
     {
-        
+        disconnectMicrobits()
     }
     
     private func connectionLabelUpdate(connectionStat:UILabel!, isConnected: Bool)
@@ -64,16 +71,18 @@ class Home: UIViewController, UpdateConnectionStatLabelDelegate, LiveAnalysisDel
     //MARK: Implementation required for LiveAnalysisDelegate
     public func disconnectMicrobits()
     {
+        let microbit = ViewController.microbitController?.microbit
         if connect.currentTitle == "Connecting"
         {
-            ViewController.microbitController?.stopScanning()
+            microbit!.stopScanning()
             disconnect.isEnabled = false
             connect.setTitle("Connect", for: .normal)
             connect.isEnabled = true
+            microbit!.disconnect()
         }
         else
         {
-            ViewController.microbitController?.disconnect()
+            microbit!.disconnect()
             let after = DispatchTime.now() + 0.5
             DispatchQueue.main.asyncAfter(deadline: after)
             {
@@ -83,6 +92,8 @@ class Home: UIViewController, UpdateConnectionStatLabelDelegate, LiveAnalysisDel
                 self.disconnect.setTitle("Disconnected", for: .normal)
             }
         }
+        Microbit.microbitPeripherals?.removeAll()
+        Home.delegate?.prepareForNextSet()
     }
     
     override func viewDidLoad() {

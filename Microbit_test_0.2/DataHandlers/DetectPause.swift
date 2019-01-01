@@ -25,9 +25,7 @@ class DetectPause
         {
             let recentD = dThreeD.suffix(from: dThreeD.count-199)
             
-            for element in recentD { if abs(Int32(element)) > 3 { return false } }
-            
-            if average(array: recentD) < 1 { return true }
+            if average(array: recentD) < 0.75 { return true }
         }
         return false
     }

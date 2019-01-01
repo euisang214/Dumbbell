@@ -210,10 +210,10 @@
 			children = (
 				02A943FA21D43073001E925A /* DataHolder.swift */,
 				02A943FB21D43074001E925A /* DataCollecter.swift */,
-				024EA94F21D705690050CCAD /* RangeOfMotion.swift */,
 				02A943FC21D43074001E925A /* DetectPause.swift */,
-				02A943FD21D43074001E925A /* RepCount.swift */,
+				024EA94F21D705690050CCAD /* RangeOfMotion.swift */,
 				024EA95121D81B410050CCAD /* Speed.swift */,
+				02A943FD21D43074001E925A /* RepCount.swift */,
 				02A943F921D43073001E925A /* Similarity.swift */,
 			);
 			path = DataHandlers;

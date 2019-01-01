@@ -38,15 +38,13 @@ class RepCounter
         
         var raisingIsConstant:Bool = true
         
-        if name == "Right" && dataHolder.dX.count != 0 { print((raising?.description ?? "nil") + "                   " + dataHolder.dThreeD.last!.description +   "                   " + dataHolder.dX.last!.description )}
-        
         //checking if actually in motion
         var yesRaiseCount = 0
-        for element in dataHolderRaising.suffix(from: dataHolderRaising.count-10)
+        for element in dataHolderRaising.suffix(from: dataHolderRaising.count-14)
         {
             if element == raising { yesRaiseCount+=1 }
         }
-        if yesRaiseCount>=9 { raisingIsConstant = true }
+        if yesRaiseCount>=12 { raisingIsConstant = true }
         else { raisingIsConstant = false }
         
         
@@ -91,9 +89,15 @@ class RepCounter
         
         rangeOfMotion?.updateRecent(x: dataHolder.x.last!)
 
-        if dataHolder.raising.count > 10 && raising != nil// 4 seconds delay
+        if dataHolder.raising.count > 14 && raising != nil// 4 seconds delay
         {
             addRepIfValid(dataHolder: &dataHolder, runCount: runCount, raising: raising)
         }
+    }
+    
+    public func resetData()
+    {
+        rangeOfMotion?.resetData()
+        prevRaising = nil
     }
 }

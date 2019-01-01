@@ -28,8 +28,6 @@ struct DataHolder
     public var crossedRunCountLog:[Int]
     public var secondsPerRep:Double
     
-    
-    
     init()
     {
         x = []
@@ -41,6 +39,20 @@ struct DataHolder
         rangeOfMotion = 0
         raising = []
         crossedRunCountLog = []
+        secondsPerRep = 0
+    }
+    
+    mutating func resetData()
+    {
+        x.removeAll()
+        threeD.removeAll()
+        dX.removeAll()
+        dThreeD.removeAll()
+        raising.removeAll()
+        crossed = 0
+        reps = 0
+        rangeOfMotion = -1
+        crossedRunCountLog.removeAll()
         secondsPerRep = 0
     }
 }

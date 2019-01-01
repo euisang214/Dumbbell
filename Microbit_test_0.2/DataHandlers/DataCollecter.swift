@@ -22,7 +22,7 @@ class Calculation
     {
         if !(record?.isEmpty)!
         {
-            return Int16(0.05*Double(rawValue)+(1-0.05)*Double((record?.last)!))
+            return Int16(0.08*Double(rawValue)+(1-0.08)*Double((record?.last)!))
         }
         return rawValue
     }

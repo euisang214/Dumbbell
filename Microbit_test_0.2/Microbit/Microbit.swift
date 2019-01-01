@@ -149,7 +149,7 @@ public class Microbit: NSObject,CBCentralManagerDelegate,CBPeripheralDelegate {
      corebluetooth knows this as a Peripheral
      */
     
-    private var microbitPeripherals:[CBPeripheral]?// right peripheral first, left peripheral second
+    public static var microbitPeripherals:[CBPeripheral]?// right peripheral first, left peripheral second
     /**
      flag is set to true by centralManagerDidUpdateState if bluetooth LE
      is available.
@@ -289,7 +289,7 @@ public class Microbit: NSObject,CBCentralManagerDelegate,CBPeripheralDelegate {
     
     public init(_ deviceName:String) {
         self.deviceName = deviceName
-        microbitPeripherals = []
+        Microbit.microbitPeripherals = []
         super.init()
         centralManager = CBCentralManager(delegate: self, queue: nil)
     }
@@ -321,14 +321,14 @@ public class Microbit: NSObject,CBCentralManagerDelegate,CBPeripheralDelegate {
             // Stop scanning
             stopScanning()
             // Set as the periheral to use and establish connection
-            microbitPeripherals?.append(peripheral)
-            if microbitPeripherals!.count == 1
+            Microbit.microbitPeripherals?.append(peripheral)
+            if Microbit.microbitPeripherals!.count == 1
             {
-                microbitPeripherals!.first?.delegate = self
+                Microbit.microbitPeripherals!.first?.delegate = self
             }
             else
             {
-                microbitPeripherals!.last?.delegate = self
+                Microbit.microbitPeripherals!.last?.delegate = self
             }
             centralManager.connect(peripheral, options: nil)
         } else {
@@ -350,7 +350,7 @@ public class Microbit: NSObject,CBCentralManagerDelegate,CBPeripheralDelegate {
             log("Service UUID = \(thisService.uuid)")
             peripheral.discoverCharacteristics(nil, for: thisService)
         }
-        if peripheral == microbitPeripherals!.first! { startScanning() }
+        if peripheral == Microbit.microbitPeripherals!.first! { startScanning() }
     }
     
     public func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Error?) {
@@ -361,7 +361,7 @@ public class Microbit: NSObject,CBCentralManagerDelegate,CBPeripheralDelegate {
         }
         else
         { // update connection status after accelerometer has been instantiated
-            if microbitPeripherals!.first == peripheral
+            if Microbit.microbitPeripherals!.first == peripheral
             {
                 isConnected[0] = true
                 log("Connected right microbit")
@@ -377,8 +377,8 @@ public class Microbit: NSObject,CBCentralManagerDelegate,CBPeripheralDelegate {
     public func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
         log("Discovering Characteristics")
         var microbitPeripheral:CBPeripheral
-        if peripheral == microbitPeripherals!.first { microbitPeripheral = microbitPeripherals!.first!}
-        else { microbitPeripheral = microbitPeripherals!.last! }
+        if peripheral == Microbit.microbitPeripherals!.first { microbitPeripheral = Microbit.microbitPeripherals!.first!}
+        else { microbitPeripheral = Microbit.microbitPeripherals!.last! }
         for characteristic in service.characteristics! {
             let thisCharacteristic = characteristic as CBCharacteristic
             log("Characteristic UUID = \(thisCharacteristic.uuid)")
@@ -485,7 +485,7 @@ public class Microbit: NSObject,CBCentralManagerDelegate,CBPeripheralDelegate {
     
     public func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
         var isRightSide:Bool
-        if peripheral == microbitPeripherals!.first { isRightSide = true}
+        if peripheral == Microbit.microbitPeripherals!.first { isRightSide = true}
         else { isRightSide = false }
         
         switch characteristic.uuid {
@@ -569,15 +569,17 @@ public class Microbit: NSObject,CBCentralManagerDelegate,CBPeripheralDelegate {
     }
     
     public func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
-        if microbitPeripherals!.first == peripheral
+        if Microbit.microbitPeripherals!.first == peripheral
         {
             isConnected[0] = false
             log("Disconnected right microbit")
+            print("Disconnected right microbit")
         }
         else
         {
             isConnected[1] = false
             log("Disconnected left microbit")
+            print("Disconnected left microbit")
         }
     }
     
@@ -608,7 +610,7 @@ public class Microbit: NSObject,CBCentralManagerDelegate,CBPeripheralDelegate {
      */
     public func disconnect() {
         if bleON {
-            for microbitPeripheral in microbitPeripherals!
+            for microbitPeripheral in Microbit.microbitPeripherals!
             {
                 if microbitPeripheral != nil {
                     centralManager.cancelPeripheralConnection(microbitPeripheral)

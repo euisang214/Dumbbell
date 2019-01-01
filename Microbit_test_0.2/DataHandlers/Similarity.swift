@@ -17,11 +17,20 @@ class Similarity
     //left side, divided by the smaller of the two
     //
     //Assesses the percentage difference between rate of change of the most recent measurements
-    public func liveSimilarity(leftArray:[Int16], rightArray:[Int16]) -> Int
+    public func liveSimilarity(leftArray:[Int16], rightArray:[Int16]) -> Double
     {
-        let difference = abs(leftArray.last!-rightArray.last!)
-        
-        return Int(abs(Double(difference)/min(Double(leftArray.last!), Double(rightArray.last!))*100))
+        var sum = 0.0
+        let leftLast = leftArray.endIndex-1
+        let rightLast = rightArray.endIndex-1
+        if leftArray.count>=32
+        {
+            for index in 0...31
+            {
+                sum += Double(min(abs(leftArray[leftLast-index]), abs(rightArray[rightLast-index])))/Double(max(abs(leftArray[leftLast-index]), abs(rightArray[rightLast-index])))*100
+            }
+            return sum/Double(32)
+        }
+        return 0
     }
     
     //uses Jaccard Similarity algorithm

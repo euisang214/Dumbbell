@@ -14,7 +14,7 @@ protocol LiveAnalysisDelegate
     func disconnectMicrobits()
 }
 
-class LiveAnalysis: UIViewController, ComputeDelegate {
+class LiveAnalysis: UIViewController, ComputeDelegate, HomeDelegate {
     
     static var liveAnalysisDelegate:LiveAnalysisDelegate?
 
@@ -32,18 +32,17 @@ class LiveAnalysis: UIViewController, ComputeDelegate {
     
     var leftRunCount:Int = 0
     var rightRunCount:Int  = 0
-    
-    @IBOutlet weak var xLabel: UILabel!
-    @IBOutlet weak var repLabel: UILabel!
-    @IBOutlet weak var threeDLabel: UILabel!
+
     @IBOutlet weak var repProgressBar: MBCircularProgressBarView!
     @IBOutlet weak var rangeOfMotionProgressBar: MBCircularProgressBarView!
     @IBOutlet weak var secondsPerRepProgressBar: MBCircularProgressBarView!
+    @IBOutlet weak var symmetryProgressBar: MBCircularProgressBarView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         ViewController.computeDelegate = self
+        Home.delegate = self
         
         leftRunCount = 0
         rightRunCount = 0
@@ -66,11 +65,7 @@ class LiveAnalysis: UIViewController, ComputeDelegate {
         else { leftRepCounter?.countRep(dataHolder: &dataHolder!, runCount: leftRunCount) }
     }
     
-    @IBOutlet weak var leftRep: UILabel!
-    @IBOutlet weak var leftX: UILabel!
-    @IBOutlet weak var rightRep: UILabel!
-    @IBOutlet weak var rightX: UILabel!
-    
+    // MARK: Implement required for ComputeDelegate protocol
     public func computeMain(isRightSide:Bool)
     {
         if ViewController.microbitController?.microbit?.isConnected.last! == true
@@ -97,33 +92,49 @@ class LiveAnalysis: UIViewController, ComputeDelegate {
             {
                 LiveAnalysis.liveAnalysisDelegate?.disconnectMicrobits()
             }
-            else
-            {
-                leftRep.text = leftData?.reps.description
-                rightRep.text = rightData?.reps.description
-                if isRightSide { rightX.text = rightData!.x.last!.description }
-                else { leftX.text = leftData!.x.last!.description }
-            }
             
             //updating progress bars
-            repProgressBar.value = CGFloat(min((leftData?.reps)!, (rightData?.reps)!))
+            UIView.animate(withDuration: 0.3)
+            {
+                self.repProgressBar.value = CGFloat(min((self.leftData?.reps)!, (self.rightData?.reps)!))
+            }
             
             if leftRepCounter?.rangeOfMotion?.rangeOfMotionSimilarity.count == rightRepCounter?.rangeOfMotion?.rangeOfMotionSimilarity.count
             {
                 let rangeOfMotionValue = ((leftData?.rangeOfMotion)!+(rightData?.rangeOfMotion)!)/2
-                rangeOfMotionProgressBar.value = CGFloat(rangeOfMotionValue)
+                UIView.animate(withDuration: 0.4)
+                {
+                    self.rangeOfMotionProgressBar.value = CGFloat(rangeOfMotionValue)
+                }
             }
             
             if leftData?.crossedRunCountLog.count == rightData?.crossedRunCountLog.count
             {
                 let secondsPerRep = ((leftData?.secondsPerRep)!+(rightData?.secondsPerRep)!)/2
-                secondsPerRepProgressBar.value = CGFloat(secondsPerRep)
+                UIView.animate(withDuration: 0.3)
+                {
+                    self.secondsPerRepProgressBar.value = CGFloat(secondsPerRep)
+                }
             }
             
-            
-            //similarity?.liveSimilarity(leftArray: <#T##[Int16]#>, rightArray: <#T##[Int16]#>)
-            // similarity?.overallSimilarity(leftArray: <#T##[Int16]#>, rightArray: <#T##[Int16]#>)
+            if rightData?.dX != nil && rightRunCount%32==0
+            {
+                UIView.animate(withDuration: 0.4)
+                {
+                    self.symmetryProgressBar.value = CGFloat((self.similarity?.liveSimilarity(leftArray: (self.leftData?.dX)!, rightArray: (self.rightData?.dX)!))!)
+                }
+            }
         }
+    }
+    
+    public func prepareForNextSet()
+    {
+        leftData?.resetData()
+        rightData?.resetData()
+        leftRepCounter?.resetData()
+        rightRepCounter?.resetData()
+        leftRunCount = 0
+        rightRunCount = 0
     }
 
     /*
