@@ -22,7 +22,7 @@ class Similarity
         var sum = 0.0
         let leftLast = leftArray.endIndex-1
         let rightLast = rightArray.endIndex-1
-        if leftArray.count>=32
+        if leftArray.count>=32 && rightArray.count>=32
         {
             for index in 0...31
             {

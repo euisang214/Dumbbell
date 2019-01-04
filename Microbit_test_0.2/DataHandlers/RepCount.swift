@@ -30,6 +30,7 @@ class RepCounter
         rangeOfMotion?.boundaryCrossed(raising: raising, name: name)
         dataHolder.crossedRunCountLog.append(runCount)
         dataHolder.raising.removeSubrange(0...dataHolder.raising.count-6)
+        print("CROSSED")
     }
     
     private func addRepIfValid(dataHolder:inout DataHolder, runCount:Int, raising:Bool?)

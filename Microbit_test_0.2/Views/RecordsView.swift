@@ -12,7 +12,6 @@ class RecordsView: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("RecordsVIEW")
         // Do any additional setup after loading the view.
     }
 

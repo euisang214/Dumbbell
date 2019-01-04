@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
+    <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -16,16 +16,18 @@
                 <outlet property="connectionLeft" destination="yPe-gS-0je" id="mPk-jp-CXP"/>
                 <outlet property="connectionRight" destination="Mxn-7C-6qL" id="dhV-mH-A8A"/>
                 <outlet property="disconnect" destination="EcS-Cr-OJ8" id="MBW-St-pOs"/>
+                <outlet property="leftImage" destination="6F5-kc-wbV" id="qA6-tX-ZLP"/>
+                <outlet property="rightImage" destination="31m-DE-bpJ" id="QET-NH-hra"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mFa-QA-dSJ">
-                    <rect key="frame" x="63" y="562" width="104" height="30"/>
+                    <rect key="frame" x="63" y="631" width="104" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <state key="normal" title="Connect"/>
                     <connections>
@@ -33,7 +35,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EcS-Cr-OJ8">
-                    <rect key="frame" x="205" y="562" width="106" height="30"/>
+                    <rect key="frame" x="244" y="631" width="106" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                     <state key="normal" title="Disconnect">
                         <color key="titleColor" name="systemRedColor" catalog="System" colorSpace="catalog"/>
@@ -42,22 +44,22 @@
                         <action selector="disconnect:" destination="-1" eventType="touchUpInside" id="gXU-Bf-GZg"/>
                     </connections>
                 </button>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="microbitPic.png" translatesAutoresizingMaskIntoConstraints="NO" id="6F5-kc-wbV">
-                    <rect key="frame" x="17" y="165" width="150" height="148"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Connecting.png" translatesAutoresizingMaskIntoConstraints="NO" id="6F5-kc-wbV">
+                    <rect key="frame" x="17" y="153" width="166" height="166"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="microbitPic2.png" translatesAutoresizingMaskIntoConstraints="NO" id="31m-DE-bpJ">
-                    <rect key="frame" x="205" y="165" width="150" height="148"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Connecting.png" translatesAutoresizingMaskIntoConstraints="NO" id="31m-DE-bpJ">
+                    <rect key="frame" x="228" y="153" width="166" height="166"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Not connected" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yPe-gS-0je">
-                    <rect key="frame" x="28" y="343" width="128" height="21"/>
+                    <rect key="frame" x="28" y="380" width="128" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Not connected" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mxn-7C-6qL">
-                    <rect key="frame" x="220" y="343" width="120" height="21"/>
+                    <rect key="frame" x="259" y="380" width="120" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -66,11 +68,10 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
-            <point key="canvasLocation" x="154.40000000000001" y="48.125937031484263"/>
+            <point key="canvasLocation" x="152.80000000000001" y="47.226386806596707"/>
         </view>
     </objects>
     <resources>
-        <image name="microbitPic.png" width="232" height="229"/>
-        <image name="microbitPic2.png" width="232" height="229"/>
+        <image name="Connecting.png" width="800" height="801"/>
     </resources>
 </document>

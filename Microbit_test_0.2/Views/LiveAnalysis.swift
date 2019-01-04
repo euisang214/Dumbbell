@@ -32,11 +32,22 @@ class LiveAnalysis: UIViewController, ComputeDelegate, HomeDelegate {
     
     var leftRunCount:Int = 0
     var rightRunCount:Int  = 0
+    
+    //to indicate whether the user has stopped the set/the set has been automatically stopped
+    var paused = true
+
 
     @IBOutlet weak var repProgressBar: MBCircularProgressBarView!
     @IBOutlet weak var rangeOfMotionProgressBar: MBCircularProgressBarView!
     @IBOutlet weak var secondsPerRepProgressBar: MBCircularProgressBarView!
     @IBOutlet weak var symmetryProgressBar: MBCircularProgressBarView!
+    
+    @IBOutlet weak var pausedUpdateButton: UIButton!
+    
+    @IBAction func pausedUpdateButtonPressed(_ sender: Any)
+    {
+        paused = !paused
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,6 +66,10 @@ class LiveAnalysis: UIViewController, ComputeDelegate, HomeDelegate {
         leftRepCounter = RepCounter(name:"Left")
         rightRepCounter = RepCounter(name:"Right")
         
+        //timerScreenView.isHidden = true
+        //timerScreenView.backgroundColor = UIColor(white: 1, alpha: 0.8)
+        //timerScreenView.isOpaque = true
+        
     }
 
 
@@ -68,7 +83,7 @@ class LiveAnalysis: UIViewController, ComputeDelegate, HomeDelegate {
     // MARK: Implement required for ComputeDelegate protocol
     public func computeMain(isRightSide:Bool)
     {
-        if ViewController.microbitController?.microbit?.isConnected.last! == true
+        if ViewController.microbitController?.microbit?.isConnected.last! == true && paused == false
         {
             let x = (ViewController.microbitController?.microbitAccelerometer?.getXValue())!
             let y = (ViewController.microbitController?.microbitAccelerometer?.getYValue())!
@@ -90,7 +105,7 @@ class LiveAnalysis: UIViewController, ComputeDelegate, HomeDelegate {
             
             if (detectPause?.isPaused(dataHolderOne: &leftData, dataHolderTwo: &rightData))!
             {
-                LiveAnalysis.liveAnalysisDelegate?.disconnectMicrobits()
+                prepareForNextSet()
             }
             
             //updating progress bars
@@ -99,31 +114,32 @@ class LiveAnalysis: UIViewController, ComputeDelegate, HomeDelegate {
                 self.repProgressBar.value = CGFloat(min((self.leftData?.reps)!, (self.rightData?.reps)!))
             }
             
-            if leftRepCounter?.rangeOfMotion?.rangeOfMotionSimilarity.count == rightRepCounter?.rangeOfMotion?.rangeOfMotionSimilarity.count
-            {
+            //if leftRepCounter?.rangeOfMotion?.rangeOfMotionSimilarity.count == rightRepCounter?.rangeOfMotion?.rangeOfMotionSimilarity.count
+            //{
                 let rangeOfMotionValue = ((leftData?.rangeOfMotion)!+(rightData?.rangeOfMotion)!)/2
                 UIView.animate(withDuration: 0.4)
                 {
                     self.rangeOfMotionProgressBar.value = CGFloat(rangeOfMotionValue)
                 }
-            }
+            //}
             
-            if leftData?.crossedRunCountLog.count == rightData?.crossedRunCountLog.count
-            {
+            //if leftData?.crossedRunCountLog.count == rightData?.crossedRunCountLog.count
+            //{
                 let secondsPerRep = ((leftData?.secondsPerRep)!+(rightData?.secondsPerRep)!)/2
                 UIView.animate(withDuration: 0.3)
                 {
                     self.secondsPerRepProgressBar.value = CGFloat(secondsPerRep)
                 }
-            }
+            //}
             
-            if rightData?.dX != nil && rightRunCount%32==0
-            {
+            //if rightData?.dX != nil && rightRunCount%32==0
+            //{
                 UIView.animate(withDuration: 0.4)
                 {
+                    print(CGFloat((self.similarity?.liveSimilarity(leftArray: (self.leftData?.dX)!, rightArray: (self.rightData?.dX)!))!))
                     self.symmetryProgressBar.value = CGFloat((self.similarity?.liveSimilarity(leftArray: (self.leftData?.dX)!, rightArray: (self.rightData?.dX)!))!)
                 }
-            }
+            //}
         }
     }
     
@@ -135,6 +151,7 @@ class LiveAnalysis: UIViewController, ComputeDelegate, HomeDelegate {
         rightRepCounter?.resetData()
         leftRunCount = 0
         rightRunCount = 0
+        paused = true
     }
 
     /*

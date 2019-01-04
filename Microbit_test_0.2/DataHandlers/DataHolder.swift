@@ -17,7 +17,7 @@ struct DataHolder
     public var dThreeD:[Int16]
     
     //for rep counting; "crossed" counts the number of times the microbit executes half a rep. 'raising' shows whether the microbit is declining or inclining
-   public var raising:[Bool?]
+    public var raising:[Bool?]
     public var crossed:Int
     public var reps:Int//Presented to user
     

@@ -18,7 +18,9 @@ class Home: UIViewController, UpdateConnectionStatLabelDelegate, LiveAnalysisDel
     public static var delegate:HomeDelegate?
 
     //  @IBOutlet weak var logView: UITextView!
-
+    @IBOutlet weak var leftImage: UIImageView!
+    @IBOutlet weak var rightImage: UIImageView!
+    
     @IBOutlet weak var connectionRight: UILabel!
     @IBOutlet weak var connectionLeft: UILabel!
     @IBOutlet weak var connect: UIButton!
@@ -49,10 +51,24 @@ class Home: UIViewController, UpdateConnectionStatLabelDelegate, LiveAnalysisDel
         case true:
             connectionStat.text = "Connected"
             connectionStat.textColor = UIColor.green
+            UIView.transition(with: self.leftImage, duration: 0.8, options: .transitionCrossDissolve, animations: {
+                self.leftImage.image = UIImage.init(named: "Connected")
+            }, completion: nil)
         case false:
             connectionStat.text = "Not Connected"
             connectionStat.textColor = UIColor.red
+            UIView.transition(with: self.leftImage, duration: 0.8, options: .transitionCrossDissolve, animations: {
+                self.leftImage.image = UIImage.init(named: "Connecting")
+            }, completion: nil)
         }
+    }
+    
+    //provide flashing effects on the circle images when attempting to connect
+    private func imageTransitioning(image:UIImageView)
+    {
+        UIView.transition(with: self.leftImage, duration: 0.8, options: .transitionCrossDissolve, animations: {
+            self.leftImage.image = UIImage.init(named: "Connected")
+        }, completion: nil)
     }
     
     // MARK: Implementaiton required for UpdateConnectionStatLabelDelegate
@@ -92,13 +108,14 @@ class Home: UIViewController, UpdateConnectionStatLabelDelegate, LiveAnalysisDel
                 self.disconnect.setTitle("Disconnected", for: .normal)
             }
         }
+        
         Microbit.microbitPeripherals?.removeAll()
         Home.delegate?.prepareForNextSet()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+    
         disconnect.isEnabled = false
         ViewController.updateConnectionStatLabelDelegate = self
         LiveAnalysis.liveAnalysisDelegate = self
@@ -108,10 +125,9 @@ class Home: UIViewController, UpdateConnectionStatLabelDelegate, LiveAnalysisDel
         connectionRight.text = "Not Connected"
         connectionRight.textColor = UIColor.red
         
-        connectionRight.layer.backgroundColor  = UIColor.lightGray.cgColor
-        connectionRight.layer.cornerRadius = 5
+        //connectionRight.layer.backgroundColor  = UIColor.lightGray.cgColor
+        //connectionRight.layer.cornerRadius = 5
     }
-    
     /*
     // MARK: - Navigation
 

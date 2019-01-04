@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		022AE89021DCD2BC00AAA694 /* Connected.png in Resources */ = {isa = PBXBuildFile; fileRef = 022AE88F21DCD2BB00AAA694 /* Connected.png */; };
+		022AE89221DCD41400AAA694 /* Connecting.png in Resources */ = {isa = PBXBuildFile; fileRef = 022AE89121DCD41400AAA694 /* Connecting.png */; };
 		022E029921D3865D0052501A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022E029821D3865D0052501A /* AppDelegate.swift */; };
 		022E029B21D3865D0052501A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022E029A21D3865D0052501A /* ViewController.swift */; };
 		022E029E21D3865D0052501A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 022E029C21D3865D0052501A /* Main.storyboard */; };
@@ -55,6 +57,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		022AE88F21DCD2BB00AAA694 /* Connected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Connected.png; sourceTree = "<group>"; };
+		022AE89121DCD41400AAA694 /* Connecting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Connecting.png; sourceTree = "<group>"; };
 		022E029521D3865D0052501A /* Microbit_test_0.2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Microbit_test_0.2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		022E029821D3865D0052501A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		022E029A21D3865D0052501A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -224,6 +228,8 @@
 			children = (
 				02D2765721D6216E003B2B7B /* microbitPic.png */,
 				02D2765921D621E3003B2B7B /* microbitPic2.png */,
+				022AE88F21DCD2BB00AAA694 /* Connected.png */,
+				022AE89121DCD41400AAA694 /* Connecting.png */,
 			);
 			path = Photos;
 			sourceTree = "<group>";
@@ -359,6 +365,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				022AE89021DCD2BC00AAA694 /* Connected.png in Resources */,
+				022AE89221DCD41400AAA694 /* Connecting.png in Resources */,
 				022E02A321D3865F0052501A /* LaunchScreen.storyboard in Resources */,
 				022E02CB21D388110052501A /* RecordsView.xib in Resources */,
 				02D2765A21D621E3003B2B7B /* microbitPic2.png in Resources */,
