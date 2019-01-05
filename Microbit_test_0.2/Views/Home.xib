@@ -12,10 +12,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="Home" customModule="Microbit_test_0_2" customModuleProvider="target">
             <connections>
-                <outlet property="connect" destination="mFa-QA-dSJ" id="MPt-5u-oEv"/>
-                <outlet property="connectionLeft" destination="yPe-gS-0je" id="mPk-jp-CXP"/>
-                <outlet property="connectionRight" destination="Mxn-7C-6qL" id="dhV-mH-A8A"/>
-                <outlet property="disconnect" destination="EcS-Cr-OJ8" id="MBW-St-pOs"/>
+                <outlet property="connectB" destination="mFa-QA-dSJ" id="CIE-FC-brA"/>
+                <outlet property="connectionLeftL" destination="yPe-gS-0je" id="dqp-98-vfs"/>
+                <outlet property="connectionRightL" destination="Mxn-7C-6qL" id="5OF-Cu-N11"/>
+                <outlet property="disconnectB" destination="EcS-Cr-OJ8" id="hAw-93-5KK"/>
                 <outlet property="leftImage" destination="6F5-kc-wbV" id="qA6-tX-ZLP"/>
                 <outlet property="rightImage" destination="31m-DE-bpJ" id="QET-NH-hra"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -31,7 +31,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <state key="normal" title="Connect"/>
                     <connections>
-                        <action selector="startScanning:" destination="-1" eventType="touchUpInside" id="P1L-Mj-D4v"/>
+                        <action selector="startScanning:" destination="-1" eventType="touchUpInside" id="6Qn-OI-n48"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EcS-Cr-OJ8">
@@ -41,7 +41,7 @@
                         <color key="titleColor" name="systemRedColor" catalog="System" colorSpace="catalog"/>
                     </state>
                     <connections>
-                        <action selector="disconnect:" destination="-1" eventType="touchUpInside" id="gXU-Bf-GZg"/>
+                        <action selector="disconnect:" destination="-1" eventType="touchUpInside" id="F11-D0-eu0"/>
                     </connections>
                 </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Connecting.png" translatesAutoresizingMaskIntoConstraints="NO" id="6F5-kc-wbV">

@@ -581,6 +581,7 @@ public class Microbit: NSObject,CBCentralManagerDelegate,CBPeripheralDelegate {
             log("Disconnected left microbit")
             print("Disconnected left microbit")
         }
+        if !isConnected[0] && !isConnected[1] { Microbit.microbitPeripherals?.removeAll() }
     }
     
     // MARK: microbit API

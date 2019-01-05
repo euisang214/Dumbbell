@@ -38,7 +38,6 @@ class ViewController: UIViewController, MicrobitAccelerometerControllerDelegate 
     public func connectionStatUpdate(isConnected: [Bool])
     {
         ViewController.updateConnectionStatLabelDelegate?.updateConnectionStatLabel(isConnected: isConnected)
-        if isConnected.first! == true && isConnected.last! == true { scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: false) }
     }
     //
     
@@ -54,7 +53,6 @@ class ViewController: UIViewController, MicrobitAccelerometerControllerDelegate 
         ViewController.microbitController?.delegate = self
         
         scrollView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.size.height)
-        print(self.scrollView.description)
         
         //setting up UI
         let recordsView:RecordsView = RecordsView(nibName: "RecordsView", bundle: nil)
@@ -65,19 +63,19 @@ class ViewController: UIViewController, MicrobitAccelerometerControllerDelegate 
         self.scrollView.addSubview(recordsView.view)
         recordsView.didMove(toParent: self)
         recordsView.view.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.size.height)
-        print("RecordsView: "+self.view.description)
+        //print("RecordsView: "+self.view.description)
         
         self.addChild(liveAnalysis)
         self.scrollView.addSubview(liveAnalysis.view)
         liveAnalysis.didMove(toParent: self)
         liveAnalysis.view.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.size.height)
-        print("LiveAnalysis: "+self.view.description)
+        //print("LiveAnalysis: "+self.view.description)
         
         self.addChild(home)
         self.scrollView.addSubview(home.view)
         home.didMove(toParent: self)
         home.view.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.size.height)
-        print("LiveAnalysis: "+home.view.description)
+       // print("LiveAnalysis: "+home.view.description)
         
         var recordsViewFrame:CGRect = recordsView.view.frame
         recordsViewFrame.origin.x = self.view.frame.width * 2
@@ -91,7 +89,8 @@ class ViewController: UIViewController, MicrobitAccelerometerControllerDelegate 
         
         scrollView.setContentOffset(CGPoint(x: self.view.frame.width, y: 0), animated: false)
         
-        print(self.scrollView.description)
+        //print(self.scrollView.description)
+    
     }
     
     override open var shouldAutorotate: Bool { return false }

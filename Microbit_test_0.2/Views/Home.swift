@@ -21,17 +21,17 @@ class Home: UIViewController, UpdateConnectionStatLabelDelegate, LiveAnalysisDel
     @IBOutlet weak var leftImage: UIImageView!
     @IBOutlet weak var rightImage: UIImageView!
     
-    @IBOutlet weak var connectionRight: UILabel!
-    @IBOutlet weak var connectionLeft: UILabel!
-    @IBOutlet weak var connect: UIButton!
-    @IBOutlet weak var disconnect: UIButton!
+    @IBOutlet weak var connectionRightL: UILabel!
+    @IBOutlet weak var connectionLeftL: UILabel!
+    @IBOutlet weak var connectB: UIButton!
+    @IBOutlet weak var disconnectB: UIButton!
     
     @IBAction func startScanning(_ sender: UIButton)
     {
-        connect.setTitle("Connecting", for: .normal)
-        connect.isEnabled = false
+        connectB.setTitle("Connecting", for: .normal)
+        connectB.isEnabled = false
         ViewController.microbitController?.startScanning()
-        disconnect.isEnabled = true
+        disconnectB.isEnabled = true
     }
     
     @IBAction func stopScanning(_ sender: UIButton)
@@ -44,43 +44,63 @@ class Home: UIViewController, UpdateConnectionStatLabelDelegate, LiveAnalysisDel
         disconnectMicrobits()
     }
     
-    private func connectionLabelUpdate(connectionStat:UILabel!, isConnected: Bool)
+    private func labelUpdate(label:UILabel!, isConnected: Bool)
     {
         switch isConnected
         {
         case true:
-            connectionStat.text = "Connected"
-            connectionStat.textColor = UIColor.green
-            UIView.transition(with: self.leftImage, duration: 0.8, options: .transitionCrossDissolve, animations: {
-                self.leftImage.image = UIImage.init(named: "Connected")
+            label.text = "Connected"
+            label.textColor = UIColor.green
+        case false:
+            label.text = "Not Connected"
+            label.textColor = UIColor.red
+        }
+    }
+    
+    //provide flashing effects on the circle images when attempting to connect
+    private func updateLeftImage(isConnected:Bool)
+    {
+        switch isConnected
+        {
+        case true:
+            UIView.transition(with: leftImage, duration: 1, options: .transitionCrossDissolve, animations: {
+                self.leftImage.image = UIImage(named: "Connected")
             }, completion: nil)
         case false:
-            connectionStat.text = "Not Connected"
-            connectionStat.textColor = UIColor.red
-            UIView.transition(with: self.leftImage, duration: 0.8, options: .transitionCrossDissolve, animations: {
+            UIView.transition(with: leftImage, duration: 1, options: .transitionCrossDissolve, animations: {
                 self.leftImage.image = UIImage.init(named: "Connecting")
             }, completion: nil)
         }
     }
     
-    //provide flashing effects on the circle images when attempting to connect
-    private func imageTransitioning(image:UIImageView)
+    private func updateRightImage(isConnected:Bool)
     {
-        UIView.transition(with: self.leftImage, duration: 0.8, options: .transitionCrossDissolve, animations: {
-            self.leftImage.image = UIImage.init(named: "Connected")
-        }, completion: nil)
+        switch isConnected
+        {
+        case true:
+            UIView.transition(with: rightImage, duration: 1, options: .transitionCrossDissolve, animations: {
+                self.rightImage.image = UIImage(named: "Connected")
+            }, completion: nil)
+        case false:
+            UIView.transition(with: rightImage, duration: 1, options: .transitionCrossDissolve, animations: {
+                self.rightImage.image = UIImage.init(named: "Connecting")
+            }, completion: nil)
+        }
     }
     
     // MARK: Implementaiton required for UpdateConnectionStatLabelDelegate
     public func updateConnectionStatLabel(isConnected: [Bool])
     {
-        connectionLabelUpdate(connectionStat: connectionRight, isConnected: isConnected.first!)
-        connectionLabelUpdate(connectionStat: connectionLeft, isConnected: isConnected.last!)
+        labelUpdate(label: connectionRightL, isConnected: isConnected.first!)
+        labelUpdate(label: connectionLeftL, isConnected: isConnected.last!)
+        updateLeftImage(isConnected: isConnected.last!)
+        updateRightImage(isConnected: isConnected.first!)
         
         if isConnected.first == true && isConnected.last == true
         {
-            connect.setTitle("Connected", for: .normal)
-            disconnect.isEnabled = true
+            connectB.setTitle("Connected", for: .normal)
+            connectB.isEnabled = false
+            disconnectB.isEnabled = true
         }
     }
     
@@ -88,12 +108,12 @@ class Home: UIViewController, UpdateConnectionStatLabelDelegate, LiveAnalysisDel
     public func disconnectMicrobits()
     {
         let microbit = ViewController.microbitController?.microbit
-        if connect.currentTitle == "Connecting"
+        if connectB.currentTitle == "Connecting"
         {
             microbit!.stopScanning()
-            disconnect.isEnabled = false
-            connect.setTitle("Connect", for: .normal)
-            connect.isEnabled = true
+            disconnectB.isEnabled = false
+            connectB.setTitle("Connect", for: .normal)
+            connectB.isEnabled = true
             microbit!.disconnect()
         }
         else
@@ -102,31 +122,29 @@ class Home: UIViewController, UpdateConnectionStatLabelDelegate, LiveAnalysisDel
             let after = DispatchTime.now() + 0.5
             DispatchQueue.main.asyncAfter(deadline: after)
             {
-                self.connect.isEnabled = true
-                self.connect.setTitle("Connect", for: .normal)
-                self.disconnect.isEnabled = false
-                self.disconnect.setTitle("Disconnected", for: .normal)
+                self.connectB.isEnabled = true
+                self.connectB.setTitle("Connect", for: .normal)
+                self.disconnectB.isEnabled = false
             }
         }
         
-        Microbit.microbitPeripherals?.removeAll()
         Home.delegate?.prepareForNextSet()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
     
-        disconnect.isEnabled = false
+        disconnectB.isEnabled = false
         ViewController.updateConnectionStatLabelDelegate = self
         LiveAnalysis.liveAnalysisDelegate = self
         
-        connectionLeft.text = "Not Connected"
-        connectionLeft.textColor = UIColor.red
-        connectionRight.text = "Not Connected"
-        connectionRight.textColor = UIColor.red
+        connectionLeftL.text = "Not Connected"
+        connectionLeftL.textColor = UIColor.red
+        connectionRightL.text = "Not Connected"
+        connectionRightL.textColor = UIColor.red
         
-        //connectionRight.layer.backgroundColor  = UIColor.lightGray.cgColor
-        //connectionRight.layer.cornerRadius = 5
+        //connectionRightL.layer.backgroundColor  = UIColor.lightGray.cgColor
+        //connectionRightL.layer.cornerRadius = 5
     }
     /*
     // MARK: - Navigation

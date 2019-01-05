@@ -34,19 +34,71 @@ class LiveAnalysis: UIViewController, ComputeDelegate, HomeDelegate {
     var rightRunCount:Int  = 0
     
     //to indicate whether the user has stopped the set/the set has been automatically stopped
-    var paused = true
+    var measuring = false
 
-
+    @IBOutlet weak var blurredView: UIView!
     @IBOutlet weak var repProgressBar: MBCircularProgressBarView!
     @IBOutlet weak var rangeOfMotionProgressBar: MBCircularProgressBarView!
     @IBOutlet weak var secondsPerRepProgressBar: MBCircularProgressBarView!
     @IBOutlet weak var symmetryProgressBar: MBCircularProgressBarView!
+    @IBOutlet weak var countDownLabel: UILabel!
     
-    @IBOutlet weak var pausedUpdateButton: UIButton!
+    @IBOutlet weak var measuringStatusUpdateButton: UIButton!
     
-    @IBAction func pausedUpdateButtonPressed(_ sender: Any)
+    @IBAction func measuringStatusUpdateButtonPressed(_ sender: Any)
     {
-        paused = !paused
+        if !measuring
+        {
+            measuringStatusUpdateButton.setTitle("Pause", for: .normal)
+            measuringStatusUpdateButton.setTitleColor(UIColor.red, for: .normal)
+            
+            let blurEffect = UIBlurEffect(style: .light)
+            let effectView = UIVisualEffectView(effect: blurEffect)
+            effectView.frame = self.view.frame
+            blurredView.addSubview(effectView)
+            effectView.alpha = 0
+            UIView.setAnimationCurve(.easeInOut)
+            self.view.bringSubviewToFront(blurredView)
+            self.view.bringSubviewToFront(countDownLabel)
+            UIView.animate(withDuration: 0.8)
+            {
+                effectView.alpha = 0.8
+            }
+            
+            countDownLabel.isHidden = false
+            for seconds in 0...8
+            {
+                let when = DispatchTime.now() + (Double(seconds))
+                DispatchQueue.main.asyncAfter(deadline: when)
+                {
+                    self.countDownLabel.text = "\(8-seconds)"
+                }
+            }
+            
+            var when = DispatchTime.now() + (9)
+            DispatchQueue.main.asyncAfter(deadline: when)
+            {
+                self.countDownLabel.isHidden = true
+                self.view.sendSubviewToBack(self.countDownLabel)
+                UIView.animate(withDuration: 0.4)
+                {
+                    effectView.alpha = 0
+                }
+            }
+            
+            when = DispatchTime.now() + (9.7)
+            DispatchQueue.main.asyncAfter(deadline: when)
+            {
+                self.view.sendSubviewToBack(self.blurredView)
+                self.measuring = !self.measuring
+            }
+        }
+        else
+        {
+            measuring = !measuring
+            measuringStatusUpdateButton.setTitle("Start", for: .normal)
+            measuringStatusUpdateButton.setTitleColor(UIColor.blue, for: .normal)
+        }
     }
     
     override func viewDidLoad() {
@@ -69,7 +121,6 @@ class LiveAnalysis: UIViewController, ComputeDelegate, HomeDelegate {
         //timerScreenView.isHidden = true
         //timerScreenView.backgroundColor = UIColor(white: 1, alpha: 0.8)
         //timerScreenView.isOpaque = true
-        
     }
 
 
@@ -83,7 +134,7 @@ class LiveAnalysis: UIViewController, ComputeDelegate, HomeDelegate {
     // MARK: Implement required for ComputeDelegate protocol
     public func computeMain(isRightSide:Bool)
     {
-        if ViewController.microbitController?.microbit?.isConnected.last! == true && paused == false
+        if ViewController.microbitController?.microbit?.isConnected.last! == true && measuring == true
         {
             let x = (ViewController.microbitController?.microbitAccelerometer?.getXValue())!
             let y = (ViewController.microbitController?.microbitAccelerometer?.getYValue())!
@@ -151,7 +202,7 @@ class LiveAnalysis: UIViewController, ComputeDelegate, HomeDelegate {
         rightRepCounter?.resetData()
         leftRunCount = 0
         rightRunCount = 0
-        paused = true
+        measuring = false
     }
 
     /*
