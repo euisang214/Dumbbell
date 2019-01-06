@@ -17,7 +17,7 @@ class DetectPause
         return sum/Double(array.count)
     }
     
-    public func isPaused(dataHolder:inout DataHolder?) -> Bool
+    public func isPaused(dataHolder:inout DataHolder?, runCount:Int) -> Bool
     {
         let dThreeD = dataHolder!.dThreeD
         
@@ -25,13 +25,13 @@ class DetectPause
         {
             let recentD = dThreeD.suffix(from: dThreeD.count-199)
             
-            if average(array: recentD) < 0.75 { return true }
+            if average(array: recentD) < 0.75 && runCount-(dataHolder?.crossedRunCountLog.last! ?? 0) > 375 { return true }
         }
         return false
     }
     
-    public func isPaused(dataHolderOne:inout DataHolder?, dataHolderTwo:inout DataHolder?) -> Bool
+    public func isPaused(dataHolderOne:inout DataHolder?, dataHolderTwo:inout DataHolder?, runCount:Int) -> Bool
     {
-        return isPaused(dataHolder: &dataHolderOne) && isPaused(dataHolder: &dataHolderTwo)
+        return isPaused(dataHolder: &dataHolderOne, runCount:runCount) && isPaused(dataHolder: &dataHolderTwo, runCount:runCount)
     }
 }

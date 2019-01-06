@@ -33,6 +33,8 @@ class LiveAnalysis: UIViewController, ComputeDelegate, HomeDelegate {
     var leftRunCount:Int = 0
     var rightRunCount:Int  = 0
     
+    var currentProgressBarValues:[Double] = [0,0,0,0]
+    
     //to indicate whether the user has stopped the set/the set has been automatically stopped
     var measuring = false
 
@@ -49,8 +51,18 @@ class LiveAnalysis: UIViewController, ComputeDelegate, HomeDelegate {
     {
         if !measuring
         {
-            measuringStatusUpdateButton.setTitle("Pause", for: .normal)
+            measuringStatusUpdateButton.setTitle("Stop", for: .normal)
             measuringStatusUpdateButton.setTitleColor(UIColor.red, for: .normal)
+            
+            setProgressBarColors(color: UIColor.blue)
+            
+            UIView.animate(withDuration: 0.3)
+            {
+                self.repProgressBar.value = 0
+                self.symmetryProgressBar.value = 0
+                self.rangeOfMotionProgressBar.value = 0
+                self.secondsPerRepProgressBar.value = 0
+            }
             
             let blurEffect = UIBlurEffect(style: .light)
             let effectView = UIVisualEffectView(effect: blurEffect)
@@ -80,13 +92,13 @@ class LiveAnalysis: UIViewController, ComputeDelegate, HomeDelegate {
             {
                 self.countDownLabel.isHidden = true
                 self.view.sendSubviewToBack(self.countDownLabel)
-                UIView.animate(withDuration: 0.4)
+                UIView.animate(withDuration: 0.8)
                 {
                     effectView.alpha = 0
                 }
             }
             
-            when = DispatchTime.now() + (9.7)
+            when = DispatchTime.now() + (9.85)
             DispatchQueue.main.asyncAfter(deadline: when)
             {
                 self.view.sendSubviewToBack(self.blurredView)
@@ -117,12 +129,27 @@ class LiveAnalysis: UIViewController, ComputeDelegate, HomeDelegate {
         leftData = DataHolder()
         leftRepCounter = RepCounter(name:"Left")
         rightRepCounter = RepCounter(name:"Right")
-        
-        //timerScreenView.isHidden = true
-        //timerScreenView.backgroundColor = UIColor(white: 1, alpha: 0.8)
-        //timerScreenView.isOpaque = true
     }
 
+    private func setProgressBarColors(color:UIColor)
+    {
+        repProgressBar.progressColor = color
+        repProgressBar.value = 0
+        repProgressBar.value = CGFloat(currentProgressBarValues[0])
+        
+        rangeOfMotionProgressBar.progressColor = color
+        rangeOfMotionProgressBar.value = 0
+        rangeOfMotionProgressBar.value = CGFloat(currentProgressBarValues[1])
+        
+        secondsPerRepProgressBar.progressColor = color
+        secondsPerRepProgressBar.value = 0
+        secondsPerRepProgressBar.value = CGFloat(currentProgressBarValues[2])
+        
+        symmetryProgressBar.progressColor = color
+        symmetryProgressBar.value = 0
+        symmetryProgressBar.value = CGFloat(currentProgressBarValues[3])
+        print(currentProgressBarValues)
+    }
 
     private func compute(dataHolder:inout DataHolder?, x:Int16, y:Int16, z:Int16, isRightSide:Bool)
     {
@@ -136,73 +163,92 @@ class LiveAnalysis: UIViewController, ComputeDelegate, HomeDelegate {
     {
         if ViewController.microbitController?.microbit?.isConnected.last! == true && measuring == true
         {
-            let x = (ViewController.microbitController?.microbitAccelerometer?.getXValue())!
-            let y = (ViewController.microbitController?.microbitAccelerometer?.getYValue())!
-            let z = (ViewController.microbitController?.microbitAccelerometer?.getZValue())!
-            
-            switch isRightSide
-            {
-            case true:
-                compute(dataHolder: &rightData, x: x, y: y, z: z, isRightSide: isRightSide)
-                //labels
-                rightRunCount += 1
-                break
-            case false:
-                compute(dataHolder: &leftData, x: x, y: y, z: z, isRightSide: isRightSide)
-                //labels
-                leftRunCount += 1
-                break
-            }
-            
-            if (detectPause?.isPaused(dataHolderOne: &leftData, dataHolderTwo: &rightData))!
+            if (detectPause?.isPaused(dataHolderOne: &leftData, dataHolderTwo: &rightData, runCount:leftRunCount))!
             {
                 prepareForNextSet()
             }
-            
-            //updating progress bars
-            UIView.animate(withDuration: 0.3)
+            else
             {
-                self.repProgressBar.value = CGFloat(min((self.leftData?.reps)!, (self.rightData?.reps)!))
-            }
-            
-            //if leftRepCounter?.rangeOfMotion?.rangeOfMotionSimilarity.count == rightRepCounter?.rangeOfMotion?.rangeOfMotionSimilarity.count
-            //{
-                let rangeOfMotionValue = ((leftData?.rangeOfMotion)!+(rightData?.rangeOfMotion)!)/2
-                UIView.animate(withDuration: 0.4)
+                let x = (ViewController.microbitController?.microbitAccelerometer?.getXValue())!
+                let y = (ViewController.microbitController?.microbitAccelerometer?.getYValue())!
+                let z = (ViewController.microbitController?.microbitAccelerometer?.getZValue())!
+                
+                switch isRightSide
                 {
-                    self.rangeOfMotionProgressBar.value = CGFloat(rangeOfMotionValue)
+                case true:
+                    compute(dataHolder: &rightData, x: x, y: y, z: z, isRightSide: isRightSide)
+                    //labels
+                    if rightRunCount%2==0 && rightRunCount>4{ print(((leftData?.dX.last!.description)!) + " " + (rightData?.dX.last!.description)!) }
+                    rightRunCount += 1
+                    break
+                case false:
+                    compute(dataHolder: &leftData, x: x, y: y, z: z, isRightSide: isRightSide)
+                    //labels
+                    leftRunCount += 1
+                    break
                 }
-            //}
-            
-            //if leftData?.crossedRunCountLog.count == rightData?.crossedRunCountLog.count
-            //{
-                let secondsPerRep = ((leftData?.secondsPerRep)!+(rightData?.secondsPerRep)!)/2
+                
+                //updating progress bars
                 UIView.animate(withDuration: 0.3)
                 {
-                    self.secondsPerRepProgressBar.value = CGFloat(secondsPerRep)
+                    self.currentProgressBarValues[0] = Double(min((self.leftData?.reps)!, (self.rightData?.reps)!))
+                    self.repProgressBar.value = CGFloat(self.currentProgressBarValues[0])
                 }
-            //}
-            
-            //if rightData?.dX != nil && rightRunCount%32==0
-            //{
-                UIView.animate(withDuration: 0.4)
+
+                //if leftRepCounter?.rangeOfMotion?.rangeOfMotionSimilarity.count == rightRepCounter?.rangeOfMotion?.rangeOfMotionSimilarity.count
+                //{
+                    currentProgressBarValues[1] = Double(((leftData?.rangeOfMotion)!+(rightData?.rangeOfMotion)!)/2)
+                    UIView.animate(withDuration: 0.4)
+                    {
+                        self.rangeOfMotionProgressBar.value = CGFloat(self.currentProgressBarValues[1])
+                    }
+                //}
+                
+                //if leftData?.crossedRunCountLog.count == rightData?.crossedRunCountLog.count
+                //{
+                    currentProgressBarValues[2] = ((leftData?.secondsPerRep)!+(rightData?.secondsPerRep)!)/2
+                    UIView.animate(withDuration: 0.3)
+                    {
+                        self.secondsPerRepProgressBar.value = CGFloat(self.currentProgressBarValues[2])
+                    }
+                //}
+                
+                //if rightData?.dX != nil && rightRunCount%32==0
+                //{
+                if leftRunCount%55 == 0
                 {
-                    print(CGFloat((self.similarity?.liveSimilarity(leftArray: (self.leftData?.dX)!, rightArray: (self.rightData?.dX)!))!))
-                    self.symmetryProgressBar.value = CGFloat((self.similarity?.liveSimilarity(leftArray: (self.leftData?.dX)!, rightArray: (self.rightData?.dX)!))!)
+                    UIView.animate(withDuration: 0.3)
+                    {
+                        self.currentProgressBarValues[3] = Double((self.similarity?.overallSimilarity(leftArray: (self.leftData?.dX)!, rightArray: (self.rightData?.dX)!))!)
+                        self.symmetryProgressBar.value = CGFloat(self.currentProgressBarValues[3])
+                    }
                 }
+            }
             //}
         }
     }
     
+    // MARK: Implementation required for HomeDelegate protocol
     public func prepareForNextSet()
     {
-        leftData?.resetData()
-        rightData?.resetData()
-        leftRepCounter?.resetData()
-        rightRepCounter?.resetData()
-        leftRunCount = 0
-        rightRunCount = 0
         measuring = false
+        
+        let when = DispatchTime.now() + (0.35)
+        DispatchQueue.main.asyncAfter(deadline: when)
+        {
+            self.leftData?.resetData()
+            self.rightData?.resetData()
+            self.leftRepCounter?.resetData()
+            self.rightRepCounter?.resetData()
+            self.leftRunCount = 0
+            self.rightRunCount = 0
+        }
+        
+        measuringStatusUpdateButton.setTitleColor(UIColor.blue, for: .normal)
+        measuringStatusUpdateButton.setTitle("Start", for: .normal)
+        
+        setProgressBarColors(color: UIColor.orange)
+        
     }
 
     /*

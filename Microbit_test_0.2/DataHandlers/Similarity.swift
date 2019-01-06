@@ -37,9 +37,13 @@ class Similarity
     //Assesses the overall corellation between the motion of the two given arrays
     public func overallSimilarity(leftArray:[Int16], rightArray:[Int16]) -> Int
     {
-        let leftSet = Set(leftArray)
-        let rightSet = Set(rightArray)
-        
-        return Int(abs(Double(leftSet.intersection(rightSet).count) / Double(leftSet.union(rightSet).count) * 100))
+        if leftArray.count>=32 && rightArray.count>=32
+        {
+            let leftSet = Set(leftArray.suffix(from: leftArray.count-32))
+            let rightSet = Set(rightArray.suffix(from: rightArray.count-32))
+            
+            return Int(abs(Double(leftSet.intersection(rightSet).count) / Double(leftSet.union(rightSet).count) * 100))
+        }
+        return 0
     }
 }

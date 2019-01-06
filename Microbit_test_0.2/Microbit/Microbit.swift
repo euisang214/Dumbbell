@@ -350,7 +350,15 @@ public class Microbit: NSObject,CBCentralManagerDelegate,CBPeripheralDelegate {
             log("Service UUID = \(thisService.uuid)")
             peripheral.discoverCharacteristics(nil, for: thisService)
         }
-        if peripheral == Microbit.microbitPeripherals!.first! { startScanning() }
+        //starting to find second microbit
+        if peripheral == Microbit.microbitPeripherals!.first!
+        {
+            let when = DispatchTime.now() + (4)
+            DispatchQueue.main.asyncAfter(deadline: when)
+            {
+                self.startScanning()
+            }
+        }
     }
     
     public func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Error?) {
