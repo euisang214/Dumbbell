@@ -11,6 +11,7 @@ import UIKit
 protocol HomeDelegate
 {
     func prepareForNextSet()
+    func changeMeasuringStatusUpdateButtonStatus(_ bool:Bool)
 }
 
 class Home: UIViewController, UpdateConnectionStatLabelDelegate, LiveAnalysisDelegate {
@@ -18,6 +19,7 @@ class Home: UIViewController, UpdateConnectionStatLabelDelegate, LiveAnalysisDel
     public static var delegate:HomeDelegate?
 
     //  @IBOutlet weak var logView: UITextView!
+    @IBOutlet weak var headerL: UILabel!
     @IBOutlet weak var leftImage: UIImageView!
     @IBOutlet weak var rightImage: UIImageView!
     
@@ -100,6 +102,7 @@ class Home: UIViewController, UpdateConnectionStatLabelDelegate, LiveAnalysisDel
         {
             connectB.setTitle("Connected", for: .normal)
             connectB.isEnabled = false
+            Home.delegate?.changeMeasuringStatusUpdateButtonStatus(true)
             disconnectB.isEnabled = true
         }
     }
@@ -128,12 +131,14 @@ class Home: UIViewController, UpdateConnectionStatLabelDelegate, LiveAnalysisDel
             }
         }
         
+        Home.delegate?.changeMeasuringStatusUpdateButtonStatus(false)
         Home.delegate?.prepareForNextSet()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
     
+        headerL.isHidden = true
         disconnectB.isEnabled = false
         ViewController.updateConnectionStatLabelDelegate = self
         LiveAnalysis.liveAnalysisDelegate = self
@@ -143,8 +148,16 @@ class Home: UIViewController, UpdateConnectionStatLabelDelegate, LiveAnalysisDel
         connectionRightL.text = "Not Connected"
         connectionRightL.textColor = UIColor.red
         
+        disconnectB.setTitleColor(UIColor.gray, for: .disabled)
+        connectB.setTitleColor(UIColor.gray, for: .disabled)
+        
         //connectionRightL.layer.backgroundColor  = UIColor.lightGray.cgColor
         //connectionRightL.layer.cornerRadius = 5
+    }
+    
+     func applicationWillTerminate()
+    {
+        disconnectMicrobits()
     }
     /*
     // MARK: - Navigation
@@ -155,5 +168,4 @@ class Home: UIViewController, UpdateConnectionStatLabelDelegate, LiveAnalysisDel
         // Pass the selected object to the new view controller.
     }
     */
-
 }

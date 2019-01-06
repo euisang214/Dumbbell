@@ -107,9 +107,7 @@ class LiveAnalysis: UIViewController, ComputeDelegate, HomeDelegate {
         }
         else
         {
-            measuring = !measuring
-            measuringStatusUpdateButton.setTitle("Start", for: .normal)
-            measuringStatusUpdateButton.setTitleColor(UIColor.blue, for: .normal)
+            prepareForNextSet()
         }
     }
     
@@ -129,6 +127,9 @@ class LiveAnalysis: UIViewController, ComputeDelegate, HomeDelegate {
         leftData = DataHolder()
         leftRepCounter = RepCounter(name:"Left")
         rightRepCounter = RepCounter(name:"Right")
+        
+        measuringStatusUpdateButton.setTitleColor(UIColor.gray, for: .disabled)
+        measuringStatusUpdateButton.isEnabled = false
     }
 
     private func setProgressBarColors(color:UIColor)
@@ -248,7 +249,11 @@ class LiveAnalysis: UIViewController, ComputeDelegate, HomeDelegate {
         measuringStatusUpdateButton.setTitle("Start", for: .normal)
         
         setProgressBarColors(color: UIColor.orange)
-        
+    }
+    
+    public func changeMeasuringStatusUpdateButtonStatus(_ bool:Bool)
+    {
+        measuringStatusUpdateButton.isEnabled = bool
     }
 
     /*

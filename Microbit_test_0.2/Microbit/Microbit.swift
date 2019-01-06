@@ -176,9 +176,12 @@ public class Microbit: NSObject,CBCentralManagerDelegate,CBPeripheralDelegate {
     public static let periodType:PeriodType = PeriodType.p20
     public var isConnected:[Bool] = [false, false]
     {
-        didSet
+        didSet(oldValue)
         {
-            delegate?.connectionStatChangeNotif(isConnected: isConnected)
+            if oldValue != isConnected
+            {
+                delegate?.connectionStatChangeNotif(isConnected: isConnected)
+            }
         }
     }
     
