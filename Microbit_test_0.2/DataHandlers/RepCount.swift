@@ -55,7 +55,7 @@ class RepCounter
         }
         
         //ensure reps are only registered for up-down motions, no accidental registers from up-up or down-down
-        else if ( raisingIsConstant && (!prevRaising! == raising) ) //&& (!prevRaising! == raising)
+        else if ( raisingIsConstant && (!prevRaising! == raising) )
         {
             boundaryCrossed(dataHolder: &dataHolder, raising: raising, name: name, runCount: runCount)
         }

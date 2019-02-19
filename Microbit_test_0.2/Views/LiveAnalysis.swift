@@ -149,7 +149,6 @@ class LiveAnalysis: UIViewController, ComputeDelegate, HomeDelegate {
         symmetryProgressBar.progressColor = color
         symmetryProgressBar.value = 0
         symmetryProgressBar.value = CGFloat(currentProgressBarValues[3])
-        print(currentProgressBarValues)
     }
 
     private func compute(dataHolder:inout DataHolder?, x:Int16, y:Int16, z:Int16, isRightSide:Bool)
@@ -162,7 +161,7 @@ class LiveAnalysis: UIViewController, ComputeDelegate, HomeDelegate {
     // MARK: Implement required for ComputeDelegate protocol
     public func computeMain(isRightSide:Bool)
     {
-        if ViewController.microbitController?.microbit?.isConnected.last! == true && measuring == true
+        if ViewController.microbitController?.microbit?.isConnected.last! == true && measuring == true && ( (isRightSide && rightRunCount <= leftRunCount) || (!isRightSide && leftRunCount <= rightRunCount) )
         {
             if (detectPause?.isPaused(dataHolderOne: &leftData, dataHolderTwo: &rightData, runCount:leftRunCount))!
             {
@@ -179,7 +178,7 @@ class LiveAnalysis: UIViewController, ComputeDelegate, HomeDelegate {
                 case true:
                     compute(dataHolder: &rightData, x: x, y: y, z: z, isRightSide: isRightSide)
                     //labels
-                    if rightRunCount%2==0 && rightRunCount>4{ print(((leftData?.dX.last!.description)!) + " " + (rightData?.dX.last!.description)!) }
+                   // if rightRunCount%2==0 && rightRunCount>4{ print(((leftData?.dX.last!.description)!) + " " + (rightData?.dX.last!.description)!) }
                     rightRunCount += 1
                     break
                 case false:
@@ -220,8 +219,13 @@ class LiveAnalysis: UIViewController, ComputeDelegate, HomeDelegate {
                 {
                     UIView.animate(withDuration: 0.3)
                     {
-                        self.currentProgressBarValues[3] = Double((self.similarity?.overallSimilarity(leftArray: (self.leftData?.dX)!, rightArray: (self.rightData?.dX)!))!)
-                        self.symmetryProgressBar.value = CGFloat(self.currentProgressBarValues[3])
+                        let tempSimil = Double((self.similarity?.overallSimilarity(leftArray: (self.leftData?.dX)!, rightArray: (self.rightData?.dX)!))!)
+                        //print(tempSimil)
+                        if tempSimil != -1
+                        {
+                            self.currentProgressBarValues[3] = tempSimil
+                            self.symmetryProgressBar.value = CGFloat(self.currentProgressBarValues[3])
+                        }
                     }
                 }
             }

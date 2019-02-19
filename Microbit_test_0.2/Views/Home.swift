@@ -153,6 +153,9 @@ class Home: UIViewController, UpdateConnectionStatLabelDelegate, LiveAnalysisDel
         
         //connectionRightL.layer.backgroundColor  = UIColor.lightGray.cgColor
         //connectionRightL.layer.cornerRadius = 5
+        
+        //print(screenSize.height)
+        //print(screenSize.width)
     }
     
      func applicationWillTerminate()

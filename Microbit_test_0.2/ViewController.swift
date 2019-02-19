@@ -23,8 +23,10 @@ class ViewController: UIViewController, MicrobitAccelerometerControllerDelegate 
     static var microbitController:MicrobitAccelerometerController?
     static var computeDelegate:ComputeDelegate?
     static var updateConnectionStatLabelDelegate:UpdateConnectionStatLabelDelegate?
-
+    
     @IBOutlet weak var scrollView: UIScrollView!
+    
+    static var contentSize:CGSize?
     
     // MARK: Implement required MicrobitAccelerometerControllerDelegate functions
     public func updateLogView(_ log: String)
@@ -89,7 +91,7 @@ class ViewController: UIViewController, MicrobitAccelerometerControllerDelegate 
         
         scrollView.setContentOffset(CGPoint(x: self.view.frame.width, y: 0), animated: false)
         
-        //print(self.scrollView.description)
+       // self.contentSize = scrollView.contentSize
     
     }
     
