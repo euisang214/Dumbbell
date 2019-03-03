@@ -55,6 +55,9 @@ struct DataHolder
         crossedRunCountLog.removeAll()
         secondsPerRep = 0
     }
+    
+    public func getX() -> [Int16] { return x }
+    
 }
 
 struct UserAdvice
