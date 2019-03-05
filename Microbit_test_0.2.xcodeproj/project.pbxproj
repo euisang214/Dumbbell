@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0222BC4C222F088300D5F79F /* readME.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0222BC4B222F088300D5F79F /* readME.txt */; };
 		022AE89021DCD2BC00AAA694 /* Connected.png in Resources */ = {isa = PBXBuildFile; fileRef = 022AE88F21DCD2BB00AAA694 /* Connected.png */; };
 		022AE89221DCD41400AAA694 /* Connecting.png in Resources */ = {isa = PBXBuildFile; fileRef = 022AE89121DCD41400AAA694 /* Connecting.png */; };
 		022E029921D3865D0052501A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022E029821D3865D0052501A /* AppDelegate.swift */; };
@@ -57,6 +58,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0222BC4B222F088300D5F79F /* readME.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = readME.txt; sourceTree = "<group>"; };
 		022AE88F21DCD2BB00AAA694 /* Connected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Connected.png; sourceTree = "<group>"; };
 		022AE89121DCD41400AAA694 /* Connecting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Connecting.png; sourceTree = "<group>"; };
 		022E029521D3865D0052501A /* Microbit_test_0.2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Microbit_test_0.2.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -154,6 +156,7 @@
 		022E029721D3865D0052501A /* Microbit_test_0.2 */ = {
 			isa = PBXGroup;
 			children = (
+				0222BC4B222F088300D5F79F /* readME.txt */,
 				02D2765421D61C41003B2B7B /* Photos */,
 				02A943EF21D4301B001E925A /* Microbit */,
 				02A943F821D43054001E925A /* DataHandlers */,
@@ -371,6 +374,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				022AE89021DCD2BC00AAA694 /* Connected.png in Resources */,
+				0222BC4C222F088300D5F79F /* readME.txt in Resources */,
 				022AE89221DCD41400AAA694 /* Connecting.png in Resources */,
 				022E02A321D3865F0052501A /* LaunchScreen.storyboard in Resources */,
 				022E02CB21D388110052501A /* RecordsView.xib in Resources */,
