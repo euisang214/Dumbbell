@@ -154,7 +154,12 @@ class LiveAnalysis: UIViewController, ComputeDelegate, HomeDelegate {
     private func compute(dataHolder:inout DataHolder?, x:Int16, y:Int16, z:Int16, isRightSide:Bool)
     {
         calculation?.updateDataHolder(dataHolder: &dataHolder!, x: x, y: y, z: z)
-        if isRightSide { rightRepCounter?.countRep(dataHolder: &dataHolder!, runCount: rightRunCount) }
+        if isRightSide { rightRepCounter?.countRep(dataHolder: &dataHolder!, runCount: rightRunCount)
+            if dataHolder?.dX.count ?? 0 > 2
+            {
+                print(dataHolder?.dX.last! as! Int16!)
+            }
+        }
         else { leftRepCounter?.countRep(dataHolder: &dataHolder!, runCount: leftRunCount) }
     }
     
@@ -269,5 +274,4 @@ class LiveAnalysis: UIViewController, ComputeDelegate, HomeDelegate {
         // Pass the selected object to the new view controller.
     }
     */
-
 }

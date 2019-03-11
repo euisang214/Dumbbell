@@ -19,6 +19,7 @@ struct DataHolder
     //for rep counting; "crossed" counts the number of times the microbit executes half a rep. 'raising' shows whether the microbit is declining or inclining
     public var raising:[Bool?]
     public var crossed:Int
+    
     public var reps:Int//Presented to user
     
     //for rangeOfMotion
@@ -55,9 +56,7 @@ struct DataHolder
         crossedRunCountLog.removeAll()
         secondsPerRep = 0
     }
-    
-    public func getX() -> [Int16] { return x }
-    
+
 }
 
 struct UserAdvice

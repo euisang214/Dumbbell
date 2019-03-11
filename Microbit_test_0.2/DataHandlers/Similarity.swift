@@ -109,6 +109,9 @@ class Similarity
             
             var leftArraySuff = leftArray.suffix(from: leftArray.count-32)
             var rightArraySuff = rightArray.suffix(from: rightArray.count-32)
+           // print()
+            //print(leftArraySuff)
+            //print(rightArraySuff)
             
             let leftAverage = average(array: leftArraySuff)
             let rightAverage = average(array: rightArraySuff)
@@ -137,6 +140,7 @@ class Similarity
             //print(returnDoubleValue)
             if returnDoubleValue.isNormal
             {
+                //print(Int(abs(returnDoubleValue*100)))
                 return Int(abs(returnDoubleValue*100))
             }
             else

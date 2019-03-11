@@ -77,3 +77,4 @@ class RangeOfMotion
         rangeOfMotionSimilarity.removeAll()
     }
 }
+

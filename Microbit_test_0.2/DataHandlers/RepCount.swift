@@ -29,7 +29,11 @@ class RepCounter
         prevRaising = raising
         rangeOfMotion?.boundaryCrossed(raising: raising, name: name)
         dataHolder.crossedRunCountLog.append(runCount)
-        dataHolder.raising.removeSubrange(0...dataHolder.raising.count-6)
+        
+        //removing unnecessary history. Most history from before the boundary is crossed again is useless. Removal will improve efficiency
+        var simplifiedRaising = dataHolder.raising
+        simplifiedRaising.removeSubrange(0...simplifiedRaising.count-6)
+        dataHolder.raising = simplifiedRaising
     }
     
     private func addRepIfValid(dataHolder:inout DataHolder, runCount:Int, raising:Bool?)
