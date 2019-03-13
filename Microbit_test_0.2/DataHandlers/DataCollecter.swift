@@ -16,8 +16,12 @@ class Calculation
         //return 1
     }
     
-    //functions for masterRecordData()
+    private func differenceOfMostRecentValues(_ array:[Int16]) -> Int16
+    {
+        return array.last! - array[array.endIndex-2]
+    }
     
+    //functions for masterRecordData()
     private func smoothen(record:[Int16]?, rawValue:Int16) -> Int16
     {
         if !(record?.isEmpty)!
@@ -27,9 +31,11 @@ class Calculation
         return rawValue
     }
     
+    //Updates x, threeD, dX, and dThreeD arrays.
+    //Called when new accelerometer data is provided.
+    //Called in LiveAnalysis, compute()
     public func updateDataHolder(dataHolder: inout DataHolder, x:Int16, y:Int16, z:Int16)
     {
-        //let twoD = twoDAcceleration(x: x, y: y)
         let threeD = threeDAcceleration(x: x, y: y, z: z)
         
         dataHolder.x.append(smoothen(record: dataHolder.x, rawValue: x))
@@ -37,8 +43,8 @@ class Calculation
         
         if dataHolder.x.count >= 2
         {
-            dataHolder.dX.append(dataHolder.x.last! - dataHolder.x[dataHolder.x.count-2])
-            dataHolder.dThreeD.append(dataHolder.threeD.last! - dataHolder.threeD[dataHolder.threeD.count-2])
+            dataHolder.dX.append(smoothen(record: dataHolder.x, rawValue: differenceOfMostRecentValues(dataHolder.x)))
+            dataHolder.dThreeD.append(smoothen(record: dataHolder.threeD, rawValue: differenceOfMostRecentValues(dataHolder.threeD)))
         }
     }
 }

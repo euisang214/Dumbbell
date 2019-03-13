@@ -42,12 +42,14 @@ class RangeOfMotion
     //called when a rep is completed; when dataHolder.crossed%2==0
     public func compareToStandard(dataHolder:inout DataHolder, runCount:Int, name:String)
     {
+        //a variable that will contain the most recent range travelled 
         var recentDifference:Double
         
         if standardDifference != nil
         {
             recentDifference = Double( abs(Int32(recentRange![0]-recentRange![1])) )
             if recentDifference < standardDifference! { rangeOfMotionSimilarity.append(Int16 (recentDifference/standardDifference!*Double(100) )) }
+            //if most recent range travelled is greater than the standard, this range becomes the standard
             else
             {
                 standardDifference = recentDifference

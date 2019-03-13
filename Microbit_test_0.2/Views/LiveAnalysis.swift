@@ -33,6 +33,7 @@ class LiveAnalysis: UIViewController, ComputeDelegate, HomeDelegate {
     var leftRunCount:Int = 0
     var rightRunCount:Int  = 0
     
+    //Stores the most recent number of reps, range of motion, seconds per rep, and similarity in this specific order
     var currentProgressBarValues:[Double] = [0,0,0,0]
     
     //to indicate whether the user has stopped the set/the set has been automatically stopped
@@ -64,46 +65,7 @@ class LiveAnalysis: UIViewController, ComputeDelegate, HomeDelegate {
                 self.secondsPerRepProgressBar.value = 0
             }
             
-            let blurEffect = UIBlurEffect(style: .light)
-            let effectView = UIVisualEffectView(effect: blurEffect)
-            effectView.frame = self.view.frame
-            blurredView.addSubview(effectView)
-            effectView.alpha = 0
-            UIView.setAnimationCurve(.easeInOut)
-            self.view.bringSubviewToFront(blurredView)
-            self.view.bringSubviewToFront(countDownLabel)
-            UIView.animate(withDuration: 0.8)
-            {
-                effectView.alpha = 0.8
-            }
-            
-            countDownLabel.isHidden = false
-            for seconds in 0...8
-            {
-                let when = DispatchTime.now() + (Double(seconds))
-                DispatchQueue.main.asyncAfter(deadline: when)
-                {
-                    self.countDownLabel.text = "\(8-seconds)"
-                }
-            }
-            
-            var when = DispatchTime.now() + (9)
-            DispatchQueue.main.asyncAfter(deadline: when)
-            {
-                self.countDownLabel.isHidden = true
-                self.view.sendSubviewToBack(self.countDownLabel)
-                UIView.animate(withDuration: 0.8)
-                {
-                    effectView.alpha = 0
-                }
-            }
-            
-            when = DispatchTime.now() + (9.85)
-            DispatchQueue.main.asyncAfter(deadline: when)
-            {
-                self.view.sendSubviewToBack(self.blurredView)
-                self.measuring = !self.measuring
-            }
+            arrangeTimer(seconds: 8)
         }
         else
         {
@@ -150,6 +112,56 @@ class LiveAnalysis: UIViewController, ComputeDelegate, HomeDelegate {
         symmetryProgressBar.value = 0
         symmetryProgressBar.value = CGFloat(currentProgressBarValues[3])
     }
+    
+    //Arranges the animation and countdown of the timer.
+    //Seconds variable: number of seconds the countdown will last
+    private func arrangeTimer(seconds:Int)
+    {
+        //Setup the blur effect view to be overlayed over the screen
+        let blurEffect = UIBlurEffect(style: .light)
+        let effectView = UIVisualEffectView(effect: blurEffect)
+        effectView.frame = self.view.frame
+        blurredView.addSubview(effectView)
+        effectView.alpha = 0
+        UIView.setAnimationCurve(.easeInOut)
+        self.view.bringSubviewToFront(blurredView)
+        self.view.bringSubviewToFront(countDownLabel)
+        UIView.animate(withDuration: 0.8)
+        {
+            effectView.alpha = 0.8
+        }
+        
+        //Countdown mechanism
+        countDownLabel.isHidden = false
+        for secondsLeft in 0...seconds
+        {
+            let when = DispatchTime.now() + (Double(secondsLeft))
+            DispatchQueue.main.asyncAfter(deadline: when)
+            {
+                self.countDownLabel.text = "\(seconds-secondsLeft)"
+            }
+        }
+        
+        //closing the blur effect view and timer
+        let timerEndTime:Double = Double(seconds+1)
+        var when = DispatchTime.now() + timerEndTime
+        DispatchQueue.main.asyncAfter(deadline: when)
+        {
+            self.countDownLabel.isHidden = true
+            self.view.sendSubviewToBack(self.countDownLabel)
+            UIView.animate(withDuration: 0.8)
+            {
+                effectView.alpha = 0
+            }
+        }
+        
+        when = DispatchTime.now() + (timerEndTime+0.05)
+        DispatchQueue.main.asyncAfter(deadline: when)
+        {
+            self.view.sendSubviewToBack(self.blurredView)
+            self.measuring = !self.measuring
+        }
+    }
 
     private func compute(dataHolder:inout DataHolder?, x:Int16, y:Int16, z:Int16, isRightSide:Bool)
     {
@@ -157,7 +169,7 @@ class LiveAnalysis: UIViewController, ComputeDelegate, HomeDelegate {
         if isRightSide { rightRepCounter?.countRep(dataHolder: &dataHolder!, runCount: rightRunCount)
             if dataHolder?.dX.count ?? 0 > 2
             {
-                print(dataHolder?.dX.last! as! Int16!)
+                print(dataHolder?.dX.last!)
             }
         }
         else { leftRepCounter?.countRep(dataHolder: &dataHolder!, runCount: leftRunCount) }
@@ -182,8 +194,6 @@ class LiveAnalysis: UIViewController, ComputeDelegate, HomeDelegate {
                 {
                 case true:
                     compute(dataHolder: &rightData, x: x, y: y, z: z, isRightSide: isRightSide)
-                    //labels
-                   // if rightRunCount%2==0 && rightRunCount>4{ print(((leftData?.dX.last!.description)!) + " " + (rightData?.dX.last!.description)!) }
                     rightRunCount += 1
                     break
                 case false:
@@ -194,32 +204,25 @@ class LiveAnalysis: UIViewController, ComputeDelegate, HomeDelegate {
                 }
                 
                 //updating progress bars
+                
+                currentProgressBarValues[0] = Double(min((leftData?.reps)!, (rightData?.reps)!))
                 UIView.animate(withDuration: 0.3)
                 {
-                    self.currentProgressBarValues[0] = Double(min((self.leftData?.reps)!, (self.rightData?.reps)!))
                     self.repProgressBar.value = CGFloat(self.currentProgressBarValues[0])
                 }
+                
+                currentProgressBarValues[1] = Double(((leftData?.rangeOfMotion)!+(rightData?.rangeOfMotion)!)/2)
+                UIView.animate(withDuration: 0.4)
+                {
+                    self.rangeOfMotionProgressBar.value = CGFloat(self.currentProgressBarValues[1])
+                }
 
-                //if leftRepCounter?.rangeOfMotion?.rangeOfMotionSimilarity.count == rightRepCounter?.rangeOfMotion?.rangeOfMotionSimilarity.count
-                //{
-                    currentProgressBarValues[1] = Double(((leftData?.rangeOfMotion)!+(rightData?.rangeOfMotion)!)/2)
-                    UIView.animate(withDuration: 0.4)
-                    {
-                        self.rangeOfMotionProgressBar.value = CGFloat(self.currentProgressBarValues[1])
-                    }
-                //}
-                
-                //if leftData?.crossedRunCountLog.count == rightData?.crossedRunCountLog.count
-                //{
-                    currentProgressBarValues[2] = ((leftData?.secondsPerRep)!+(rightData?.secondsPerRep)!)/2
-                    UIView.animate(withDuration: 0.3)
-                    {
-                        self.secondsPerRepProgressBar.value = CGFloat(self.currentProgressBarValues[2])
-                    }
-                //}
-                
-                //if rightData?.dX != nil && rightRunCount%32==0
-                //{
+                currentProgressBarValues[2] = ((leftData?.secondsPerRep)!+(rightData?.secondsPerRep)!)/2
+                UIView.animate(withDuration: 0.3)
+                {
+                    self.secondsPerRepProgressBar.value = CGFloat(self.currentProgressBarValues[2])
+                }
+
                 if leftRunCount%55 == 0
                 {
                     UIView.animate(withDuration: 0.3)
@@ -234,7 +237,6 @@ class LiveAnalysis: UIViewController, ComputeDelegate, HomeDelegate {
                     }
                 }
             }
-            //}
         }
     }
     

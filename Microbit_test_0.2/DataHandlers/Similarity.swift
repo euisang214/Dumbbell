@@ -17,6 +17,8 @@ class Similarity
         return sum/Double(array.count)
     }
     
+    /*
+    
     //gets the 'd' - difference - between most recent data points for the given
     //array - in DataHolder - and presents it as a percentage.
     //
@@ -40,78 +42,17 @@ class Similarity
         return 0
     }
     
-    //uses Jaccard Similarity algorithm
+    */
+    
+    //uses Microsoft Excel's 'Correl' equation
     //Assesses the overall corellation between the motion of the two given arrays
     public func overallSimilarity(leftArray:[Int16], rightArray:[Int16]) -> Int
     {
-        /*
-        if leftArray.count>32 && rightArray.count>32
-        {
-            let leftAverage = leftArray.suffix(from: leftArray.count-32)
-            
-            let rightAverage = rightArray.suffix(from: rightArray.count-32)
-            
-            var differencePercentageArray:[Int16] = []
-            
-            var differenceAverage:Double
-            
-            for idx in 0...31
-            {
-                let minValue = min(abs(leftAverage[leftAverage.endIndex-idx-1]), abs(rightAverage[rightAverage.endIndex-idx-1]))
-                let maxValue = max(abs(leftAverage[leftAverage.endIndex-idx-1]), abs(rightAverage[rightAverage.endIndex-idx-1]))
-                
-                if maxValue != 0
-                {
-                    differencePercentageArray.append(Int16(Int(100*Double(minValue)/Double(maxValue))))
-                    print(minValue.description + " " + maxValue.description + " " + differencePercentageArray.last!.description)
-                }
-                else
-                {
-                    differencePercentageArray.append(50)
-                }
-            
-            }
-            
-            differencePercentageArray = differencePercentageArray.sorted()
-            
-            differenceAverage = Double(differencePercentageArray[Int(differencePercentageArray.count/2)])
-            
-            if differenceAverage.isNaN
-            {
-                return 100
-            }
-            
-            return Int(differenceAverage)
-            */
-            
-            /*var leftAbs:[Int16] = []
-            var rightAbs:[Int16] = []
-            
-            for elements in leftArray.suffix(from: leftArray.count-32)
-            {
-                leftAbs.append(abs(elements))
-            }
-            
-            for elements in rightArray.suffix(from: rightArray.count-32)
-            {
-                rightAbs.append(abs(elements))
-            }
-            
-            print((leftAbs.first?.description)! + " " + rightAbs.first!.description)
-            
-            let leftSet = Set(leftAbs)
-            let rightSet = Set(rightAbs)
-            
-            return Int(abs(Double(leftSet.intersection(rightSet).count) / Double(leftSet.union(rightSet).count) * 100))
-            */
         if leftArray.count>32 && rightArray.count>32
         {
             
             var leftArraySuff = leftArray.suffix(from: leftArray.count-32)
             var rightArraySuff = rightArray.suffix(from: rightArray.count-32)
-           // print()
-            //print(leftArraySuff)
-            //print(rightArraySuff)
             
             let leftAverage = average(array: leftArraySuff)
             let rightAverage = average(array: rightArraySuff)
@@ -137,10 +78,8 @@ class Similarity
             
             let returnDoubleValue = numerater/(pow(denominatorRight*denominatorLeft, 0.5))
             
-            //print(returnDoubleValue)
             if returnDoubleValue.isNormal
             {
-                //print(Int(abs(returnDoubleValue*100)))
                 return Int(abs(returnDoubleValue*100))
             }
             else
