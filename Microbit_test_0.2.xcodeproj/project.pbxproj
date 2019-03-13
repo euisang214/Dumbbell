@@ -17,12 +17,12 @@
 		022E02A321D3865F0052501A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 022E02A121D3865F0052501A /* LaunchScreen.storyboard */; };
 		022E02AE21D3865F0052501A /* Microbit_test_0_2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022E02AD21D3865F0052501A /* Microbit_test_0_2Tests.swift */; };
 		022E02B921D3865F0052501A /* Microbit_test_0_2UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022E02B821D3865F0052501A /* Microbit_test_0_2UITests.swift */; };
-		022E02CA21D388110052501A /* RecordsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022E02C821D388110052501A /* RecordsView.swift */; };
-		022E02CB21D388110052501A /* RecordsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 022E02C921D388110052501A /* RecordsView.xib */; };
-		022E02CE21D389720052501A /* LiveAnalysis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022E02CC21D389720052501A /* LiveAnalysis.swift */; };
-		022E02CF21D389720052501A /* LiveAnalysis.xib in Resources */ = {isa = PBXBuildFile; fileRef = 022E02CD21D389720052501A /* LiveAnalysis.xib */; };
-		022E02D221D38D6F0052501A /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022E02D021D38D6F0052501A /* Home.swift */; };
-		022E02D321D38D6F0052501A /* Home.xib in Resources */ = {isa = PBXBuildFile; fileRef = 022E02D121D38D6F0052501A /* Home.xib */; };
+		022E02CA21D388110052501A /* RecordsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022E02C821D388110052501A /* RecordsViewController.swift */; };
+		022E02CB21D388110052501A /* RecordsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 022E02C921D388110052501A /* RecordsViewController.xib */; };
+		022E02CE21D389720052501A /* LiveAnalysisViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022E02CC21D389720052501A /* LiveAnalysisViewController.swift */; };
+		022E02CF21D389720052501A /* LiveAnalysisViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 022E02CD21D389720052501A /* LiveAnalysisViewController.xib */; };
+		022E02D221D38D6F0052501A /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022E02D021D38D6F0052501A /* HomeViewController.swift */; };
+		022E02D321D38D6F0052501A /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 022E02D121D38D6F0052501A /* HomeViewController.xib */; };
 		024EA95021D705690050CCAD /* RangeOfMotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024EA94F21D705690050CCAD /* RangeOfMotion.swift */; };
 		024EA95221D81B410050CCAD /* Speed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024EA95121D81B410050CCAD /* Speed.swift */; };
 		02A943F321D4301B001E925A /* MicrobitAccelerometer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A943F021D4301B001E925A /* MicrobitAccelerometer.swift */; };
@@ -74,12 +74,12 @@
 		022E02B421D3865F0052501A /* Microbit_test_0.2UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Microbit_test_0.2UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		022E02B821D3865F0052501A /* Microbit_test_0_2UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Microbit_test_0_2UITests.swift; sourceTree = "<group>"; };
 		022E02BA21D3865F0052501A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		022E02C821D388110052501A /* RecordsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordsView.swift; sourceTree = "<group>"; };
-		022E02C921D388110052501A /* RecordsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecordsView.xib; sourceTree = "<group>"; };
-		022E02CC21D389720052501A /* LiveAnalysis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveAnalysis.swift; sourceTree = "<group>"; };
-		022E02CD21D389720052501A /* LiveAnalysis.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LiveAnalysis.xib; sourceTree = "<group>"; };
-		022E02D021D38D6F0052501A /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
-		022E02D121D38D6F0052501A /* Home.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Home.xib; sourceTree = "<group>"; };
+		022E02C821D388110052501A /* RecordsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordsViewController.swift; sourceTree = "<group>"; };
+		022E02C921D388110052501A /* RecordsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecordsViewController.xib; sourceTree = "<group>"; };
+		022E02CC21D389720052501A /* LiveAnalysisViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveAnalysisViewController.swift; sourceTree = "<group>"; };
+		022E02CD21D389720052501A /* LiveAnalysisViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LiveAnalysisViewController.xib; sourceTree = "<group>"; };
+		022E02D021D38D6F0052501A /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		022E02D121D38D6F0052501A /* HomeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeViewController.xib; sourceTree = "<group>"; };
 		024EA94F21D705690050CCAD /* RangeOfMotion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RangeOfMotion.swift; sourceTree = "<group>"; };
 		024EA95121D81B410050CCAD /* Speed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Speed.swift; sourceTree = "<group>"; };
 		02A943F021D4301B001E925A /* MicrobitAccelerometer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MicrobitAccelerometer.swift; sourceTree = "<group>"; };
@@ -192,12 +192,12 @@
 		02A943EE21D42F79001E925A /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				022E02CC21D389720052501A /* LiveAnalysis.swift */,
-				022E02CD21D389720052501A /* LiveAnalysis.xib */,
-				022E02C821D388110052501A /* RecordsView.swift */,
-				022E02C921D388110052501A /* RecordsView.xib */,
-				022E02D021D38D6F0052501A /* Home.swift */,
-				022E02D121D38D6F0052501A /* Home.xib */,
+				022E02CC21D389720052501A /* LiveAnalysisViewController.swift */,
+				022E02CD21D389720052501A /* LiveAnalysisViewController.xib */,
+				022E02C821D388110052501A /* RecordsViewController.swift */,
+				022E02C921D388110052501A /* RecordsViewController.xib */,
+				022E02D021D38D6F0052501A /* HomeViewController.swift */,
+				022E02D121D38D6F0052501A /* HomeViewController.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -377,12 +377,12 @@
 				0222BC4C222F088300D5F79F /* readME.txt in Resources */,
 				022AE89221DCD41400AAA694 /* Connecting.png in Resources */,
 				022E02A321D3865F0052501A /* LaunchScreen.storyboard in Resources */,
-				022E02CB21D388110052501A /* RecordsView.xib in Resources */,
+				022E02CB21D388110052501A /* RecordsViewController.xib in Resources */,
 				02D2765A21D621E3003B2B7B /* microbitPic2.png in Resources */,
 				022E02A021D3865F0052501A /* Assets.xcassets in Resources */,
 				022E029E21D3865D0052501A /* Main.storyboard in Resources */,
-				022E02D321D38D6F0052501A /* Home.xib in Resources */,
-				022E02CF21D389720052501A /* LiveAnalysis.xib in Resources */,
+				022E02D321D38D6F0052501A /* HomeViewController.xib in Resources */,
+				022E02CF21D389720052501A /* LiveAnalysisViewController.xib in Resources */,
 				02D2765821D6216E003B2B7B /* microbitPic.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -489,11 +489,11 @@
 				024EA95221D81B410050CCAD /* Speed.swift in Sources */,
 				02A9440121D43074001E925A /* DetectPause.swift in Sources */,
 				02A943F321D4301B001E925A /* MicrobitAccelerometer.swift in Sources */,
-				022E02CA21D388110052501A /* RecordsView.swift in Sources */,
+				022E02CA21D388110052501A /* RecordsViewController.swift in Sources */,
 				02A943FE21D43074001E925A /* Similarity.swift in Sources */,
-				022E02CE21D389720052501A /* LiveAnalysis.swift in Sources */,
+				022E02CE21D389720052501A /* LiveAnalysisViewController.swift in Sources */,
 				02A943F421D4301B001E925A /* Microbit.swift in Sources */,
-				022E02D221D38D6F0052501A /* Home.swift in Sources */,
+				022E02D221D38D6F0052501A /* HomeViewController.swift in Sources */,
 				024EA95021D705690050CCAD /* RangeOfMotion.swift in Sources */,
 				022E029B21D3865D0052501A /* ViewController.swift in Sources */,
 				02A9440221D43074001E925A /* RepCount.swift in Sources */,

@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="Home" customModule="Microbit_test_0_2" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeViewController" customModule="Microbit_test_0_2" customModuleProvider="target">
             <connections>
                 <outlet property="connectB" destination="mFa-QA-dSJ" id="CIE-FC-brA"/>
                 <outlet property="connectionLeftL" destination="yPe-gS-0je" id="dqp-98-vfs"/>

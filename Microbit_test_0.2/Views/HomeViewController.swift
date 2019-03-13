@@ -14,7 +14,7 @@ protocol HomeDelegate
     func changeMeasuringStatusUpdateButtonStatus(_ bool:Bool)
 }
 
-class Home: UIViewController, UpdateConnectionStatLabelDelegate, LiveAnalysisDelegate {
+class HomeViewController: UIViewController, UpdateConnectionStatLabelDelegate, LiveAnalysisDelegate {
     
     public static var delegate:HomeDelegate?
 
@@ -102,7 +102,7 @@ class Home: UIViewController, UpdateConnectionStatLabelDelegate, LiveAnalysisDel
         {
             connectB.setTitle("Connected", for: .normal)
             connectB.isEnabled = false
-            Home.delegate?.changeMeasuringStatusUpdateButtonStatus(true)
+            HomeViewController.delegate?.changeMeasuringStatusUpdateButtonStatus(true)
             disconnectB.isEnabled = true
         }
     }
@@ -131,8 +131,8 @@ class Home: UIViewController, UpdateConnectionStatLabelDelegate, LiveAnalysisDel
             }
         }
         
-        Home.delegate?.changeMeasuringStatusUpdateButtonStatus(false)
-        Home.delegate?.prepareForNextSet()
+        HomeViewController.delegate?.changeMeasuringStatusUpdateButtonStatus(false)
+        HomeViewController.delegate?.prepareForNextSet()
     }
     
     override func viewDidLoad() {
@@ -141,7 +141,7 @@ class Home: UIViewController, UpdateConnectionStatLabelDelegate, LiveAnalysisDel
         headerL.isHidden = true
         disconnectB.isEnabled = false
         ViewController.updateConnectionStatLabelDelegate = self
-        LiveAnalysis.liveAnalysisDelegate = self
+        LiveAnalysisViewController.liveAnalysisDelegate = self
         
         connectionLeftL.text = "Not Connected"
         connectionLeftL.textColor = UIColor.red

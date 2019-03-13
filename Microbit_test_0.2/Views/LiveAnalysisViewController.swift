@@ -14,7 +14,7 @@ protocol LiveAnalysisDelegate
     func disconnectMicrobits()
 }
 
-class LiveAnalysis: UIViewController, ComputeDelegate, HomeDelegate {
+class LiveAnalysisViewController: UIViewController, ComputeDelegate, HomeDelegate {
     
     static var liveAnalysisDelegate:LiveAnalysisDelegate?
 
@@ -77,7 +77,7 @@ class LiveAnalysis: UIViewController, ComputeDelegate, HomeDelegate {
         super.viewDidLoad()
         
         ViewController.computeDelegate = self
-        Home.delegate = self
+        HomeViewController.delegate = self
         
         leftRunCount = 0
         rightRunCount = 0
@@ -163,13 +163,14 @@ class LiveAnalysis: UIViewController, ComputeDelegate, HomeDelegate {
         }
     }
 
+    //Updating DataHolder and running .countRep (all core functions)
     private func compute(dataHolder:inout DataHolder?, x:Int16, y:Int16, z:Int16, isRightSide:Bool)
     {
         calculation?.updateDataHolder(dataHolder: &dataHolder!, x: x, y: y, z: z)
         if isRightSide { rightRepCounter?.countRep(dataHolder: &dataHolder!, runCount: rightRunCount)
             if dataHolder?.dX.count ?? 0 > 2
             {
-                print(dataHolder?.dX.last!)
+                print(dataHolder?.dX.last! as Any)
             }
         }
         else { leftRepCounter?.countRep(dataHolder: &dataHolder!, runCount: leftRunCount) }

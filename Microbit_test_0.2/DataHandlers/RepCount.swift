@@ -71,9 +71,10 @@ class RepCounter
             speed.secondsPerRep(dataHolder: &dataHolder)
         }
         
+        //If a rep has been completed
         if rangeOfMotion?.recentRange!.count == 2
         {
-            rangeOfMotion?.compareToStandard(dataHolder: &dataHolder, runCount: runCount, name:name)
+            rangeOfMotion?.updateRangeOfMotion(dataHolder: &dataHolder, runCount: runCount, name:name)
         }
     }
     

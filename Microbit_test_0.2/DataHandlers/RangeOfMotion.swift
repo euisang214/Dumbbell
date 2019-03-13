@@ -40,7 +40,7 @@ class RangeOfMotion
     }
 
     //called when a rep is completed; when dataHolder.crossed%2==0
-    public func compareToStandard(dataHolder:inout DataHolder, runCount:Int, name:String)
+    public func updateRangeOfMotion(dataHolder:inout DataHolder, runCount:Int, name:String)
     {
         //a variable that will contain the most recent range travelled 
         var recentDifference:Double
