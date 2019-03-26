@@ -57,9 +57,9 @@ class ViewController: UIViewController, MicrobitAccelerometerControllerDelegate 
         scrollView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.size.height)
         
         //setting up UI
-        let recordsView:RecordsViewController = RecordsViewController(nibName: "RecordsView", bundle: nil)
-        let liveAnalysis:LiveAnalysisViewController = LiveAnalysisViewController(nibName: "LiveAnalysis", bundle: nil)
-        let home:HomeViewController = HomeViewController(nibName: "Home", bundle: nil)
+        let recordsView:RecordsViewController = RecordsViewController(nibName: "RecordsViewController", bundle: nil)
+        let liveAnalysis:LiveAnalysisViewController = LiveAnalysisViewController(nibName: "LiveAnalysisViewController", bundle: nil)
+        let home:HomeViewController = HomeViewController(nibName: "HomeViewController", bundle: nil)
 
         self.addChild(recordsView)
         self.scrollView.addSubview(recordsView.view)

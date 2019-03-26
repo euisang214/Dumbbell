@@ -65,7 +65,7 @@ class LiveAnalysisViewController: UIViewController, ComputeDelegate, HomeDelegat
                 self.secondsPerRepProgressBar.value = 0
             }
             
-            arrangeTimer(seconds: 8)
+            arrangeTimer(seconds: 2)
         }
         else
         {
@@ -168,10 +168,6 @@ class LiveAnalysisViewController: UIViewController, ComputeDelegate, HomeDelegat
     {
         calculation?.updateDataHolder(dataHolder: &dataHolder!, x: x, y: y, z: z)
         if isRightSide { rightRepCounter?.countRep(dataHolder: &dataHolder!, runCount: rightRunCount)
-            if dataHolder?.dX.count ?? 0 > 2
-            {
-                print(dataHolder?.dX.last! as Any)
-            }
         }
         else { leftRepCounter?.countRep(dataHolder: &dataHolder!, runCount: leftRunCount) }
     }

@@ -22,11 +22,14 @@ class Calculation
     }
     
     //functions for masterRecordData()
-    private func smoothen(record:[Int16]?, rawValue:Int16) -> Int16
+    private func smoothen(record:[Int16]?, rawValue:Int16, _ smoothenLevel:Double) -> Int16
     {
         if !(record?.isEmpty)!
         {
-            return Int16(0.08*Double(rawValue)+(1-0.08)*Double((record?.last)!))
+            let equationPart_1 = Int16((1.0-smoothenLevel)*Double(rawValue))
+            let equationPart_2 = Int16((smoothenLevel)*Double((record?.last)!))
+            
+            return Int16(equationPart_1 + equationPart_2)
         }
         return rawValue
     }
@@ -38,13 +41,13 @@ class Calculation
     {
         let threeD = threeDAcceleration(x: x, y: y, z: z)
         
-        dataHolder.x.append(smoothen(record: dataHolder.x, rawValue: x))
-        dataHolder.threeD.append(smoothen(record: dataHolder.threeD, rawValue: threeD))
+        dataHolder.x.append(smoothen(record: dataHolder.x, rawValue: x, 0.92))
+        dataHolder.threeD.append(smoothen(record: dataHolder.threeD, rawValue: threeD, 0.92))
         
         if dataHolder.x.count >= 2
         {
-            dataHolder.dX.append(smoothen(record: dataHolder.x, rawValue: differenceOfMostRecentValues(dataHolder.x)))
-            dataHolder.dThreeD.append(smoothen(record: dataHolder.threeD, rawValue: differenceOfMostRecentValues(dataHolder.threeD)))
+            dataHolder.dX.append(smoothen(record: dataHolder.x, rawValue: differenceOfMostRecentValues(dataHolder.x), 0.7))
+            dataHolder.dThreeD.append(smoothen(record: dataHolder.threeD, rawValue: differenceOfMostRecentValues(dataHolder.threeD), 0.7))
         }
     }
 }
