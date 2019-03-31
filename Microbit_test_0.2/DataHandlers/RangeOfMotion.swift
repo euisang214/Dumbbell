@@ -14,7 +14,7 @@ class RangeOfMotion
 {
     //Stores the acceleration between boundary crosses
     public var recentReps:[Int16]?
-    //
+    
     public var recentRange:[Int16]?
     //Stores the default range of motion: based on the first rep
     private var standardDifference:Double?
@@ -60,7 +60,7 @@ class RangeOfMotion
         }
         else
         {
-            print("Standard difference calculation for \(name): " + recentRange![0].description + " " + recentRange![1].description)
+            //print("Standard difference calculation for \(name): " + recentRange![0].description + " " + recentRange![1].description)
             standardDifference = Double( abs(Int32(recentRange![0]-recentRange![1])) )*0.98
             dataHolder.rangeOfMotion = 100
         }

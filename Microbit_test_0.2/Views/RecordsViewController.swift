@@ -8,11 +8,20 @@
 
 import UIKit
 
-class RecordsViewController: UIViewController {
+class RecordsViewController: UIViewController
+{
+    
+    // Functiuon for stats being updated once a new set is completed
+    static public func RsetCompleted()
+    {
+        
+    }
 
-    override func viewDidLoad() {
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        
     }
 
 

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 46;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -63,7 +63,7 @@
 		06FF16359240A4B38DD493D2109F4F2E /* Pods-Microbit_test_0.2Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Microbit_test_0.2Tests-acknowledgements.plist"; sourceTree = "<group>"; };
 		12976417890B597C252C55EF242847C5 /* Pods-Microbit_test_0.2-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Microbit_test_0.2-dummy.m"; sourceTree = "<group>"; };
 		169E46E94E71926AFFEDED5D14C57E03 /* Pods-Microbit_test_0.2UITests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Microbit_test_0.2UITests-dummy.m"; sourceTree = "<group>"; };
-		1C66388EA39990E3C57166EE98CC6794 /* Pods_Microbit_test_0_2Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_Microbit_test_0_2Tests.framework; path = "Pods-Microbit_test_0.2Tests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1C66388EA39990E3C57166EE98CC6794 /* Pods_Microbit_test_0_2Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Microbit_test_0_2Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		29359D3456256F9C464A4E5B07BCEBFD /* Pods-Microbit_test_0.2-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Microbit_test_0.2-frameworks.sh"; sourceTree = "<group>"; };
 		2B9991CD6B532ECA008BAAFA8AF0EBA0 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2F22A5EA5D8E9209FF74B32CDDC5C24D /* Pods-Microbit_test_0.2Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Microbit_test_0.2Tests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -78,20 +78,20 @@
 		5AE177EE8E4529FD2D7E2F33EF0F2EEA /* MBCircularProgressBarView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MBCircularProgressBarView.m; path = Pod/Classes/MBCircularProgressBarView.m; sourceTree = "<group>"; };
 		5BF076811E546867319BF73118023DBC /* ResourceBundle-MBCircularProgressBar-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "ResourceBundle-MBCircularProgressBar-Info.plist"; sourceTree = "<group>"; };
 		5FC0C6F51BDE6BE95E4DAD70609A6167 /* Pods-Microbit_test_0.2Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Microbit_test_0.2Tests.modulemap"; sourceTree = "<group>"; };
-		64CFC6AB83C9985D7F363130ABA6344D /* MBCircularProgressBar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = MBCircularProgressBar.framework; path = MBCircularProgressBar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		64CFC6AB83C9985D7F363130ABA6344D /* MBCircularProgressBar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MBCircularProgressBar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		656EE1B26E53FF3D1F9CFE78DED2C28E /* Pods-Microbit_test_0.2Tests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Microbit_test_0.2Tests-resources.sh"; sourceTree = "<group>"; };
 		69C141292FED66CE59CDC3F21A739DD6 /* MBCircularProgressBarView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MBCircularProgressBarView.h; path = Pod/Classes/MBCircularProgressBarView.h; sourceTree = "<group>"; };
 		78EA80F337516A76042990BBD3D2F351 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		89E43BC9FBE04EE0B57AF91B9576E77E /* Pods-Microbit_test_0.2UITests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Microbit_test_0.2UITests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		8C15A4601A62397F4C2BFEE09EA2C17F /* Pods-Microbit_test_0.2-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Microbit_test_0.2-acknowledgements.markdown"; sourceTree = "<group>"; };
 		8CBFB6096666053BE7B9B681FA89E721 /* Pods-Microbit_test_0.2UITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Microbit_test_0.2UITests.release.xcconfig"; sourceTree = "<group>"; };
-		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		95D53A0B149B94006E1867D7A9B3E432 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		95F618A74B8E41BBB40AEE23F885A114 /* MBCircularProgressBar.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = MBCircularProgressBar.bundle; path = "MBCircularProgressBar-MBCircularProgressBar.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
+		95F618A74B8E41BBB40AEE23F885A114 /* MBCircularProgressBar.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MBCircularProgressBar.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		9CC3A8AB81A57F13C9A5383E885438A4 /* Pods-Microbit_test_0.2Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Microbit_test_0.2Tests-umbrella.h"; sourceTree = "<group>"; };
 		9D8DC23FD5CA4F5975E8415D4649C149 /* Pods-Microbit_test_0.2.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Microbit_test_0.2.debug.xcconfig"; sourceTree = "<group>"; };
 		AA0F1FC47CBD2D6D975D9D244A7B9B34 /* Pods-Microbit_test_0.2.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Microbit_test_0.2.modulemap"; sourceTree = "<group>"; };
-		B8319E8E1FABE17A3A5937431A107497 /* Pods_Microbit_test_0_2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_Microbit_test_0_2.framework; path = "Pods-Microbit_test_0.2.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B8319E8E1FABE17A3A5937431A107497 /* Pods_Microbit_test_0_2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Microbit_test_0_2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD8A7803CEAD9B9D1AE6E039AC392C04 /* Pods-Microbit_test_0.2UITests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Microbit_test_0.2UITests.modulemap"; sourceTree = "<group>"; };
 		BFB60D4DE74B9617A229D3B55818FFE4 /* MBCircularProgressBar-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "MBCircularProgressBar-dummy.m"; sourceTree = "<group>"; };
 		C68EE05B44C5F1E7AC3697842D061797 /* Pods-Microbit_test_0.2Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Microbit_test_0.2Tests.release.xcconfig"; sourceTree = "<group>"; };
@@ -104,7 +104,7 @@
 		D99656B9564A8FF9EB6AC5A58F113A6F /* MBCircularProgressBarLayer.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MBCircularProgressBarLayer.m; path = Pod/Classes/MBCircularProgressBarLayer.m; sourceTree = "<group>"; };
 		DE26868BE2E5BA5BC79BD1A3C0A167A1 /* Pods-Microbit_test_0.2-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Microbit_test_0.2-acknowledgements.plist"; sourceTree = "<group>"; };
 		E0A92051BEF5F5DB8B3F6F41DA6FFD25 /* MBCircularProgressBar-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MBCircularProgressBar-umbrella.h"; sourceTree = "<group>"; };
-		E2C1EC1F54B0275DB0B37C86633683E4 /* Pods_Microbit_test_0_2UITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_Microbit_test_0_2UITests.framework; path = "Pods-Microbit_test_0.2UITests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E2C1EC1F54B0275DB0B37C86633683E4 /* Pods_Microbit_test_0_2UITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Microbit_test_0_2UITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5EA381619AB53F9AC6A12DE03A71B53 /* Pods-Microbit_test_0.2UITests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Microbit_test_0.2UITests-resources.sh"; sourceTree = "<group>"; };
 		EE8741FC987698461DE85EAF0C60D6F2 /* Pods-Microbit_test_0.2UITests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Microbit_test_0.2UITests-frameworks.sh"; sourceTree = "<group>"; };
 		F0B0918E9F8570BBA800A579E0741C61 /* MBCircularProgressBar.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = MBCircularProgressBar.xcconfig; sourceTree = "<group>"; };
@@ -163,7 +163,6 @@
 				632E234E737254A0CDE96F6B8195E459 /* Resources */,
 				C80EC943730FC81019D37BDD652D3AF5 /* Support Files */,
 			);
-			name = MBCircularProgressBar;
 			path = MBCircularProgressBar;
 			sourceTree = "<group>";
 		};
@@ -442,10 +441,11 @@
 			};
 			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
 			productRefGroup = 9B2A18E8D0761F1208737C7F9191EF85 /* Products */;
@@ -628,11 +628,7 @@
 				INFOPLIST_FILE = "Target Support Files/Pods-Microbit_test_0.2UITests/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
 				MODULEMAP_FILE = "Target Support Files/Pods-Microbit_test_0.2UITests/Pods-Microbit_test_0.2UITests.modulemap";
 				OTHER_LDFLAGS = "";
@@ -667,11 +663,7 @@
 				INFOPLIST_FILE = "Target Support Files/Pods-Microbit_test_0.2Tests/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
 				MODULEMAP_FILE = "Target Support Files/Pods-Microbit_test_0.2Tests/Pods-Microbit_test_0.2Tests.modulemap";
 				OTHER_LDFLAGS = "";
@@ -785,11 +777,7 @@
 				INFOPLIST_FILE = "Target Support Files/Pods-Microbit_test_0.2/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
 				MODULEMAP_FILE = "Target Support Files/Pods-Microbit_test_0.2/Pods-Microbit_test_0.2.modulemap";
 				OTHER_LDFLAGS = "";
@@ -840,11 +828,7 @@
 				INFOPLIST_FILE = "Target Support Files/Pods-Microbit_test_0.2UITests/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
 				MODULEMAP_FILE = "Target Support Files/Pods-Microbit_test_0.2UITests/Pods-Microbit_test_0.2UITests.modulemap";
 				OTHER_LDFLAGS = "";
@@ -877,11 +861,7 @@
 				INFOPLIST_FILE = "Target Support Files/MBCircularProgressBar/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/MBCircularProgressBar/MBCircularProgressBar.modulemap";
 				PRODUCT_MODULE_NAME = MBCircularProgressBar;
 				PRODUCT_NAME = MBCircularProgressBar;
@@ -913,11 +893,7 @@
 				INFOPLIST_FILE = "Target Support Files/Pods-Microbit_test_0.2Tests/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
 				MODULEMAP_FILE = "Target Support Files/Pods-Microbit_test_0.2Tests/Pods-Microbit_test_0.2Tests.modulemap";
 				OTHER_LDFLAGS = "";
@@ -950,11 +926,7 @@
 				INFOPLIST_FILE = "Target Support Files/MBCircularProgressBar/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/MBCircularProgressBar/MBCircularProgressBar.modulemap";
 				PRODUCT_MODULE_NAME = MBCircularProgressBar;
 				PRODUCT_NAME = MBCircularProgressBar;
@@ -987,11 +959,7 @@
 				INFOPLIST_FILE = "Target Support Files/Pods-Microbit_test_0.2/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
 				MODULEMAP_FILE = "Target Support Files/Pods-Microbit_test_0.2/Pods-Microbit_test_0.2.modulemap";
 				OTHER_LDFLAGS = "";

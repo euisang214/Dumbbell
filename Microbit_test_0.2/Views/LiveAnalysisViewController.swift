@@ -41,8 +41,8 @@ class LiveAnalysisViewController: UIViewController, ComputeDelegate, HomeDelegat
 
     @IBOutlet weak var blurredView: UIView!
     @IBOutlet weak var repProgressBar: MBCircularProgressBarView!
-    @IBOutlet weak var rangeOfMotionProgressBar: MBCircularProgressBarView!
-    @IBOutlet weak var secondsPerRepProgressBar: MBCircularProgressBarView!
+    @IBOutlet weak var romProgressBar: MBCircularProgressBarView!
+    @IBOutlet weak var sprProgressBar: MBCircularProgressBarView!
     @IBOutlet weak var symmetryProgressBar: MBCircularProgressBarView!
     @IBOutlet weak var countDownLabel: UILabel!
     
@@ -61,15 +61,96 @@ class LiveAnalysisViewController: UIViewController, ComputeDelegate, HomeDelegat
             {
                 self.repProgressBar.value = 0
                 self.symmetryProgressBar.value = 0
-                self.rangeOfMotionProgressBar.value = 0
-                self.secondsPerRepProgressBar.value = 0
+                self.romProgressBar.value = 0
+                self.sprProgressBar.value = 0
             }
             
             arrangeTimer(seconds: 2)
         }
         else
         {
-            prepareForNextSet()
+            // if the change between dX data points includes 0
+            // key: the index difference between the dX data points
+            // value: max absolute value within this range
+            
+            /*
+            print()
+            print()
+            print()
+            print(leftData?.dX_1)
+            print(leftData?.dX2_1)
+            print(leftData?.dX3_1)
+            print(leftData?.dX4_1)
+            print()
+            print()
+            print()
+            print(leftData?.dX_2)
+            print(leftData?.dX2_2)
+            print(leftData?.dX3_2)
+            print(leftData?.dX4_2)
+            print()
+            print()
+            print()
+            print(leftData?.dX_3)
+            print(leftData?.dX2_3)
+            print(leftData?.dX3_3)
+            print(leftData?.dX4_3)
+            print()
+            print()
+            print()
+            print(leftData?.dX_4)
+            print(leftData?.dX2_4)
+            print(leftData?.dX3_4)
+            print(leftData?.dX4_4)
+            print()
+            print()
+            print()
+            */
+            var record:[[Int16]] = [[]]
+            let dX = leftData?.dX
+            for indexOne in 0...(leftData?.dX.count ?? 0)-2
+            {
+                var firstRange:Range<Int16>
+                if dX![indexOne] < dX![indexOne+1] { firstRange = dX![indexOne]..<dX![indexOne+1] }
+                else { firstRange = dX![indexOne+1]..<dX![indexOne] }
+                
+                if firstRange.contains(0) && (dX![indexOne+1] != 0)
+                {
+                    //going to the next 0 cross if a 0 is crossed
+                    for indexTwo in indexOne+2...(leftData?.dX.count ?? 0)-2
+                    {
+                        var secondRange:Range<Int16>
+                        if dX![indexTwo] < dX![indexTwo+1] { secondRange = dX![indexTwo]..<dX![indexTwo+1] }
+                        else { secondRange = dX![indexTwo+1]..<dX![indexTwo] }
+                        
+                        if secondRange.contains(0) && (dX![indexTwo+1] != 0)
+                        {
+                            var absMax:Int16
+                            if secondRange.max()! > abs(secondRange.min()!) { absMax = Int16(secondRange.max()!) }
+                            else { absMax = Int16(abs(secondRange.min()!)) }
+                            
+                            if record.count == 1 { record[0] = [Int16(indexTwo-indexOne), absMax] }
+                            else { record.append([Int16(indexTwo-indexOne), absMax]) }
+                            break
+                        }
+                    }
+                }
+            }
+            
+            var averageArea = 0
+            
+            var count = 0
+            for index in 0...record.count-1
+            {
+                if index%2 == 0
+                {
+                    averageArea += Int( (record[index].first! * record[index].last!)/2 )
+                    print((record[index].first! * record[index].last!)/2)
+                    count += 1
+                }
+            }
+            print("Average area: \(averageArea/count)")
+            prepareForNextSet()*/
         }
     }
     
@@ -100,13 +181,13 @@ class LiveAnalysisViewController: UIViewController, ComputeDelegate, HomeDelegat
         repProgressBar.value = 0
         repProgressBar.value = CGFloat(currentProgressBarValues[0])
         
-        rangeOfMotionProgressBar.progressColor = color
-        rangeOfMotionProgressBar.value = 0
-        rangeOfMotionProgressBar.value = CGFloat(currentProgressBarValues[1])
+        romProgressBar.progressColor = color
+        romProgressBar.value = 0
+        romProgressBar.value = CGFloat(currentProgressBarValues[1])
         
-        secondsPerRepProgressBar.progressColor = color
-        secondsPerRepProgressBar.value = 0
-        secondsPerRepProgressBar.value = CGFloat(currentProgressBarValues[2])
+        sprProgressBar.progressColor = color
+        sprProgressBar.value = 0
+        sprProgressBar.value = CGFloat(currentProgressBarValues[2])
         
         symmetryProgressBar.progressColor = color
         symmetryProgressBar.value = 0
@@ -167,9 +248,12 @@ class LiveAnalysisViewController: UIViewController, ComputeDelegate, HomeDelegat
     private func compute(dataHolder:inout DataHolder?, x:Int16, y:Int16, z:Int16, isRightSide:Bool)
     {
         calculation?.updateDataHolder(dataHolder: &dataHolder!, x: x, y: y, z: z)
-        if isRightSide { rightRepCounter?.countRep(dataHolder: &dataHolder!, runCount: rightRunCount)
-        }
+        if isRightSide { rightRepCounter?.countRep(dataHolder: &dataHolder!, runCount: rightRunCount) }
         else { leftRepCounter?.countRep(dataHolder: &dataHolder!, runCount: leftRunCount) }
+        
+        if !isRightSide {
+            print(String(x) + " " + String(dataHolder?.dX.last ?? 0))
+        }
     }
     
     // MARK: Implement required for ComputeDelegate protocol
@@ -211,13 +295,13 @@ class LiveAnalysisViewController: UIViewController, ComputeDelegate, HomeDelegat
                 currentProgressBarValues[1] = Double(((leftData?.rangeOfMotion)!+(rightData?.rangeOfMotion)!)/2)
                 UIView.animate(withDuration: 0.4)
                 {
-                    self.rangeOfMotionProgressBar.value = CGFloat(self.currentProgressBarValues[1])
+                    self.romProgressBar.value = CGFloat(self.currentProgressBarValues[1])
                 }
 
                 currentProgressBarValues[2] = ((leftData?.secondsPerRep)!+(rightData?.secondsPerRep)!)/2
                 UIView.animate(withDuration: 0.3)
                 {
-                    self.secondsPerRepProgressBar.value = CGFloat(self.currentProgressBarValues[2])
+                    self.sprProgressBar.value = CGFloat(self.currentProgressBarValues[2])
                 }
 
                 if leftRunCount%55 == 0
@@ -257,6 +341,41 @@ class LiveAnalysisViewController: UIViewController, ComputeDelegate, HomeDelegat
         measuringStatusUpdateButton.setTitle("Start", for: .normal)
         
         setProgressBarColors(color: UIColor.orange)
+        
+        //Saving to long term data for performance comparisons once a set is completed
+        //Keys: repAverage, similAverage, romAverage, sprAverage, repDiff, similDiff, romDiff, sprDiff
+        
+        // if data is saved from previous sessions
+        if UserDefaults.standard.object(forKey: "repAverage") as? Double != nil
+        {
+            // Updating averages
+            
+            let repAverage = (UserDefaults.standard.object(forKey: "repAverage") as! Double + currentProgressBarValues.first!) / 2.0
+            UserDefaults.standard.set(repAverage, forKey: "repAverage")
+            
+            let similAverage = (UserDefaults.standard.object(forKey: "similAverage") as! Double + currentProgressBarValues[1]) / 2.0
+            UserDefaults.standard.set(similAverage, forKey: "similAverage")
+            
+            let romAverage = (UserDefaults.standard.object(forKey: "romAverage") as! Double + currentProgressBarValues[2]) / 2.0
+            UserDefaults.standard.set(romAverage, forKey: "romAverage")
+            
+            let sprAverage = (UserDefaults.standard.object(forKey: "sprAverage") as! Double + currentProgressBarValues.last!) / 2.0
+            UserDefaults.standard.set(sprAverage, forKey: "sprAverage")
+            
+            //Updating most recent performance differences
+            
+            let repDiff = currentProgressBarValues.first! - (UserDefaults.standard.object(forKey: "repDiff") as! Double)
+            UserDefaults.standard.set(repDiff, forKey: "repDiff")
+            
+            let similDiff = currentProgressBarValues[1] - (UserDefaults.standard.object(forKey: "similDiff") as! Double)
+            UserDefaults.standard.set(similDiff, forKey: "similDiff")
+            
+            let romDiff = currentProgressBarValues[2] - (UserDefaults.standard.object(forKey: "romDiff") as! Double)
+            UserDefaults.standard.set(romDiff, forKey: "romDiff")
+            
+            let sprDiff = currentProgressBarValues.last! - (UserDefaults.standard.object(forKey: "sprDiff") as! Double)
+            UserDefaults.standard.set(sprDiff, forKey: "sprDiff")
+        }
     }
     
     public func changeMeasuringStatusUpdateButtonStatus(_ bool:Bool)

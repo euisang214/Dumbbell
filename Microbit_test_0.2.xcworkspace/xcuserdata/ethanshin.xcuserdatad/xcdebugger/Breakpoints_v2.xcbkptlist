@@ -10,7 +10,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Microbit_test_0.2/ViewController.swift"
-            timestampString = "571517992.5830441"
+            timestampString = "575254518.3940409"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "36"
@@ -25,24 +25,8 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Microbit_test_0.2/DataHandlers/RepCount.swift"
-            timestampString = "574131434.457195"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "72"
-            endingLineNumber = "72"
-            landmarkName = "addRepIfValid(dataHolder:runCount:raising:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "Microbit_test_0.2/DataHandlers/RangeOfMotion.swift"
-            timestampString = "574312165.212835"
+            timestampString = "575440789.443872"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "37"
@@ -58,7 +42,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Microbit_test_0.2/DataHandlers/RangeOfMotion.swift"
-            timestampString = "574312165.213277"
+            timestampString = "575440789.444118"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "47"
@@ -74,39 +58,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Microbit_test_0.2/DataHandlers/RepCount.swift"
-            timestampString = "574131434.457357"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "79"
-            endingLineNumber = "79"
-            landmarkName = "addRepIfValid(dataHolder:runCount:raising:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Microbit_test_0.2/DataHandlers/RepCount.swift"
-            timestampString = "574131434.4573981"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "78"
-            endingLineNumber = "78"
-            landmarkName = "addRepIfValid(dataHolder:runCount:raising:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Microbit_test_0.2/DataHandlers/RepCount.swift"
-            timestampString = "574131434.457437"
+            timestampString = "575440789.444169"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "96"
@@ -122,7 +74,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Microbit_test_0.2/Microbit/Microbit.swift"
-            timestampString = "568871253.539061"
+            timestampString = "575528281.252856"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "312"
@@ -138,7 +90,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Microbit_test_0.2/Microbit/Microbit.swift"
-            timestampString = "568871253.53996"
+            timestampString = "575528281.252911"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "582"
@@ -214,17 +166,97 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Microbit_test_0.2/DataHandlers/RepCount.swift"
+            timestampString = "575440789.444562"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "42"
+            endingLineNumber = "42"
+            landmarkName = "addRepIfValid(dataHolder:runCount:raising:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Microbit_test_0.2/Views/LiveAnalysisViewController.swift"
-            timestampString = "574325261.942649"
+            timestampString = "575539718.998469"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "178"
-            endingLineNumber = "178"
-            landmarkName = "computeMain(isRightSide:)"
+            startingLineNumber = "110"
+            endingLineNumber = "110"
+            landmarkName = "measuringStatusUpdateButtonPressed(_:)"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Microbit_test_0.2/Views/LiveAnalysisViewController.swift"
+            timestampString = "575539718.998534"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "119"
+            endingLineNumber = "119"
+            landmarkName = "measuringStatusUpdateButtonPressed(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Microbit_test_0.2/Views/LiveAnalysisViewController.swift"
+            timestampString = "575539718.998585"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "143"
+            endingLineNumber = "143"
+            landmarkName = "measuringStatusUpdateButtonPressed(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Microbit_test_0_2.LiveAnalysisViewController.measuringStatusUpdateButtonPressed(Any) -&gt; ()"
+                  moduleName = "Microbit_test_0.2"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ethanshin/Desktop/Personal%20Projects/Dumbbell/Microbit_test_0.2/Microbit_test_0.2/Views/LiveAnalysisViewController.swift"
+                  timestampString = "575526971.158235"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "112"
+                  endingLineNumber = "112"
+                  offsetFromSymbolStart = "8936">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Microbit_test_0_2.LiveAnalysisViewController.measuringStatusUpdateButtonPressed(Any) -&gt; ()"
+                  moduleName = "Microbit_test_0.2"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ethanshin/Desktop/Personal%20Projects/Dumbbell/Microbit_test_0.2/Microbit_test_0.2/Views/LiveAnalysisViewController.swift"
+                  timestampString = "575526971.159709"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "112"
+                  endingLineNumber = "112"
+                  offsetFromSymbolStart = "9548">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -234,11 +266,27 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Microbit_test_0.2/Views/LiveAnalysisViewController.swift"
-            timestampString = "574325261.9429899"
+            timestampString = "575539718.998633"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "54"
-            endingLineNumber = "54"
+            startingLineNumber = "152"
+            endingLineNumber = "152"
+            landmarkName = "measuringStatusUpdateButtonPressed(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Microbit_test_0.2/Views/LiveAnalysisViewController.swift"
+            timestampString = "575539718.998705"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "131"
+            endingLineNumber = "131"
             landmarkName = "measuringStatusUpdateButtonPressed(_:)"
             landmarkType = "7">
          </BreakpointContent>

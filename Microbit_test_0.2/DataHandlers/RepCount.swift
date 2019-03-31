@@ -72,7 +72,7 @@ class RepCounter
         }
         
         //If a rep has been completed
-        if (rangeOfMotion?.recentRange!.count ?? 0)%2 == 0
+        else if (rangeOfMotion?.recentRange!.count ?? 0)%2 == 0 && rangeOfMotion!.recentRange!.count > 0
         {
             rangeOfMotion?.updateRangeOfMotion(dataHolder: &dataHolder, runCount: runCount, name:name)
         }
