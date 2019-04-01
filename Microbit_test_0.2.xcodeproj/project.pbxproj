@@ -24,8 +24,7 @@
 		022E02D321D38D6F0052501A /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 022E02D121D38D6F0052501A /* HomeViewController.xib */; };
 		024EA95021D705690050CCAD /* RangeOfMotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024EA94F21D705690050CCAD /* RangeOfMotion.swift */; };
 		024EA95221D81B410050CCAD /* Speed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024EA95121D81B410050CCAD /* Speed.swift */; };
-		028569B2224C7CB1008A0EF5 /* RecordsViewController_2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 028569B1224C7CB1008A0EF5 /* RecordsViewController_2.xib */; };
-		028569B4224C81F3008A0EF5 /* RecordsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 028569B3224C81F3008A0EF5 /* RecordsViewController.xib */; };
+		028CFBAB225187CA0082D630 /* RecordsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 028CFBAA225187CA0082D630 /* RecordsViewController.xib */; };
 		02A943F321D4301B001E925A /* MicrobitAccelerometer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A943F021D4301B001E925A /* MicrobitAccelerometer.swift */; };
 		02A943F421D4301B001E925A /* Microbit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A943F121D4301B001E925A /* Microbit.swift */; };
 		02A943F521D4301B001E925A /* MicrobitController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A943F221D4301B001E925A /* MicrobitController.swift */; };
@@ -80,8 +79,7 @@
 		022E02D121D38D6F0052501A /* HomeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeViewController.xib; sourceTree = "<group>"; };
 		024EA94F21D705690050CCAD /* RangeOfMotion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RangeOfMotion.swift; sourceTree = "<group>"; };
 		024EA95121D81B410050CCAD /* Speed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Speed.swift; sourceTree = "<group>"; };
-		028569B1224C7CB1008A0EF5 /* RecordsViewController_2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecordsViewController_2.xib; sourceTree = "<group>"; };
-		028569B3224C81F3008A0EF5 /* RecordsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecordsViewController.xib; sourceTree = "<group>"; };
+		028CFBAA225187CA0082D630 /* RecordsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecordsViewController.xib; sourceTree = "<group>"; };
 		02A943F021D4301B001E925A /* MicrobitAccelerometer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MicrobitAccelerometer.swift; sourceTree = "<group>"; };
 		02A943F121D4301B001E925A /* Microbit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Microbit.swift; sourceTree = "<group>"; };
 		02A943F221D4301B001E925A /* MicrobitController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MicrobitController.swift; sourceTree = "<group>"; };
@@ -193,8 +191,7 @@
 				022E02CC21D389720052501A /* LiveAnalysisViewController.swift */,
 				022E02CD21D389720052501A /* LiveAnalysisViewController.xib */,
 				0215D340223B3F9500350ED8 /* RecordsViewController.swift */,
-				028569B3224C81F3008A0EF5 /* RecordsViewController.xib */,
-				028569B1224C7CB1008A0EF5 /* RecordsViewController_2.xib */,
+				028CFBAA225187CA0082D630 /* RecordsViewController.xib */,
 				022E02D021D38D6F0052501A /* HomeViewController.swift */,
 				022E02D121D38D6F0052501A /* HomeViewController.xib */,
 			);
@@ -371,14 +368,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				022AE89021DCD2BC00AAA694 /* Connected.png in Resources */,
-				028569B4224C81F3008A0EF5 /* RecordsViewController.xib in Resources */,
 				0222BC4C222F088300D5F79F /* readME.txt in Resources */,
 				022AE89221DCD41400AAA694 /* Connecting.png in Resources */,
 				022E02A321D3865F0052501A /* LaunchScreen.storyboard in Resources */,
 				022E02A021D3865F0052501A /* Assets.xcassets in Resources */,
 				022E029E21D3865D0052501A /* Main.storyboard in Resources */,
-				028569B2224C7CB1008A0EF5 /* RecordsViewController_2.xib in Resources */,
 				022E02D321D38D6F0052501A /* HomeViewController.xib in Resources */,
+				028CFBAB225187CA0082D630 /* RecordsViewController.xib in Resources */,
 				022E02CF21D389720052501A /* LiveAnalysisViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -69,88 +69,7 @@ class LiveAnalysisViewController: UIViewController, ComputeDelegate, HomeDelegat
         }
         else
         {
-            // if the change between dX data points includes 0
-            // key: the index difference between the dX data points
-            // value: max absolute value within this range
-            
-            /*
-            print()
-            print()
-            print()
-            print(leftData?.dX_1)
-            print(leftData?.dX2_1)
-            print(leftData?.dX3_1)
-            print(leftData?.dX4_1)
-            print()
-            print()
-            print()
-            print(leftData?.dX_2)
-            print(leftData?.dX2_2)
-            print(leftData?.dX3_2)
-            print(leftData?.dX4_2)
-            print()
-            print()
-            print()
-            print(leftData?.dX_3)
-            print(leftData?.dX2_3)
-            print(leftData?.dX3_3)
-            print(leftData?.dX4_3)
-            print()
-            print()
-            print()
-            print(leftData?.dX_4)
-            print(leftData?.dX2_4)
-            print(leftData?.dX3_4)
-            print(leftData?.dX4_4)
-            print()
-            print()
-            print()
-            */
-            var record:[[Int16]] = [[]]
-            let dX = leftData?.dX
-            for indexOne in 0...(leftData?.dX.count ?? 0)-2
-            {
-                var firstRange:Range<Int16>
-                if dX![indexOne] < dX![indexOne+1] { firstRange = dX![indexOne]..<dX![indexOne+1] }
-                else { firstRange = dX![indexOne+1]..<dX![indexOne] }
-                
-                if firstRange.contains(0) && (dX![indexOne+1] != 0)
-                {
-                    //going to the next 0 cross if a 0 is crossed
-                    for indexTwo in indexOne+2...(leftData?.dX.count ?? 0)-2
-                    {
-                        var secondRange:Range<Int16>
-                        if dX![indexTwo] < dX![indexTwo+1] { secondRange = dX![indexTwo]..<dX![indexTwo+1] }
-                        else { secondRange = dX![indexTwo+1]..<dX![indexTwo] }
-                        
-                        if secondRange.contains(0) && (dX![indexTwo+1] != 0)
-                        {
-                            var absMax:Int16
-                            if secondRange.max()! > abs(secondRange.min()!) { absMax = Int16(secondRange.max()!) }
-                            else { absMax = Int16(abs(secondRange.min()!)) }
-                            
-                            if record.count == 1 { record[0] = [Int16(indexTwo-indexOne), absMax] }
-                            else { record.append([Int16(indexTwo-indexOne), absMax]) }
-                            break
-                        }
-                    }
-                }
-            }
-            
-            var averageArea = 0
-            
-            var count = 0
-            for index in 0...record.count-1
-            {
-                if index%2 == 0
-                {
-                    averageArea += Int( (record[index].first! * record[index].last!)/2 )
-                    print((record[index].first! * record[index].last!)/2)
-                    count += 1
-                }
-            }
-            print("Average area: \(averageArea/count)")
-            prepareForNextSet()*/
+            prepareForNextSet()
         }
     }
     
@@ -250,10 +169,24 @@ class LiveAnalysisViewController: UIViewController, ComputeDelegate, HomeDelegat
         calculation?.updateDataHolder(dataHolder: &dataHolder!, x: x, y: y, z: z)
         if isRightSide { rightRepCounter?.countRep(dataHolder: &dataHolder!, runCount: rightRunCount) }
         else { leftRepCounter?.countRep(dataHolder: &dataHolder!, runCount: leftRunCount) }
-        
-        if !isRightSide {
-            print(String(x) + " " + String(dataHolder?.dX.last ?? 0))
-        }
+    }
+    
+    // Function saves average of the given statistic into local storage
+    // stat: the statistic to be saved
+    // CPBVIndex: currentProgressBarValueIndex
+    private func saveLocal_Average(_ stat:String, CPBVIndex:Int)
+    {
+        let statistic = (UserDefaults.standard.object(forKey: stat+"Average") as! Double + currentProgressBarValues[CPBVIndex]) / 2.0
+        UserDefaults.standard.set(statistic, forKey: stat+"Average")
+    }
+    
+    // Function saves most recent difference of the given statistic into local storage
+    // stat: the statistic to be saved
+    // CPBVIndex: currentProgressBarValueIndex
+    private func saveLocal_Diff(_ stat:String, CPBVIndex:Int)
+    {
+        let statDiff = currentProgressBarValues[CPBVIndex] - (UserDefaults.standard.object(forKey: stat+"Diff") as! Double)
+        UserDefaults.standard.set(statDiff, forKey: stat+"Diff")
     }
     
     // MARK: Implement required for ComputeDelegate protocol
@@ -349,39 +282,26 @@ class LiveAnalysisViewController: UIViewController, ComputeDelegate, HomeDelegat
         if UserDefaults.standard.object(forKey: "repAverage") as? Double != nil
         {
             // Updating averages
-            
-            let repAverage = (UserDefaults.standard.object(forKey: "repAverage") as! Double + currentProgressBarValues.first!) / 2.0
-            UserDefaults.standard.set(repAverage, forKey: "repAverage")
-            
-            let similAverage = (UserDefaults.standard.object(forKey: "similAverage") as! Double + currentProgressBarValues[1]) / 2.0
-            UserDefaults.standard.set(similAverage, forKey: "similAverage")
-            
-            let romAverage = (UserDefaults.standard.object(forKey: "romAverage") as! Double + currentProgressBarValues[2]) / 2.0
-            UserDefaults.standard.set(romAverage, forKey: "romAverage")
-            
-            let sprAverage = (UserDefaults.standard.object(forKey: "sprAverage") as! Double + currentProgressBarValues.last!) / 2.0
-            UserDefaults.standard.set(sprAverage, forKey: "sprAverage")
+            saveLocal_Average("rep", CPBVIndex: 0)
+            saveLocal_Average("sym", CPBVIndex: 1)
+            saveLocal_Average("rom", CPBVIndex: 2)
+            saveLocal_Average("spr", CPBVIndex: 3)
             
             //Updating most recent performance differences
-            
-            let repDiff = currentProgressBarValues.first! - (UserDefaults.standard.object(forKey: "repDiff") as! Double)
-            UserDefaults.standard.set(repDiff, forKey: "repDiff")
-            
-            let similDiff = currentProgressBarValues[1] - (UserDefaults.standard.object(forKey: "similDiff") as! Double)
-            UserDefaults.standard.set(similDiff, forKey: "similDiff")
-            
-            let romDiff = currentProgressBarValues[2] - (UserDefaults.standard.object(forKey: "romDiff") as! Double)
-            UserDefaults.standard.set(romDiff, forKey: "romDiff")
-            
-            let sprDiff = currentProgressBarValues.last! - (UserDefaults.standard.object(forKey: "sprDiff") as! Double)
-            UserDefaults.standard.set(sprDiff, forKey: "sprDiff")
+            saveLocal_Diff("rep", CPBVIndex: 0)
+            saveLocal_Diff("sym", CPBVIndex: 1)
+            saveLocal_Diff("rom", CPBVIndex: 2)
+            saveLocal_Diff("spr", CPBVIndex: 3)
         }
     }
     
+    // MARK: Implementation required for HomeDelegate protocol
     public func changeMeasuringStatusUpdateButtonStatus(_ bool:Bool)
     {
         measuringStatusUpdateButton.isEnabled = bool
     }
+    
+    
 
     /*
     // MARK: - Navigation
