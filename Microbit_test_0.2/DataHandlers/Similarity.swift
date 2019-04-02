@@ -10,7 +10,7 @@ import Foundation
 
 class Similarity
 {
-    private func average(array:ArraySlice<Int16>) -> Double
+    private func average(array:ArraySlice<Double>) -> Double
     {
         var sum:Double = 0
         for element in array { sum += Double(Int32(element))}
@@ -46,7 +46,7 @@ class Similarity
     
     //uses Microsoft Excel's 'Correl' equation
     //Assesses the overall corellation between the motion of the two given arrays
-    public func overallSimilarity(leftArray:[Int16], rightArray:[Int16]) -> Int
+    public func overallSimilarity(leftArray:[Double], rightArray:[Double]) -> Int
     {
         if leftArray.count>32 && rightArray.count>32
         {

@@ -14,9 +14,16 @@ protocol LiveAnalysisDelegate
     func disconnectMicrobits()
 }
 
+protocol RecordsViewControllerDelegate
+{
+    func updateRecordVC()
+}
+
 class LiveAnalysisViewController: UIViewController, ComputeDelegate, HomeDelegate {
     
     static var liveAnalysisDelegate:LiveAnalysisDelegate?
+    
+    public var recordsViewControllerDelegate:RecordsViewControllerDelegate?
 
     var calculation:Calculation?
     
@@ -34,7 +41,9 @@ class LiveAnalysisViewController: UIViewController, ComputeDelegate, HomeDelegat
     var rightRunCount:Int  = 0
     
     //Stores the most recent number of reps, range of motion, seconds per rep, and similarity in this specific order
-    var currentProgressBarValues:[Double] = [0,0,0,0]
+    var livePBValues:[Double] = [0,0,0,0]
+    //Stores the average of each respective statistic to simplify process of saving to local storage
+    var averagePBValues:[Double] = [0,0,0,0]
     
     //to indicate whether the user has stopped the set/the set has been automatically stopped
     var measuring = false
@@ -69,6 +78,21 @@ class LiveAnalysisViewController: UIViewController, ComputeDelegate, HomeDelegat
         }
         else
         {
+            print(leftData?.dX)
+            print(leftData?.dThreeD)
+            /*print()
+            print()
+            print("the most")
+            print(leftData?.dX2_1)
+            print()
+            print()
+            print()
+            print(leftData?.dX3_1)
+            print()
+            print()
+            print()
+            print(leftData?.dX4_1)*/
+            
             prepareForNextSet()
         }
     }
@@ -98,19 +122,19 @@ class LiveAnalysisViewController: UIViewController, ComputeDelegate, HomeDelegat
     {
         repProgressBar.progressColor = color
         repProgressBar.value = 0
-        repProgressBar.value = CGFloat(currentProgressBarValues[0])
+        repProgressBar.value = CGFloat(livePBValues[0])
         
         romProgressBar.progressColor = color
         romProgressBar.value = 0
-        romProgressBar.value = CGFloat(currentProgressBarValues[1])
+        romProgressBar.value = CGFloat(livePBValues[1])
         
         sprProgressBar.progressColor = color
         sprProgressBar.value = 0
-        sprProgressBar.value = CGFloat(currentProgressBarValues[2])
+        sprProgressBar.value = CGFloat(livePBValues[2])
         
         symmetryProgressBar.progressColor = color
         symmetryProgressBar.value = 0
-        symmetryProgressBar.value = CGFloat(currentProgressBarValues[3])
+        symmetryProgressBar.value = CGFloat(livePBValues[3])
     }
     
     //Arranges the animation and countdown of the timer.
@@ -173,20 +197,41 @@ class LiveAnalysisViewController: UIViewController, ComputeDelegate, HomeDelegat
     
     // Function saves average of the given statistic into local storage
     // stat: the statistic to be saved
-    // CPBVIndex: currentProgressBarValueIndex
-    private func saveLocal_Average(_ stat:String, CPBVIndex:Int)
+    // LPBVIndex: livePBValues's index
+    private func saveLocal_Average(_ stat:String, LPBVIndex:Int)
     {
-        let statistic = (UserDefaults.standard.object(forKey: stat+"Average") as! Double + currentProgressBarValues[CPBVIndex]) / 2.0
-        UserDefaults.standard.set(statistic, forKey: stat+"Average")
+        if (UserDefaults.standard.object(forKey: stat+"Average") ?? nil) != nil
+        {
+            let statistic = (UserDefaults.standard.object(forKey: stat+"Average") as! Double + averagePBValues[LPBVIndex]) / 2.0
+            UserDefaults.standard.set(statistic, forKey: stat+"Average")
+        }
+        else
+        {
+            UserDefaults.standard.set(averagePBValues[LPBVIndex], forKey: stat+"Average")
+        }
     }
     
     // Function saves most recent difference of the given statistic into local storage
     // stat: the statistic to be saved
-    // CPBVIndex: currentProgressBarValueIndex
-    private func saveLocal_Diff(_ stat:String, CPBVIndex:Int)
+    // LPBVIndex: livePBValues's index
+    private func saveLocal_Diff(_ stat:String, LPBVIndex:Int)
     {
-        let statDiff = currentProgressBarValues[CPBVIndex] - (UserDefaults.standard.object(forKey: stat+"Diff") as! Double)
-        UserDefaults.standard.set(statDiff, forKey: stat+"Diff")
+        if (UserDefaults.standard.object(forKey: stat+"Diff") ?? nil) != nil
+        {
+            let statDiff = averagePBValues[LPBVIndex] - (UserDefaults.standard.object(forKey: stat+"Diff") as! Double)
+            UserDefaults.standard.set(statDiff, forKey: stat+"Diff")
+        }
+        else
+        {
+            print(String(LPBVIndex) + " " + String(averagePBValues[LPBVIndex]))
+            UserDefaults.standard.set(averagePBValues[LPBVIndex], forKey: stat+"Diff")
+        }
+    }
+    
+    private func updateAveragePBValues(index:Int)
+    {
+        if averagePBValues[index] == 0 { averagePBValues[index] = livePBValues[index] }
+        else { averagePBValues[index] = (averagePBValues[index]+livePBValues[index])/2 }
     }
     
     // MARK: Implement required for ComputeDelegate protocol
@@ -219,22 +264,25 @@ class LiveAnalysisViewController: UIViewController, ComputeDelegate, HomeDelegat
                 
                 //updating progress bars
                 
-                currentProgressBarValues[0] = Double(min((leftData?.reps)!, (rightData?.reps)!))
+                livePBValues[0] = Double(min((leftData?.reps)!, (rightData?.reps)!))
+                updateAveragePBValues(index: 0)
                 UIView.animate(withDuration: 0.3)
                 {
-                    self.repProgressBar.value = CGFloat(self.currentProgressBarValues[0])
+                    self.repProgressBar.value = CGFloat(self.livePBValues[0])
                 }
                 
-                currentProgressBarValues[1] = Double(((leftData?.rangeOfMotion)!+(rightData?.rangeOfMotion)!)/2)
+                livePBValues[1] = Double(((leftData?.rom)!+(rightData?.rom)!)/2)
+                updateAveragePBValues(index: 1)
                 UIView.animate(withDuration: 0.4)
                 {
-                    self.romProgressBar.value = CGFloat(self.currentProgressBarValues[1])
+                    self.romProgressBar.value = CGFloat(self.livePBValues[1])
                 }
 
-                currentProgressBarValues[2] = ((leftData?.secondsPerRep)!+(rightData?.secondsPerRep)!)/2
+                livePBValues[2] = ((leftData?.spr)!+(rightData?.spr)!)/2
+                updateAveragePBValues(index: 2)
                 UIView.animate(withDuration: 0.3)
                 {
-                    self.sprProgressBar.value = CGFloat(self.currentProgressBarValues[2])
+                    self.sprProgressBar.value = CGFloat(self.livePBValues[2])
                 }
 
                 if leftRunCount%55 == 0
@@ -245,8 +293,9 @@ class LiveAnalysisViewController: UIViewController, ComputeDelegate, HomeDelegat
                         //print(tempSimil)
                         if tempSimil != -1
                         {
-                            self.currentProgressBarValues[3] = tempSimil
-                            self.symmetryProgressBar.value = CGFloat(self.currentProgressBarValues[3])
+                            self.livePBValues[3] = tempSimil
+                            self.updateAveragePBValues(index: 3)
+                            self.symmetryProgressBar.value = CGFloat(self.livePBValues[3])
                         }
                     }
                 }
@@ -276,23 +325,21 @@ class LiveAnalysisViewController: UIViewController, ComputeDelegate, HomeDelegat
         setProgressBarColors(color: UIColor.orange)
         
         //Saving to long term data for performance comparisons once a set is completed
-        //Keys: repAverage, similAverage, romAverage, sprAverage, repDiff, similDiff, romDiff, sprDiff
+        //Keys: repAverage, symAverage, romAverage, sprAverage, repDiff, symDiff, romDiff, sprDiff
         
-        // if data is saved from previous sessions
-        if UserDefaults.standard.object(forKey: "repAverage") as? Double != nil
-        {
-            // Updating averages
-            saveLocal_Average("rep", CPBVIndex: 0)
-            saveLocal_Average("sym", CPBVIndex: 1)
-            saveLocal_Average("rom", CPBVIndex: 2)
-            saveLocal_Average("spr", CPBVIndex: 3)
-            
-            //Updating most recent performance differences
-            saveLocal_Diff("rep", CPBVIndex: 0)
-            saveLocal_Diff("sym", CPBVIndex: 1)
-            saveLocal_Diff("rom", CPBVIndex: 2)
-            saveLocal_Diff("spr", CPBVIndex: 3)
-        }
+        // Updating averages
+        saveLocal_Average("rep", LPBVIndex: 0)
+        saveLocal_Average("rom", LPBVIndex: 1)
+        saveLocal_Average("spr", LPBVIndex: 2)
+        saveLocal_Average("sym", LPBVIndex: 3)
+        
+        //Updating most recent performance differences
+        saveLocal_Diff("rep", LPBVIndex: 0)
+        saveLocal_Diff("rom", LPBVIndex: 1)
+        saveLocal_Diff("spr", LPBVIndex: 2)
+        saveLocal_Diff("sym", LPBVIndex: 3)
+        
+        recordsViewControllerDelegate?.updateRecordVC()
     }
     
     // MARK: Implementation required for HomeDelegate protocol

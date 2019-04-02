@@ -8,22 +8,37 @@
 import MBCircularProgressBar
 import UIKit
 
-class RecordsViewController: UIViewController
+class RecordsViewController: UIViewController, RecordsViewControllerDelegate
 {
+    //MARK: Implementation required by LiveAnalysisViewController
+    //Allows to be called from LiveAnalysisViewController, updated the moment the workout is stopped
+    func updateRecordVC()
+    {
+        updatePB("Average")
+    }
     
     // Updates the PB (Progress Bars) on the desired statistic: either the average or the difference between two most recent sets
     private func updatePB(_ statType:String)
     {
-        repPB.value = UserDefaults.standard.object(forKey: "rep"+statType) as! CGFloat
-        sprPB.value = UserDefaults.standard.object(forKey: "spr"+statType) as! CGFloat
-        romPB.value = UserDefaults.standard.object(forKey: "rom"+statType) as! CGFloat
-        symmetryPB.value = UserDefaults.standard.object(forKey: "sym"+statType) as! CGFloat
-    }
-    
-    // Functiuon for stats being updated once a new set is completed
-    static public func updateRecordVC()
-    {
-        
+        if (UserDefaults.standard.object(forKey: "rep"+statType) ?? nil) != nil
+        {
+            UIView.animate(withDuration: 0.4)
+            {
+                self.repPB.value = UserDefaults.standard.object(forKey: "rep"+statType) as! CGFloat
+            }
+            UIView.animate(withDuration: 0.4)
+            {
+                self.sprPB.value = UserDefaults.standard.object(forKey: "spr"+statType) as! CGFloat
+            }
+            UIView.animate(withDuration: 0.4)
+            {
+                self.romPB.value = UserDefaults.standard.object(forKey: "rom"+statType) as! CGFloat
+            }
+            UIView.animate(withDuration: 0.4)
+            {
+                self.symmetryPB.value = UserDefaults.standard.object(forKey: "sym"+statType) as! CGFloat
+            }
+        }
     }
     
     @IBOutlet weak var repPB: MBCircularProgressBarView!
@@ -49,6 +64,15 @@ class RecordsViewController: UIViewController
         super.viewDidLoad()
         
         updatePB("Average")
+        /*UserDefaults.standard.set(nil, forKey: "sprAverage")
+        UserDefaults.standard.set(nil, forKey: "symAverage")
+        UserDefaults.standard.set(nil, forKey: "repAverage")
+        UserDefaults.standard.set(nil, forKey: "romAverage")
+        
+        UserDefaults.standard.set(nil, forKey: "sprDiff")
+        UserDefaults.standard.set(nil, forKey: "symDiff")
+        UserDefaults.standard.set(nil, forKey: "romDiff")
+        UserDefaults.standard.set(nil, forKey: "repDiff")*/
     }
 
 

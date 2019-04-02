@@ -10,7 +10,7 @@ import Foundation
 
 class DetectPause
 {
-    private func average(array:ArraySlice<Int16>) -> Double
+    private func average(array:ArraySlice<Double>) -> Double
     {
         var sum:Double = 0
         for element in array { sum += Double(abs(Int32(element)))}

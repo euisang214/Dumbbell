@@ -15,18 +15,18 @@ struct DataHolder
     // Short term data, used only for live processing
     //
     
-    public var x:[Int16]
-    public var x2:[Int16]
+    public var x:[Double]
+    public var x2:[Double]
     public var x3:[Int16]
     public var x4:[Int16]
-    public var threeD:[Int16]
+    public var threeD:[Double]
     
-    public var dX:[Int16]
+    public var dX:[Double]
     //for Similarity; 'd' indicates the difference from the previous value. All values inputted here are also smoothened
-    public var dX_1:[Int16]
-    public var dX2_1:[Int16]
-    public var dX3_1:[Int16]
-    public var dX4_1:[Int16]
+    public var dX_1:[Double]
+    public var dX2_1:[Double]
+    public var dX3_1:[Double]
+    public var dX4_1:[Double]
     
     public var dX_2:[Int16]
     public var dX2_2:[Int16]
@@ -42,20 +42,22 @@ struct DataHolder
     public var dX2_4:[Int16]
     public var dX3_4:[Int16]
     public var dX4_4:[Int16]
-    public var dThreeD:[Int16]
+    public var dThreeD:[Double]
     
     //for rep counting; "crossed" counts the number of times the microbit executes half a rep. 'raising' shows whether the microbit is declining or inclining
-    public var raising:[Bool?]
+    public var crossingZero:[Bool?]
     public var crossed:Int
     
     public var reps:Int//Presented to user
     
     //for rangeOfMotion
-    public var rangeOfMotion:Int16 //Presented to user
+    public var rom:Int16 //Presented to user
+    public var romAverage:Int16
     
-    //for Speed; multiply the gap between the most recent odd index points by .p80
+    //for Speed; multiply the gap between the most recent odd index points by .p30
     public var crossedRunCountLog:[Int]
-    public var secondsPerRep:Double
+    public var spr:Double
+    public var sprAverage:Double
     
     //
     // Long term data, used for performance comparisons
@@ -90,10 +92,12 @@ struct DataHolder
         dThreeD = []
         crossed = 0
         reps = 0
-        rangeOfMotion = 0
-        raising = []
+        rom = 0
+        romAverage = 0
+        crossingZero = []
         crossedRunCountLog = []
-        secondsPerRep = 0
+        spr = 0
+        sprAverage = 0
     }
     
     mutating func resetData()
@@ -102,12 +106,12 @@ struct DataHolder
         threeD.removeAll()
         dX.removeAll()
         dThreeD.removeAll()
-        raising.removeAll()
+        crossingZero.removeAll()
         crossed = 0
         reps = 0
-        rangeOfMotion = -1
+        rom = -1
         crossedRunCountLog.removeAll()
-        secondsPerRep = 0
+        spr = 0
     }
 
 }

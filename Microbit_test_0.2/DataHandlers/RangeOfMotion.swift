@@ -13,71 +13,67 @@ import Foundation
 class RangeOfMotion
 {
     //Stores the acceleration between boundary crosses
-    public var recentReps:[Int16]?
+    public var recentReps:[Double]
     
-    public var recentRange:[Int16]?
     //Stores the default range of motion: based on the first rep
     private var standardDifference:Double?
     
-    public var rangeOfMotionRecord:[Int16]
+    public var romLog:[Int16]
     
     init()
     {
         recentReps = []
-        recentRange = []
         standardDifference = nil
-        rangeOfMotionRecord = []
+        romLog = []
     }
     
-    public func updateRecent(x:Int16) { recentReps?.append(x) }
-    
-    //Called when half a rep is executed
-    public func boundaryCrossed(raising:Bool?, name:String)
-    {
-        if raising == true { recentRange?.append((recentReps?.min())!) }
-        else { recentRange?.append((recentReps?.max())!) }
-       // print(name + " " + (recentRange?.count.description)!)
-    }
+    public func updateRecent(x:Double) { recentReps.append(x) }
 
     //called when a rep is completed; when dataHolder.crossed%2==0
     public func updateRangeOfMotion(dataHolder:inout DataHolder, runCount:Int, name:String)
     {
-        //a variable that will contain the most recent range travelled 
-        var recentDifference:Double
-        
+        //a variable that will contain the most recent range travelled, in double; aka the difference between the greatest and smallest accelerometer values
+        let range:Double = abs( Double(recentReps.max()! - recentReps.min()!) )
+       
+        print()
+        print()
+        print("Range : \(range)")
+        print("recentReps.max = \(recentReps.max()!)")
+        print("recentReps.min = \(recentReps.min()!)")
+        print("recentReps.count = \(recentReps.count)")
+        print("runCount = \(runCount)")
+        print()
+        print()
+ 
         if standardDifference != nil
         {
-            recentDifference = Double( abs(Int32(recentRange![0]-recentRange![1])) )
-            if recentDifference < standardDifference! { rangeOfMotionRecord.append(Int16 (recentDifference/standardDifference!*Double(100) )) }
+            if range < standardDifference! { romLog.append(Int16 (range/standardDifference!*Double(100) )) }
             //if most recent range travelled is greater than the standard, this range becomes the standard
             else
             {
-                standardDifference = recentDifference
-                rangeOfMotionRecord.append(100)
+                standardDifference = range
+                romLog.append(100)
             }
             //getting percentage
-            dataHolder.rangeOfMotion = rangeOfMotionRecord.last!
+            dataHolder.rom = romLog.last!
+            if dataHolder.romAverage == 0 { dataHolder.romAverage = dataHolder.rom }
+            else { dataHolder.romAverage = (dataHolder.rom+dataHolder.romAverage)/2 }
         }
         else
         {
             //print("Standard difference calculation for \(name): " + recentRange![0].description + " " + recentRange![1].description)
-            standardDifference = Double( abs(Int32(recentRange![0]-recentRange![1])) )*0.98
-            dataHolder.rangeOfMotion = 100
+            standardDifference = range
+            dataHolder.rom = 100
         }
         
-        if dataHolder.rangeOfMotion > 100 {
-            (name + " " + recentRange![0].description + " " + recentRange![1].description + "  " + standardDifference!.description) }
-
-        recentRange?.removeAll()
-        recentReps?.removeAll()
+        recentReps.removeAll()
     }
     
     public func resetData()
     {
-        recentReps?.removeAll()
-        recentRange?.removeAll()
+        recentReps.removeAll()
         standardDifference = nil
-        rangeOfMotionRecord.removeAll()
+        romLog.removeAll()
     }
 }
 

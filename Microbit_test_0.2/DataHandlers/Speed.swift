@@ -15,7 +15,9 @@ class Speed
         let log = dataHolder.crossedRunCountLog
         if log.count >= 3
         {
-            dataHolder.secondsPerRep = Double(Microbit.periodType.rawValue)/1000 * Double(log.last! - log[log.count-3])
+            dataHolder.spr = Double(Microbit.periodType.rawValue)/1000 * Double(log.last! - log[log.count-3])
+            if dataHolder.sprAverage == 0 { dataHolder.sprAverage = dataHolder.spr }
+            else { dataHolder.sprAverage = (dataHolder.spr+dataHolder.sprAverage)/2 }
         }
     }
 }

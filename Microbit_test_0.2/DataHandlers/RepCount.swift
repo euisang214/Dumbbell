@@ -14,7 +14,6 @@ class RepCounter
     public var speed:Speed
     
     private var name:String
-    private var prevRaising:Bool?
     
     init(name:String)
     {
@@ -23,86 +22,97 @@ class RepCounter
         self.name = name
     }
     
-    private func boundaryCrossed(dataHolder:inout DataHolder, raising:Bool?, name:String, runCount:Int)
+    private func boundaryCrossed(dataHolder:inout DataHolder, crossedZero:Bool?, name:String, runCount:Int)
     {
         dataHolder.crossed += 1
-        prevRaising = raising
-        rangeOfMotion?.boundaryCrossed(raising: raising, name: name)
         dataHolder.crossedRunCountLog.append(runCount)
         
         //removing unnecessary history. Most history from before the boundary is crossed again is useless. Removal will improve efficiency
-        var simplifiedRaising = dataHolder.raising
-        simplifiedRaising.removeSubrange(0...simplifiedRaising.count-6)
-        dataHolder.raising = simplifiedRaising
-    }
-    
-    private func addRepIfValid(dataHolder:inout DataHolder, runCount:Int, raising:Bool?)
-    {
-        let dataHolderRaising = dataHolder.raising
-        
-        var raisingIsConstant:Bool = true
-        
-        //checking if actually in motion
-        var yesRaiseCount = 0
-        for element in dataHolderRaising.suffix(from: dataHolderRaising.count-14)
-        {
-            if element == raising { yesRaiseCount+=1 }
-        }
-        if yesRaiseCount>=12 { raisingIsConstant = true }
-        else { raisingIsConstant = false }
-        
-        
-       //make the first motion count no matter what
-        if ( raisingIsConstant ) && prevRaising == nil // range.contains(boundary)
-        {
-            boundaryCrossed(dataHolder: &dataHolder, raising: raising, name: name, runCount: runCount )
-        }
-        
-        //ensure reps are only registered for up-down motions, no accidental registers from up-up or down-down
-        else if ( raisingIsConstant && (!prevRaising! == raising) )
-        {
-            boundaryCrossed(dataHolder: &dataHolder, raising: raising, name: name, runCount: runCount)
-        }
-        
-        //updating rep count when crossed is odd; does so to add rep when user pushes/pulles up
-        if dataHolder.crossed%2 == 1
-        {
-            dataHolder.reps = (dataHolder.crossed+1)/2
-            speed.secondsPerRep(dataHolder: &dataHolder)
-        }
-        
-        //If a rep has been completed
-        else if (rangeOfMotion?.recentRange!.count ?? 0)%2 == 0 && rangeOfMotion!.recentRange!.count > 0
-        {
-            rangeOfMotion?.updateRangeOfMotion(dataHolder: &dataHolder, runCount: runCount, name:name)
-        }
+        var simplifiedRaising = dataHolder.crossingZero
+        simplifiedRaising.removeSubrange(0...simplifiedRaising.count-1)
+        dataHolder.crossingZero = simplifiedRaising
     }
     
     public func countRep(dataHolder: inout DataHolder, runCount:Int)
     {
         let dX = dataHolder.dX
-        var raising:Bool?
+        var crossingZero:Bool = false
         
-        if dX.count>=10
+        if dX.count >= 2
         {
-            if dX.last! > 0 { raising = true }
-            else if dX.last! == 0 { raising = nil }
-            else { raising = false }
+            let recentTwo_dX_are_Zero = dX[dX.endIndex-2] == 0.0 && dX.last! == 0.0
+            var meetsMinimumAltitudeReq:Bool = true
+            
+            if dataHolder.crossedRunCountLog.count >= 1
+            {
+                if Double(dataHolder.dX[dataHolder.crossedRunCountLog.last!...dataHolder.dX.endIndex-1].max()!).magnitude > Double(dataHolder.dX[dataHolder.crossedRunCountLog.last!...dataHolder.dX.endIndex-1].min()!).magnitude
+                {
+                    
+                }
+                
+                
+                meetsMinimumAltitudeReq = max(abs(Double(dataHolder.dX[dataHolder.crossedRunCountLog.last!...dataHolder.dX.endIndex-1].max()!)), abs(Double(dataHolder.dX[dataHolder.crossedRunCountLog.last!...dataHolder.dX.endIndex-1].max()!))) > 1
+                /*print()
+                print("altitude: \(max(abs(Double(dataHolder.dX[dataHolder.crossedRunCountLog.last!...dataHolder.dX.endIndex-1].max()!)), abs(Double(dataHolder.dX[dataHolder.crossedRunCountLog.last!...dataHolder.dX.endIndex-1].min()!))))")
+                print("meetsMinimumAltitudeReq: \(meetsMinimumAltitudeReq)")
+                print()*/
+            }
+            
+            if dX[dX.endIndex-2] < dX.last!
+            {
+                if (dX[dX.endIndex-2]...dX.last!).contains(0) && !recentTwo_dX_are_Zero { crossingZero = true }
+            }
+            else if (dX.last!...dX[dX.endIndex-2]).contains(0) && !recentTwo_dX_are_Zero { crossingZero = true }
         }
         
-        dataHolder.raising.append(raising)
+        /*
+        //make class local variable of what the previous direction was: e.i var prevDDX:Int
+        // purpose of prevDDXDir is to see whether the direction, + or -, has changed in ddX
+        var prevDDX_isPositive:Bool?
+        var raising:Bool // replacing name for crossingZero; their functions should be identical
+        if dX.count >= 2
+        {
+            let ddX = dX.last! - dX[dX.endIndex-2]
+            
+            // accounting for when the dX >= 2 for the first time
+            if prevDDX_isPositive != nil
+            {
+                // if the change in ddX is less than 4; and the signs of prevDDX and ddX are opposite
+                if abs (ddX) < 4 && ( (ddX > 0 && !prevDDX_isPositive!) || (ddX < 0 && prevDDX_isPositive!) )
+                {
+                    raising = true
+                }
+                else { raising = false }
+            }
+            prevDDX_isPositive = ddX > 0
+        }
+        else
+        {
+            raising = false
+        }*/
+
+        dataHolder.crossingZero.append(crossingZero)
         
         rangeOfMotion?.updateRecent(x: dataHolder.x.last!)
-
-        if dataHolder.raising.count > 14 && raising != nil// 4 seconds delay
+        
+        if crossingZero
         {
-            addRepIfValid(dataHolder: &dataHolder, runCount: runCount, raising: raising)
+            boundaryCrossed(dataHolder: &dataHolder, crossedZero: crossingZero, name: name, runCount: runCount)
+        }
+        
+        
+        if dataHolder.crossed%2 == 1
+        {
+            dataHolder.reps = (dataHolder.crossed+1)/2
+            speed.secondsPerRep(dataHolder: &dataHolder)
+        }
+            
+            //If a rep has been completed
+        else if dataHolder.crossed > 0
+        {
+            rangeOfMotion?.updateRangeOfMotion(dataHolder: &dataHolder, runCount: runCount, name:name)
         }
     }
     
-    public func resetData()
-    {
-        rangeOfMotion?.resetData()
-        prevRaising = nil
-    }
+    public func resetData() { rangeOfMotion?.resetData() }
 }

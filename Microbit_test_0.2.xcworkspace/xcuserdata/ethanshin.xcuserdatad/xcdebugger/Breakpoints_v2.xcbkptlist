@@ -25,54 +25,6 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Microbit_test_0.2/DataHandlers/RangeOfMotion.swift"
-            timestampString = "575770983.3682981"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "37"
-            endingLineNumber = "37"
-            landmarkName = "boundaryCrossed(raising:name:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Microbit_test_0.2/DataHandlers/RangeOfMotion.swift"
-            timestampString = "575770983.368379"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "47"
-            endingLineNumber = "47"
-            landmarkName = "updateRangeOfMotion(dataHolder:runCount:name:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Microbit_test_0.2/DataHandlers/RepCount.swift"
-            timestampString = "575440789.444169"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "96"
-            endingLineNumber = "96"
-            landmarkName = "countRep(dataHolder:runCount:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "Microbit_test_0.2/Microbit/Microbit.swift"
             timestampString = "575770983.368443"
             startingColumnNumber = "9223372036854775807"
@@ -154,7 +106,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Microbit_test_0.2/DataHandlers/Similarity.swift"
-            timestampString = "573992798.046131"
+            timestampString = "575930356.228498"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "79"
@@ -167,15 +119,31 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             shouldBeEnabled = "No"
+            ignoreCount = "200"
+            continueAfterRunningActions = "No"
+            filePath = "Microbit_test_0.2/DataHandlers/DataCollecter.swift"
+            timestampString = "575930356.228599"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "28"
+            endingLineNumber = "28"
+            landmarkName = "smoothen(record:rawValue:_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Microbit_test_0.2/DataHandlers/RepCount.swift"
-            timestampString = "575440789.444562"
+            timestampString = "575930356.228662"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "42"
-            endingLineNumber = "42"
-            landmarkName = "addRepIfValid(dataHolder:runCount:raising:)"
+            startingLineNumber = "61"
+            endingLineNumber = "61"
+            landmarkName = "countRep(dataHolder:runCount:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
