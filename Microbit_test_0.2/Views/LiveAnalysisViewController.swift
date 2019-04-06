@@ -24,7 +24,7 @@ class LiveAnalysisViewController: UIViewController, ComputeDelegate, HomeDelegat
     static var liveAnalysisDelegate:LiveAnalysisDelegate?
     
     public var recordsViewControllerDelegate:RecordsViewControllerDelegate?
-
+    
     var calculation:Calculation?
     
     var similarity:Similarity?
@@ -47,7 +47,9 @@ class LiveAnalysisViewController: UIViewController, ComputeDelegate, HomeDelegat
     
     //to indicate whether the user has stopped the set/the set has been automatically stopped
     var measuring = false
-
+    
+    var speech:Speech?
+    
     @IBOutlet weak var blurredView: UIView!
     @IBOutlet weak var repProgressBar: MBCircularProgressBarView!
     @IBOutlet weak var romProgressBar: MBCircularProgressBarView!
@@ -78,21 +80,6 @@ class LiveAnalysisViewController: UIViewController, ComputeDelegate, HomeDelegat
         }
         else
         {
-            print(leftData?.dX)
-            print(leftData?.dThreeD)
-            /*print()
-            print()
-            print("the most")
-            print(leftData?.dX2_1)
-            print()
-            print()
-            print()
-            print(leftData?.dX3_1)
-            print()
-            print()
-            print()
-            print(leftData?.dX4_1)*/
-            
             prepareForNextSet()
         }
     }
@@ -116,6 +103,7 @@ class LiveAnalysisViewController: UIViewController, ComputeDelegate, HomeDelegat
         
         measuringStatusUpdateButton.setTitleColor(UIColor.gray, for: .disabled)
         measuringStatusUpdateButton.isEnabled = false
+        speech = Speech()
     }
 
     private func setProgressBarColors(color:UIColor)
@@ -232,6 +220,7 @@ class LiveAnalysisViewController: UIViewController, ComputeDelegate, HomeDelegat
     {
         if averagePBValues[index] == 0 { averagePBValues[index] = livePBValues[index] }
         else { averagePBValues[index] = (averagePBValues[index]+livePBValues[index])/2 }
+        speech?.appendToAverageLogs(index: index, averagePBValues[index])
     }
     
     // MARK: Implement required for ComputeDelegate protocol
@@ -277,14 +266,14 @@ class LiveAnalysisViewController: UIViewController, ComputeDelegate, HomeDelegat
                 {
                     self.romProgressBar.value = CGFloat(self.livePBValues[1])
                 }
-
+                
                 livePBValues[2] = ((leftData?.spr)!+(rightData?.spr)!)/2
                 updateAveragePBValues(index: 2)
                 UIView.animate(withDuration: 0.3)
                 {
                     self.sprProgressBar.value = CGFloat(self.livePBValues[2])
                 }
-
+                
                 if leftRunCount%55 == 0
                 {
                     UIView.animate(withDuration: 0.3)

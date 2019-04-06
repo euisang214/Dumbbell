@@ -24,6 +24,8 @@
 		022E02D321D38D6F0052501A /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 022E02D121D38D6F0052501A /* HomeViewController.xib */; };
 		024EA95021D705690050CCAD /* RangeOfMotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024EA94F21D705690050CCAD /* RangeOfMotion.swift */; };
 		024EA95221D81B410050CCAD /* Speed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024EA95121D81B410050CCAD /* Speed.swift */; };
+		0255E74D22544863003033D7 /* Speech.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0255E74C22544863003033D7 /* Speech.swift */; };
+		0255E74F2254565D003033D7 /* SpeechStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0255E74E2254565D003033D7 /* SpeechStruct.swift */; };
 		028CFBAB225187CA0082D630 /* RecordsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 028CFBAA225187CA0082D630 /* RecordsViewController.xib */; };
 		02A943F321D4301B001E925A /* MicrobitAccelerometer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A943F021D4301B001E925A /* MicrobitAccelerometer.swift */; };
 		02A943F421D4301B001E925A /* Microbit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A943F121D4301B001E925A /* Microbit.swift */; };
@@ -79,6 +81,8 @@
 		022E02D121D38D6F0052501A /* HomeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeViewController.xib; sourceTree = "<group>"; };
 		024EA94F21D705690050CCAD /* RangeOfMotion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RangeOfMotion.swift; sourceTree = "<group>"; };
 		024EA95121D81B410050CCAD /* Speed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Speed.swift; sourceTree = "<group>"; };
+		0255E74C22544863003033D7 /* Speech.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Speech.swift; sourceTree = "<group>"; };
+		0255E74E2254565D003033D7 /* SpeechStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechStruct.swift; sourceTree = "<group>"; };
 		028CFBAA225187CA0082D630 /* RecordsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecordsViewController.xib; sourceTree = "<group>"; };
 		02A943F021D4301B001E925A /* MicrobitAccelerometer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MicrobitAccelerometer.swift; sourceTree = "<group>"; };
 		02A943F121D4301B001E925A /* Microbit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Microbit.swift; sourceTree = "<group>"; };
@@ -157,6 +161,7 @@
 				02A943EF21D4301B001E925A /* Microbit */,
 				02A943F821D43054001E925A /* DataHandlers */,
 				02A943EE21D42F79001E925A /* Views */,
+				0255E74B22544821003033D7 /* Feedback */,
 				022E029821D3865D0052501A /* AppDelegate.swift */,
 				022E029A21D3865D0052501A /* ViewController.swift */,
 				022E029C21D3865D0052501A /* Main.storyboard */,
@@ -183,6 +188,15 @@
 				022E02BA21D3865F0052501A /* Info.plist */,
 			);
 			path = Microbit_test_0.2UITests;
+			sourceTree = "<group>";
+		};
+		0255E74B22544821003033D7 /* Feedback */ = {
+			isa = PBXGroup;
+			children = (
+				0255E74C22544863003033D7 /* Speech.swift */,
+				0255E74E2254565D003033D7 /* SpeechStruct.swift */,
+			);
+			path = Feedback;
 			sourceTree = "<group>";
 		};
 		02A943EE21D42F79001E925A /* Views */ = {
@@ -483,6 +497,7 @@
 				02A943F321D4301B001E925A /* MicrobitAccelerometer.swift in Sources */,
 				02A943FE21D43074001E925A /* Similarity.swift in Sources */,
 				022E02CE21D389720052501A /* LiveAnalysisViewController.swift in Sources */,
+				0255E74F2254565D003033D7 /* SpeechStruct.swift in Sources */,
 				02A943F421D4301B001E925A /* Microbit.swift in Sources */,
 				022E02D221D38D6F0052501A /* HomeViewController.swift in Sources */,
 				024EA95021D705690050CCAD /* RangeOfMotion.swift in Sources */,
@@ -490,6 +505,7 @@
 				02A9440221D43074001E925A /* RepCount.swift in Sources */,
 				022E029921D3865D0052501A /* AppDelegate.swift in Sources */,
 				0215D342223B3F9500350ED8 /* RecordsViewController.swift in Sources */,
+				0255E74D22544863003033D7 /* Speech.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

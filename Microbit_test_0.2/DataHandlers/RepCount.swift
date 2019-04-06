@@ -37,59 +37,32 @@ class RepCounter
     {
         let dX = dataHolder.dX
         var crossingZero:Bool = false
+        var meetsMinimumAltitudeReq:Bool = true
         
         if dX.count >= 2
         {
             let recentTwo_dX_are_Zero = dX[dX.endIndex-2] == 0.0 && dX.last! == 0.0
-            var meetsMinimumAltitudeReq:Bool = true
             
             if dataHolder.crossedRunCountLog.count >= 1
             {
-                if Double(dataHolder.dX[dataHolder.crossedRunCountLog.last!...dataHolder.dX.endIndex-1].max()!).magnitude > Double(dataHolder.dX[dataHolder.crossedRunCountLog.last!...dataHolder.dX.endIndex-1].min()!).magnitude
-                {
-                    
-                }
-                
-                
-                meetsMinimumAltitudeReq = max(abs(Double(dataHolder.dX[dataHolder.crossedRunCountLog.last!...dataHolder.dX.endIndex-1].max()!)), abs(Double(dataHolder.dX[dataHolder.crossedRunCountLog.last!...dataHolder.dX.endIndex-1].max()!))) > 1
-                /*print()
-                print("altitude: \(max(abs(Double(dataHolder.dX[dataHolder.crossedRunCountLog.last!...dataHolder.dX.endIndex-1].max()!)), abs(Double(dataHolder.dX[dataHolder.crossedRunCountLog.last!...dataHolder.dX.endIndex-1].min()!))))")
-                print("meetsMinimumAltitudeReq: \(meetsMinimumAltitudeReq)")
-                print()*/
+                meetsMinimumAltitudeReq = max(abs(Double(dataHolder.dX[dataHolder.crossedRunCountLog.last!...dataHolder.dX.endIndex-1].max()!)), abs(Double(dataHolder.dX[dataHolder.crossedRunCountLog.last!...dataHolder.dX.endIndex-1].min()!))) > 0.9
             }
             
             if dX[dX.endIndex-2] < dX.last!
             {
-                if (dX[dX.endIndex-2]...dX.last!).contains(0) && !recentTwo_dX_are_Zero { crossingZero = true }
+                if (dX[dX.endIndex-2]...dX.last!).contains(0) && !recentTwo_dX_are_Zero && meetsMinimumAltitudeReq { crossingZero = true }
             }
-            else if (dX.last!...dX[dX.endIndex-2]).contains(0) && !recentTwo_dX_are_Zero { crossingZero = true }
+            else if (dX.last!...dX[dX.endIndex-2]).contains(0) && !recentTwo_dX_are_Zero && meetsMinimumAltitudeReq { crossingZero = true }
         }
         
-        /*
-        //make class local variable of what the previous direction was: e.i var prevDDX:Int
-        // purpose of prevDDXDir is to see whether the direction, + or -, has changed in ddX
-        var prevDDX_isPositive:Bool?
-        var raising:Bool // replacing name for crossingZero; their functions should be identical
-        if dX.count >= 2
+        /*if crossingZero && dataHolder.crossedRunCountLog.count >= 1
         {
-            let ddX = dX.last! - dX[dX.endIndex-2]
-            
-            // accounting for when the dX >= 2 for the first time
-            if prevDDX_isPositive != nil
-            {
-                // if the change in ddX is less than 4; and the signs of prevDDX and ddX are opposite
-                if abs (ddX) < 4 && ( (ddX > 0 && !prevDDX_isPositive!) || (ddX < 0 && prevDDX_isPositive!) )
-                {
-                    raising = true
-                }
-                else { raising = false }
-            }
-            prevDDX_isPositive = ddX > 0
-        }
-        else
-        {
-            raising = false
+            print()
+            print("altitude: \(max(abs(Double(dataHolder.dX[dataHolder.crossedRunCountLog.last!...dataHolder.dX.endIndex-1].max()!)), abs(Double(dataHolder.dX[dataHolder.crossedRunCountLog.last!...dataHolder.dX.endIndex-1].min()!))))")
+            print("meetsMinimumAltitudeReq: \(meetsMinimumAltitudeReq)")
+            print()
         }*/
+
 
         dataHolder.crossingZero.append(crossingZero)
         
@@ -100,7 +73,6 @@ class RepCounter
             boundaryCrossed(dataHolder: &dataHolder, crossedZero: crossingZero, name: name, runCount: runCount)
         }
         
-        
         if dataHolder.crossed%2 == 1
         {
             dataHolder.reps = (dataHolder.crossed+1)/2
@@ -108,7 +80,7 @@ class RepCounter
         }
             
             //If a rep has been completed
-        else if dataHolder.crossed > 0
+        else if dataHolder.crossed > 0 && crossingZero
         {
             rangeOfMotion?.updateRangeOfMotion(dataHolder: &dataHolder, runCount: runCount, name:name)
         }

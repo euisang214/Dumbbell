@@ -18,7 +18,7 @@ class RangeOfMotion
     //Stores the default range of motion: based on the first rep
     private var standardDifference:Double?
     
-    public var romLog:[Int16]
+    public var romLog:[Double]
     
     init()
     {
@@ -34,20 +34,10 @@ class RangeOfMotion
     {
         //a variable that will contain the most recent range travelled, in double; aka the difference between the greatest and smallest accelerometer values
         let range:Double = abs( Double(recentReps.max()! - recentReps.min()!) )
-       
-        print()
-        print()
-        print("Range : \(range)")
-        print("recentReps.max = \(recentReps.max()!)")
-        print("recentReps.min = \(recentReps.min()!)")
-        print("recentReps.count = \(recentReps.count)")
-        print("runCount = \(runCount)")
-        print()
-        print()
  
         if standardDifference != nil
         {
-            if range < standardDifference! { romLog.append(Int16 (range/standardDifference!*Double(100) )) }
+            if range < standardDifference! { romLog.append( range/standardDifference!*Double(100) ) }
             //if most recent range travelled is greater than the standard, this range becomes the standard
             else
             {

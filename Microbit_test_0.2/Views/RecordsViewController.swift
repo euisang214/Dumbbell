@@ -22,19 +22,19 @@ class RecordsViewController: UIViewController, RecordsViewControllerDelegate
     {
         if (UserDefaults.standard.object(forKey: "rep"+statType) ?? nil) != nil
         {
-            UIView.animate(withDuration: 0.4)
+            UIView.animate(withDuration: 0.6)
             {
                 self.repPB.value = UserDefaults.standard.object(forKey: "rep"+statType) as! CGFloat
             }
-            UIView.animate(withDuration: 0.4)
+            UIView.animate(withDuration: 0.6)
             {
                 self.sprPB.value = UserDefaults.standard.object(forKey: "spr"+statType) as! CGFloat
             }
-            UIView.animate(withDuration: 0.4)
+            UIView.animate(withDuration: 0.6)
             {
                 self.romPB.value = UserDefaults.standard.object(forKey: "rom"+statType) as! CGFloat
             }
-            UIView.animate(withDuration: 0.4)
+            UIView.animate(withDuration: 0.6)
             {
                 self.symmetryPB.value = UserDefaults.standard.object(forKey: "sym"+statType) as! CGFloat
             }

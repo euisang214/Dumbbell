@@ -51,13 +51,27 @@ struct DataHolder
     public var reps:Int//Presented to user
     
     //for rangeOfMotion
-    public var rom:Int16 //Presented to user
-    public var romAverage:Int16
+    public var rom:Double //Presented to user
+    public var romAverage:Double
+    {
+        didSet
+        {
+            romAverageLog.append(oldValue)
+        }
+    }
+    public var romAverageLog:[Double]
     
     //for Speed; multiply the gap between the most recent odd index points by .p30
     public var crossedRunCountLog:[Int]
     public var spr:Double
     public var sprAverage:Double
+    {
+        didSet
+        {
+            sprAverageLog.append(oldValue)
+        }
+    }
+    public var sprAverageLog:[Double]
     
     //
     // Long term data, used for performance comparisons
@@ -98,6 +112,8 @@ struct DataHolder
         crossedRunCountLog = []
         spr = 0
         sprAverage = 0
+        sprAverageLog = []
+        romAverageLog = []
     }
     
     mutating func resetData()
