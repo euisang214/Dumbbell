@@ -10,7 +10,10 @@ import Foundation
 
 class Speed
 {
-    public func secondsPerRep(dataHolder:inout DataHolder)
+    /// Updates the SPR (Seconds Per Repetition) for the given DataHolder
+    ///
+    /// - Parameter dataHolder: The DataHolder to be examined for its SPR
+    static public func updateSPR(dataHolder:inout DataHolder)
     {
         let log = dataHolder.crossedRunCountLog
         if log.count >= 3

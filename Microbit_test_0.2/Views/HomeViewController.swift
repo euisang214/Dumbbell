@@ -14,11 +14,11 @@ protocol HomeDelegate
     func changeMeasuringStatusUpdateButtonStatus(_ bool:Bool)
 }
 
-class HomeViewController: UIViewController, UpdateConnectionStatLabelDelegate, LiveAnalysisDelegate {
+class HomeViewController: UIViewController, UpdateConnectionIndicators, LiveAnalysisDelegate
+{
     
     public static var delegate:HomeDelegate?
 
-    //  @IBOutlet weak var logView: UITextView!
     @IBOutlet weak var headerL: UILabel!
     @IBOutlet weak var leftImage: UIImageView!
     @IBOutlet weak var rightImage: UIImageView!
@@ -46,57 +46,59 @@ class HomeViewController: UIViewController, UpdateConnectionStatLabelDelegate, L
         disconnectMicrobits()
     }
     
-    private func labelUpdate(label:UILabel!, isConnected: Bool)
+    
+    /// Updates the labels based on its connection status
+    ///
+    /// - Parameters:
+    ///   - labels: The UILabels - text - under the connection icons
+    ///   - isConnected: Connection statuses
+    private func labelUpdate(labels:[UILabel?], _ isConnected: [Bool])
     {
-        switch isConnected
+        for index in 0...1
         {
-        case true:
-            label.text = "Connected"
-            label.textColor = UIColor.green
-        case false:
-            label.text = "Not Connected"
-            label.textColor = UIColor.red
+            switch isConnected[index]
+            {
+            case true:
+                labels[index]!.text = "Connected"
+                labels[index]!.textColor = UIColor.green
+            case false:
+                labels[index]!.text = "Not Connected"
+                labels[index]!.textColor = UIColor.red
+            }
         }
     }
     
-    //provide flashing effects on the circle images when attempting to connect
-    private func updateLeftImage(isConnected:Bool)
+    /// Provide transition effects when connection status changes
+    ///
+    /// - Parameters:
+    ///   - isConnected: Connection status
+    ///   - image: The UIImageView - image icon - for the connection status
+    private func updateImage(images:[UIImageView], _ isConnected:[Bool])
     {
-        switch isConnected
+        for index in 0...1
         {
-        case true:
-            UIView.transition(with: leftImage, duration: 1, options: .transitionCrossDissolve, animations: {
-                self.leftImage.image = UIImage(named: "Connected")
-            }, completion: nil)
-        case false:
-            UIView.transition(with: leftImage, duration: 1, options: .transitionCrossDissolve, animations: {
-                self.leftImage.image = UIImage.init(named: "Connecting")
-            }, completion: nil)
+            switch isConnected[index]
+            {
+            case true:
+                UIView.transition(with: images[index], duration: 1, options: .transitionCrossDissolve, animations: {
+                    self.rightImage.image = UIImage(named: "Connected")
+                }, completion: nil)
+            case false:
+                UIView.transition(with: images[index], duration: 1, options: .transitionCrossDissolve, animations: {
+                    self.rightImage.image = UIImage.init(named: "Connecting")
+                }, completion: nil)
+            }
         }
     }
     
-    private func updateRightImage(isConnected:Bool)
+    /// MARK: Implementation required for UpdateConnectionIndicators
+    /// Updates connection label and images based on connection status of Microbits
+    ///
+    /// - Parameter isConnected: Connection status of both Microbits
+    public func updateConnectionIndicators(isConnected: [Bool])
     {
-        switch isConnected
-        {
-        case true:
-            UIView.transition(with: rightImage, duration: 1, options: .transitionCrossDissolve, animations: {
-                self.rightImage.image = UIImage(named: "Connected")
-            }, completion: nil)
-        case false:
-            UIView.transition(with: rightImage, duration: 1, options: .transitionCrossDissolve, animations: {
-                self.rightImage.image = UIImage.init(named: "Connecting")
-            }, completion: nil)
-        }
-    }
-    
-    // MARK: Implementaiton required for UpdateConnectionStatLabelDelegate
-    public func updateConnectionStatLabel(isConnected: [Bool])
-    {
-        labelUpdate(label: connectionRightL, isConnected: isConnected.first!)
-        labelUpdate(label: connectionLeftL, isConnected: isConnected.last!)
-        updateLeftImage(isConnected: isConnected.last!)
-        updateRightImage(isConnected: isConnected.first!)
+        labelUpdate(labels: [connectionRightL, connectionLeftL], isConnected)
+        updateImage(images: [rightImage, leftImage], isConnected)
         
         if isConnected.first == true && isConnected.last == true
         {
@@ -107,7 +109,7 @@ class HomeViewController: UIViewController, UpdateConnectionStatLabelDelegate, L
         }
     }
     
-    //MARK: Implementation required for LiveAnalysisDelegate
+    /// MARK: Implementation required for LiveAnalysisDelegate; disconnect from Microbits
     public func disconnectMicrobits()
     {
         let microbit = ViewController.microbitController?.microbit
@@ -135,12 +137,13 @@ class HomeViewController: UIViewController, UpdateConnectionStatLabelDelegate, L
         HomeViewController.delegate?.prepareForNextSet()
     }
     
-    override func viewDidLoad() {
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
     
         headerL.isHidden = true
         disconnectB.isEnabled = false
-        ViewController.updateConnectionStatLabelDelegate = self
+        ViewController.updateConnectionIndicators = self
         LiveAnalysisViewController.liveAnalysisDelegate = self
         
         connectionLeftL.text = "Not Connected"
@@ -150,25 +153,11 @@ class HomeViewController: UIViewController, UpdateConnectionStatLabelDelegate, L
         
         disconnectB.setTitleColor(UIColor.gray, for: .disabled)
         connectB.setTitleColor(UIColor.gray, for: .disabled)
-        
-        //connectionRightL.layer.backgroundColor  = UIColor.lightGray.cgColor
-        //connectionRightL.layer.cornerRadius = 5
-        
-        //print(screenSize.height)
-        //print(screenSize.width)
     }
     
+     /// Disconnect all microbits when app is quitting
      func applicationWillTerminate()
     {
         disconnectMicrobits()
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 }

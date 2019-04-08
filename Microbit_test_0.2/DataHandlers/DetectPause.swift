@@ -10,6 +10,10 @@ import Foundation
 
 class DetectPause
 {
+    /// Calculates the average value of a given ArraySlice, BUT ALL VALUES ARE ABSOLUTE VALUED throughout the process to measure magnitude without + - signs
+    ///
+    /// - Parameter array: The array whose average value is desired
+    /// - Returns: The average ABSOLUTE value of the array's contents as a Double
     private func average(array:ArraySlice<Double>) -> Double
     {
         var sum:Double = 0
@@ -17,7 +21,13 @@ class DetectPause
         return sum/Double(array.count)
     }
     
-    public func isPaused(dataHolder:inout DataHolder?, runCount:Int) -> Bool
+    /// Determines whether a MicroBit has minimal movement; aka whether the user stopped moving the MicroBit/stopped workout
+    ///
+    /// - Parameters:
+    ///   - dataHolder: The DataHolder to be examined whether it has minimal movement or not
+    ///   - runCount: The number of times accerlerometer data has been passed to the iOS device
+    /// - Returns: A Bool of whether the user stopped moving the MicroBit
+    private func isPaused(dataHolder:inout DataHolder?, runCount:Int) -> Bool
     {
         let dThreeD = dataHolder!.dThreeD
         
@@ -30,6 +40,13 @@ class DetectPause
         return false
     }
     
+    /// Determines whether BOTH MicroBits have minimal movement using the isPaused private function
+    ///
+    /// - Parameters:
+    ///   - dataHolderOne: A DataHolder for a MicroBit
+    ///   - dataHolderTwo: A DataHolder for a different MicroBit
+    ///   - runCount: The number of times accerlerometer data has been passed to the iOS device
+    /// - Returns: A Bool of whether the user stopped moving BOTH MicroBits
     public func isPaused(dataHolderOne:inout DataHolder?, dataHolderTwo:inout DataHolder?, runCount:Int) -> Bool
     {
         return isPaused(dataHolder: &dataHolderOne, runCount:runCount) && isPaused(dataHolder: &dataHolderTwo, runCount:runCount)

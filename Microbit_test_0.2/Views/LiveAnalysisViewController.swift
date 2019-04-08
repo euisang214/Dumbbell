@@ -9,20 +9,17 @@
 import UIKit
 import MBCircularProgressBar
 
+/// Delegate to disconnect MircoBits
+/// Inherited in HomeViewController
 protocol LiveAnalysisDelegate
 {
     func disconnectMicrobits()
 }
 
-protocol RecordsViewControllerDelegate
-{
-    func updateRecordVC()
-}
-
+/// Class that controls the live processing view
 class LiveAnalysisViewController: UIViewController, ComputeDelegate, HomeDelegate {
     
     static var liveAnalysisDelegate:LiveAnalysisDelegate?
-    
     public var recordsViewControllerDelegate:RecordsViewControllerDelegate?
     
     var calculation:Calculation?
@@ -37,18 +34,22 @@ class LiveAnalysisViewController: UIViewController, ComputeDelegate, HomeDelegat
     var leftRepCounter:RepCounter?
     var rightRepCounter:RepCounter?
     
+    var speech:Speech?
+    
+    /// The number of times accerlerometer data from the LEFT MICROBIT has been passed to the iOS device
     var leftRunCount:Int = 0
+    /// The number of times accerlerometer data from the RIGHT MICROBIT has been passed to the iOS device
     var rightRunCount:Int  = 0
     
-    //Stores the most recent number of reps, range of motion, seconds per rep, and similarity in this specific order
+    /// Stores the most recent number of reps, range of motion, seconds per rep, and similarity in this specific order.
+    /// Necessary because DataHolder only contains average for one side, while livePBValues account for both sides
     var livePBValues:[Double] = [0,0,0,0]
-    //Stores the average of each respective statistic to simplify process of saving to local storage
+    //Stores the average of each respective statistic to simplify process of saving to local storage.
+    /// Necessary because DataHolder only contains average for one side, while livePBValues account for both sides
     var averagePBValues:[Double] = [0,0,0,0]
     
-    //to indicate whether the user has stopped the set/the set has been automatically stopped
+    /// Indicates whether the (user has stopped the set) / (set has been automatically stopped)
     var measuring = false
-    
-    var speech:Speech?
     
     @IBOutlet weak var blurredView: UIView!
     @IBOutlet weak var repProgressBar: MBCircularProgressBarView!
@@ -59,6 +60,9 @@ class LiveAnalysisViewController: UIViewController, ComputeDelegate, HomeDelegat
     
     @IBOutlet weak var measuringStatusUpdateButton: UIButton!
     
+    /// Action when the start/stop button is pressed
+    ///
+    /// - Parameter sender: sender
     @IBAction func measuringStatusUpdateButtonPressed(_ sender: Any)
     {
         if !measuring
@@ -75,7 +79,6 @@ class LiveAnalysisViewController: UIViewController, ComputeDelegate, HomeDelegat
                 self.romProgressBar.value = 0
                 self.sprProgressBar.value = 0
             }
-            
             arrangeTimer(seconds: 2)
         }
         else
@@ -84,7 +87,9 @@ class LiveAnalysisViewController: UIViewController, ComputeDelegate, HomeDelegat
         }
     }
     
-    override func viewDidLoad() {
+    /// Initialisation
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
         
         ViewController.computeDelegate = self
@@ -98,14 +103,17 @@ class LiveAnalysisViewController: UIViewController, ComputeDelegate, HomeDelegat
         detectPause = DetectPause()
         rightData = DataHolder()
         leftData = DataHolder()
-        leftRepCounter = RepCounter(name:"Left")
-        rightRepCounter = RepCounter(name:"Right")
+        leftRepCounter = RepCounter()
+        rightRepCounter = RepCounter()
         
         measuringStatusUpdateButton.setTitleColor(UIColor.gray, for: .disabled)
         measuringStatusUpdateButton.isEnabled = false
         speech = Speech()
     }
 
+    /// Instantly change all progress bars to given color
+    ///
+    /// - Parameter color: The color to which the progress bars will be changed
     private func setProgressBarColors(color:UIColor)
     {
         repProgressBar.progressColor = color
@@ -125,8 +133,9 @@ class LiveAnalysisViewController: UIViewController, ComputeDelegate, HomeDelegat
         symmetryProgressBar.value = CGFloat(livePBValues[3])
     }
     
-    //Arranges the animation and countdown of the timer.
-    //Seconds variable: number of seconds the countdown will last
+    /// Arranges the animation and countdown of the timer.
+    ///
+    /// - Parameter seconds: Number of seconds the countdown will last
     private func arrangeTimer(seconds:Int)
     {
         //Setup the blur effect view to be overlayed over the screen
@@ -175,17 +184,26 @@ class LiveAnalysisViewController: UIViewController, ComputeDelegate, HomeDelegat
         }
     }
 
-    //Updating DataHolder and running .countRep (all core functions)
+    /// Updates SPR, ROM, and Speed if applicable for given DataHolder
+    ///
+    /// - Parameters:
+    ///   - dataHolder: The DataHolder to be referenced from
+    ///   - x: The x acceleration
+    ///   - y: The y acceleration
+    ///   - z: The z acceleration
+    ///   - isRightSide: Whether the Microbit is on the left/right arm
     private func compute(dataHolder:inout DataHolder?, x:Int16, y:Int16, z:Int16, isRightSide:Bool)
     {
         calculation?.updateDataHolder(dataHolder: &dataHolder!, x: x, y: y, z: z)
         if isRightSide { rightRepCounter?.countRep(dataHolder: &dataHolder!, runCount: rightRunCount) }
         else { leftRepCounter?.countRep(dataHolder: &dataHolder!, runCount: leftRunCount) }
     }
-    
-    // Function saves average of the given statistic into local storage
-    // stat: the statistic to be saved
-    // LPBVIndex: livePBValues's index
+
+    /// Saves average of the given statistic into local storage
+    ///
+    /// - Parameters:
+    ///   - stat: The statistic to be saved
+    ///   - LPBVIndex: livePBValue's index for this statistic
     private func saveLocal_Average(_ stat:String, LPBVIndex:Int)
     {
         if (UserDefaults.standard.object(forKey: stat+"Average") ?? nil) != nil
@@ -198,10 +216,12 @@ class LiveAnalysisViewController: UIViewController, ComputeDelegate, HomeDelegat
             UserDefaults.standard.set(averagePBValues[LPBVIndex], forKey: stat+"Average")
         }
     }
-    
-    // Function saves most recent difference of the given statistic into local storage
-    // stat: the statistic to be saved
-    // LPBVIndex: livePBValues's index
+
+    /// Saves most recent difference of the given statistic into local storage
+    ///
+    /// - Parameters:
+    ///   - stat: The statistic to be saved
+    ///   - LPBVIndex: livePBValues's index for this statistic
     private func saveLocal_Diff(_ stat:String, LPBVIndex:Int)
     {
         if (UserDefaults.standard.object(forKey: stat+"Diff") ?? nil) != nil
@@ -215,7 +235,10 @@ class LiveAnalysisViewController: UIViewController, ComputeDelegate, HomeDelegat
             UserDefaults.standard.set(averagePBValues[LPBVIndex], forKey: stat+"Diff")
         }
     }
-    
+
+    /// Updates the average value of given statistic to respective index in averagePBValues
+    ///
+    /// - Parameter index: averagePBValues's index for this statistic
     private func updateAveragePBValues(index:Int)
     {
         if averagePBValues[index] == 0 { averagePBValues[index] = livePBValues[index] }
@@ -223,7 +246,10 @@ class LiveAnalysisViewController: UIViewController, ComputeDelegate, HomeDelegat
         speech?.appendToAverageLogs(index: index, averagePBValues[index])
     }
     
-    // MARK: Implement required for ComputeDelegate protocol
+    /// MARK: Implement required for ComputeDelegate protocol
+    /// The main computation and UI refresher
+    ///
+    /// - Parameter isRightSide: Whether the Microbit is on the left/right arm
     public func computeMain(isRightSide:Bool)
     {
         if ViewController.microbitController?.microbit?.isConnected.last! == true && measuring == true && ( (isRightSide && rightRunCount <= leftRunCount) || (!isRightSide && leftRunCount <= rightRunCount) )
@@ -292,7 +318,9 @@ class LiveAnalysisViewController: UIViewController, ComputeDelegate, HomeDelegat
         }
     }
     
-    // MARK: Implementation required for HomeDelegate protocol
+    /// MARK: Implementation required for HomeDelegate protocol
+    ///
+    /// Reset all local variables in this class in preperation for next workout set
     public func prepareForNextSet()
     {
         measuring = false
@@ -331,21 +359,12 @@ class LiveAnalysisViewController: UIViewController, ComputeDelegate, HomeDelegat
         recordsViewControllerDelegate?.updateRecordVC()
     }
     
-    // MARK: Implementation required for HomeDelegate protocol
+    /// MARK: Implementation required for HomeDelegate protocol
+    ///
+    /// Change the status of the measuringStatusUpdateButton
+    /// - Parameter bool: The state of the measuringStatusUpdateButton
     public func changeMeasuringStatusUpdateButtonStatus(_ bool:Bool)
     {
         measuringStatusUpdateButton.isEnabled = bool
     }
-    
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 }

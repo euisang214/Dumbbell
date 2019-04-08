@@ -10,6 +10,10 @@ import Foundation
 
 class Similarity
 {
+    /// Calculates the average value of a given ArraySlice
+    ///
+    /// - Parameter array: The array whose average value is desired
+    /// - Returns: The average value of the array's contents as a Double
     private func average(array:ArraySlice<Double>) -> Double
     {
         var sum:Double = 0
@@ -17,35 +21,12 @@ class Similarity
         return sum/Double(array.count)
     }
     
-    /*
-    
-    //gets the 'd' - difference - between most recent data points for the given
-    //array - in DataHolder - and presents it as a percentage.
-    //
-    //The percentage is given as the difference between the right and
-    //left side, divided by the smaller of the two
-    //
-    //Assesses the percentage difference between rate of change of the most recent measurements
-    public func liveSimilarity(leftArray:[Int16], rightArray:[Int16]) -> Double
-    {
-        var sum = 0.0
-        let leftLast = leftArray.endIndex-1
-        let rightLast = rightArray.endIndex-1
-        if leftArray.count>=32 && rightArray.count>=32
-        {
-            for index in 0...31
-            {
-                sum += Double(min(abs(leftArray[leftLast-index]), abs(rightArray[rightLast-index])))/Double(max(abs(leftArray[leftLast-index]), abs(rightArray[rightLast-index])))*100
-            }
-            return sum/Double(32)
-        }
-        return 0
-    }
-    
-    */
-    
-    //uses Microsoft Excel's 'Correl' equation
-    //Assesses the overall corellation between the motion of the two given arrays
+    /// Uses Microsoft Excel's 'Correl' equation to assess the overall corellation/similarity between two given arrays
+    ///
+    /// - Parameters:
+    ///   - leftArray: Array number 1
+    ///   - rightArray: Array number 2
+    /// - Returns: The similarity value of the two arrays as an Int
     public func overallSimilarity(leftArray:[Double], rightArray:[Double]) -> Int
     {
         if leftArray.count>32 && rightArray.count>32

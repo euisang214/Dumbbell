@@ -13,16 +13,16 @@ protocol ComputeDelegate
     func computeMain(isRightSide:Bool)
 }
 
-protocol UpdateConnectionStatLabelDelegate
+protocol UpdateConnectionIndicators
 {
-    func updateConnectionStatLabel(isConnected:[Bool])
+    func updateConnectionIndicators(isConnected:[Bool])
 }
 
 class ViewController: UIViewController, MicrobitAccelerometerControllerDelegate {
     
     static var microbitController:MicrobitAccelerometerController?
     static var computeDelegate:ComputeDelegate?
-    static var updateConnectionStatLabelDelegate:UpdateConnectionStatLabelDelegate?
+    static var updateConnectionIndicators:UpdateConnectionIndicators?
     
     @IBOutlet weak var scrollView: UIScrollView!
     
@@ -39,7 +39,7 @@ class ViewController: UIViewController, MicrobitAccelerometerControllerDelegate 
     
     public func connectionStatUpdate(isConnected: [Bool])
     {
-        ViewController.updateConnectionStatLabelDelegate?.updateConnectionStatLabel(isConnected: isConnected)
+        ViewController.updateConnectionIndicators?.updateConnectionIndicators(isConnected: isConnected)
     }
     //
     

@@ -8,21 +8,26 @@
 
 import Foundation
 
+/// The RepCounter class contains the RangeOfMotion classs for it to function easily when a rep has been conducted
+/// This is the easiest implementation since there must be two instances of RepCounter and RangeOfMotion respectively, in pairs for the left and right Microbits, in LiveAnalysisViewController
+
 class RepCounter
 {
+    /// The RangeOfMotion class
     public var rangeOfMotion:RangeOfMotion?
-    public var speed:Speed
     
-    private var name:String
-    
-    init(name:String)
+    init()
     {
         rangeOfMotion = RangeOfMotion()
-        speed = Speed()
-        self.name = name
     }
     
-    private func boundaryCrossed(dataHolder:inout DataHolder, crossedZero:Bool?, name:String, runCount:Int)
+    
+    /// Processes actions required when half a rep is conducted; aka when the boundary is crossed
+    ///
+    /// - Parameters:
+    ///   - dataHolder: The DataHolder to be processed
+    ///   - runCount: The number of times accerlerometer data has been passed to the iOS device
+    private func boundaryCrossed(dataHolder:inout DataHolder, runCount:Int)
     {
         dataHolder.crossed += 1
         dataHolder.crossedRunCountLog.append(runCount)
@@ -33,6 +38,12 @@ class RepCounter
         dataHolder.crossingZero = simplifiedRaising
     }
     
+    /// The main function for RepCount
+    /// Calls boundaryCrossed() and rangeOfMotion functions when necessary
+    ///
+    /// - Parameters:
+    ///   - dataHolder: The DataHolder to be processed
+    ///   - runCount: The number of times accerlerometer data has been passed to the iOS device
     public func countRep(dataHolder: inout DataHolder, runCount:Int)
     {
         let dX = dataHolder.dX
@@ -45,7 +56,7 @@ class RepCounter
             
             if dataHolder.crossedRunCountLog.count >= 1
             {
-                meetsMinimumAltitudeReq = max(abs(Double(dataHolder.dX[dataHolder.crossedRunCountLog.last!...dataHolder.dX.endIndex-1].max()!)), abs(Double(dataHolder.dX[dataHolder.crossedRunCountLog.last!...dataHolder.dX.endIndex-1].min()!))) > 0.9
+                meetsMinimumAltitudeReq = max(abs(Double(dX[dataHolder.crossedRunCountLog.last!...dX.endIndex-1].max()!)), abs(Double(dX[dataHolder.crossedRunCountLog.last!...dX.endIndex-1].min()!))) > 0.9
             }
             
             if dX[dX.endIndex-2] < dX.last!
@@ -54,15 +65,6 @@ class RepCounter
             }
             else if (dX.last!...dX[dX.endIndex-2]).contains(0) && !recentTwo_dX_are_Zero && meetsMinimumAltitudeReq { crossingZero = true }
         }
-        
-        /*if crossingZero && dataHolder.crossedRunCountLog.count >= 1
-        {
-            print()
-            print("altitude: \(max(abs(Double(dataHolder.dX[dataHolder.crossedRunCountLog.last!...dataHolder.dX.endIndex-1].max()!)), abs(Double(dataHolder.dX[dataHolder.crossedRunCountLog.last!...dataHolder.dX.endIndex-1].min()!))))")
-            print("meetsMinimumAltitudeReq: \(meetsMinimumAltitudeReq)")
-            print()
-        }*/
-
 
         dataHolder.crossingZero.append(crossingZero)
         
@@ -70,21 +72,21 @@ class RepCounter
         
         if crossingZero
         {
-            boundaryCrossed(dataHolder: &dataHolder, crossedZero: crossingZero, name: name, runCount: runCount)
+            boundaryCrossed(dataHolder: &dataHolder, runCount: runCount)
         }
         
         if dataHolder.crossed%2 == 1
         {
             dataHolder.reps = (dataHolder.crossed+1)/2
-            speed.secondsPerRep(dataHolder: &dataHolder)
         }
             
-            //If a rep has been completed
+        //If a rep has been completed
         else if dataHolder.crossed > 0 && crossingZero
         {
-            rangeOfMotion?.updateRangeOfMotion(dataHolder: &dataHolder, runCount: runCount, name:name)
+            rangeOfMotion?.updateROM(dataHolder: &dataHolder, runCount: runCount)
         }
     }
     
+    /// Reset all local variables in this class in preperation for next workout set
     public func resetData() { rangeOfMotion?.resetData() }
 }

@@ -8,16 +8,23 @@
 import MBCircularProgressBar
 import UIKit
 
+protocol RecordsViewControllerDelegate
+{
+    func updateRecordVC()
+}
+
 class RecordsViewController: UIViewController, RecordsViewControllerDelegate
 {
-    //MARK: Implementation required by LiveAnalysisViewController
-    //Allows to be called from LiveAnalysisViewController, updated the moment the workout is stopped
+    /// MARK: Implementation required by LiveAnalysisViewController
+    /// Update the recordVC
     func updateRecordVC()
     {
         updatePB("Average")
     }
     
-    // Updates the PB (Progress Bars) on the desired statistic: either the average or the difference between two most recent sets
+    /// Updates the PB (Progress Bars) on the desired statistic: either the average or the difference between two most recent sets
+    ///
+    /// - Parameter statType: The statistic type desired: the average or the difference between two most recent sets
     private func updatePB(_ statType:String)
     {
         if (UserDefaults.standard.object(forKey: "rep"+statType) ?? nil) != nil
@@ -46,6 +53,9 @@ class RecordsViewController: UIViewController, RecordsViewControllerDelegate
     @IBOutlet weak var romPB: MBCircularProgressBarView!
     @IBOutlet weak var symmetryPB: MBCircularProgressBarView!
     
+    /// Updates the PB to the desired statistic, based on the segmentControl option selected
+    ///
+    /// - Parameter sender: UISegmentedControl
     @IBAction func segmentedControl(_ sender: UISegmentedControl)
     {
         switch sender.selectedSegmentIndex
@@ -59,31 +69,10 @@ class RecordsViewController: UIViewController, RecordsViewControllerDelegate
         }
     }
     
+    /// Load the average history by default
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        
         updatePB("Average")
-        /*UserDefaults.standard.set(nil, forKey: "sprAverage")
-        UserDefaults.standard.set(nil, forKey: "symAverage")
-        UserDefaults.standard.set(nil, forKey: "repAverage")
-        UserDefaults.standard.set(nil, forKey: "romAverage")
-        
-        UserDefaults.standard.set(nil, forKey: "sprDiff")
-        UserDefaults.standard.set(nil, forKey: "symDiff")
-        UserDefaults.standard.set(nil, forKey: "romDiff")
-        UserDefaults.standard.set(nil, forKey: "repDiff")*/
     }
-
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
