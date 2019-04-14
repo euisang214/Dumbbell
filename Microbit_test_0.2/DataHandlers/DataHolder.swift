@@ -29,7 +29,7 @@ struct DataHolder
     public var reps:Int
     
     //for rangeOfMotion
-    public var rom:Double //Presented to user
+    public var rom:Double
     public var romAverage:Double
     {
         didSet
@@ -39,7 +39,7 @@ struct DataHolder
     }
     public var romAverageLog:[Double]
     
-    //for Speed; multiply the gap between the most recent odd index points by .p30
+    //for Speed; multiply the gap between the most recent odd index points by .p20
     public var crossedRunCountLog:[Int]
     public var spr:Double
     public var sprAverage:Double
@@ -50,12 +50,6 @@ struct DataHolder
         }
     }
     public var sprAverageLog:[Double]
-    
-    //
-    // Long term data, used for performance comparisons
-    //
-    
-    
     
     init()
     {
@@ -81,12 +75,16 @@ struct DataHolder
         threeD.removeAll()
         dX.removeAll()
         dThreeD.removeAll()
-        crossingZero.removeAll()
         crossed = 0
         reps = 0
-        rom = -1
+        rom = 0
+        romAverage = 0
+        crossingZero.removeAll()
         crossedRunCountLog.removeAll()
         spr = 0
+        sprAverage = 0
+        sprAverageLog.removeAll()
+        romAverageLog.removeAll()
     }
 
 }

@@ -28,13 +28,13 @@ class LiveAnalysisViewController: UIViewController, ComputeDelegate, HomeDelegat
     
     var detectPause:DetectPause?
     
+    var speech:Speech?
+    
     var leftData:DataHolder?
     var rightData:DataHolder?
     
     var leftRepCounter:RepCounter?
     var rightRepCounter:RepCounter?
-    
-    var speech:Speech?
     
     /// The number of times accerlerometer data from the LEFT MICROBIT has been passed to the iOS device
     var leftRunCount:Int = 0
@@ -44,9 +44,11 @@ class LiveAnalysisViewController: UIViewController, ComputeDelegate, HomeDelegat
     /// Stores the most recent number of reps, range of motion, seconds per rep, and similarity in this specific order.
     /// Necessary because DataHolder only contains average for one side, while livePBValues account for both sides
     var livePBValues:[Double] = [0,0,0,0]
-    //Stores the average of each respective statistic to simplify process of saving to local storage.
+    /// Stores the average of each respective statistic to simplify process of saving to local storage.
     /// Necessary because DataHolder only contains average for one side, while livePBValues account for both sides
     var averagePBValues:[Double] = [0,0,0,0]
+    /// Previous averagePBValues
+    var previousAveragePBValues:[Double] = [0,0,0,0]
     
     /// Indicates whether the (user has stopped the set) / (set has been automatically stopped)
     var measuring = false
@@ -231,19 +233,38 @@ class LiveAnalysisViewController: UIViewController, ComputeDelegate, HomeDelegat
         }
         else
         {
-            print(String(LPBVIndex) + " " + String(averagePBValues[LPBVIndex]))
+            //print(String(LPBVIndex) + " " + String(averagePBValues[LPBVIndex]))
             UserDefaults.standard.set(averagePBValues[LPBVIndex], forKey: stat+"Diff")
         }
     }
 
     /// Updates the average value of given statistic to respective index in averagePBValues
+    /// Also updates previousAveragePBValues
+    /// Also calls updateSpeech_averageLogs to update Speech's local variable averageLogs
     ///
     /// - Parameter index: averagePBValues's index for this statistic
     private func updateAveragePBValues(index:Int)
     {
         if averagePBValues[index] == 0 { averagePBValues[index] = livePBValues[index] }
         else { averagePBValues[index] = (averagePBValues[index]+livePBValues[index])/2 }
-        speech?.appendToAverageLogs(index: index, averagePBValues[index])
+        callForSpeech(index: index, value: averagePBValues[index])
+        previousAveragePBValues[index] = averagePBValues[index]
+    }
+    
+    
+    /// Updates Speech's local variable averageLogs
+    ///
+    /// - Parameters:
+    ///   - index: averagePBValues's index for this statistic
+    ///   - value: Value to be appended at this index
+    private func callForSpeech(index:Int, value:Double)
+    {
+        //print("\(previousAveragePBValues[index])  \(averagePBValues[index])")
+        if index > 0 && index < 3 && previousAveragePBValues[index] != averagePBValues[index]
+        {
+            speech?.appendToAverageLogs(index: index, value)
+            speech?.provideFeedback_Main(index: index, leftData: leftData!, rightData: rightData!)
+        }
     }
     
     /// MARK: Implement required for ComputeDelegate protocol
@@ -252,6 +273,9 @@ class LiveAnalysisViewController: UIViewController, ComputeDelegate, HomeDelegat
     /// - Parameter isRightSide: Whether the Microbit is on the left/right arm
     public func computeMain(isRightSide:Bool)
     {
+        //print(isRightSide)
+        /*print("\(isRightSide) \(leftRunCount) \(rightRunCount)")
+        print("\(isRightSide && rightRunCount <= leftRunCount)" +  " \(!isRightSide && leftRunCount <= rightRunCount)")*/
         if ViewController.microbitController?.microbit?.isConnected.last! == true && measuring == true && ( (isRightSide && rightRunCount <= leftRunCount) || (!isRightSide && leftRunCount <= rightRunCount) )
         {
             if (detectPause?.isPaused(dataHolderOne: &leftData, dataHolderTwo: &rightData, runCount:leftRunCount))!
@@ -277,15 +301,16 @@ class LiveAnalysisViewController: UIViewController, ComputeDelegate, HomeDelegat
                     break
                 }
                 
-                //updating progress bars
-                
+                //updating repProgressBar
                 livePBValues[0] = Double(min((leftData?.reps)!, (rightData?.reps)!))
                 updateAveragePBValues(index: 0)
+                
                 UIView.animate(withDuration: 0.3)
                 {
                     self.repProgressBar.value = CGFloat(self.livePBValues[0])
                 }
                 
+                //updating romProgressBar
                 livePBValues[1] = Double(((leftData?.rom)!+(rightData?.rom)!)/2)
                 updateAveragePBValues(index: 1)
                 UIView.animate(withDuration: 0.4)
@@ -293,6 +318,7 @@ class LiveAnalysisViewController: UIViewController, ComputeDelegate, HomeDelegat
                     self.romProgressBar.value = CGFloat(self.livePBValues[1])
                 }
                 
+                //updating sprProgressBar
                 livePBValues[2] = ((leftData?.spr)!+(rightData?.spr)!)/2
                 updateAveragePBValues(index: 2)
                 UIView.animate(withDuration: 0.3)
@@ -300,12 +326,12 @@ class LiveAnalysisViewController: UIViewController, ComputeDelegate, HomeDelegat
                     self.sprProgressBar.value = CGFloat(self.livePBValues[2])
                 }
                 
+                //updating symmetryProgressBar
                 if leftRunCount%55 == 0
                 {
                     UIView.animate(withDuration: 0.3)
                     {
                         let tempSimil = Double((self.similarity?.overallSimilarity(leftArray: (self.leftData?.dX)!, rightArray: (self.rightData?.dX)!))!)
-                        //print(tempSimil)
                         if tempSimil != -1
                         {
                             self.livePBValues[3] = tempSimil

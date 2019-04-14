@@ -344,7 +344,7 @@ public class Microbit: NSObject,CBCentralManagerDelegate,CBPeripheralDelegate {
         peripheral.discoverServices(nil)
     }
     
-    // MARK: Core bluetooth Perioheral Delegate methods
+    // MARK: Core bluetooth Peripheral Delegate methods
     
     public func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
         log("Looking for peripheral services")
@@ -356,7 +356,7 @@ public class Microbit: NSObject,CBCentralManagerDelegate,CBPeripheralDelegate {
         //starting to find second microbit
         if peripheral == Microbit.microbitPeripherals!.first!
         {
-            let when = DispatchTime.now() + (4)
+            let when = DispatchTime.now() + (3)
             DispatchQueue.main.asyncAfter(deadline: when)
             {
                 self.startScanning()

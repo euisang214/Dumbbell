@@ -36,7 +36,7 @@ class RangeOfMotion
     ///   - runCount: The number of times accerlerometer data has been passed to the iOS device
     public func updateROM(dataHolder:inout DataHolder, runCount:Int)
     {
-        //a variable that will contain the most recent range travelled, in double; aka the difference between the greatest and smallest accelerometer values
+        //a variable that will represent the most recent range travelled, in double; aka the difference between the greatest and smallest accelerometer values
         let range:Double = abs( Double(recentReps.max()! - recentReps.min()!) )
  
         if standardDifference != nil

@@ -23,14 +23,12 @@ class HomeViewController: UIViewController, UpdateConnectionIndicators, LiveAnal
     @IBOutlet weak var leftImage: UIImageView!
     @IBOutlet weak var rightImage: UIImageView!
     
-    @IBOutlet weak var connectionRightL: UILabel!
-    @IBOutlet weak var connectionLeftL: UILabel!
     @IBOutlet weak var connectB: UIButton!
     @IBOutlet weak var disconnectB: UIButton!
     
     @IBAction func startScanning(_ sender: UIButton)
     {
-        connectB.setTitle("Connecting", for: .normal)
+        headerL.text = "Connecting"
         connectB.isEnabled = false
         ViewController.microbitController?.startScanning()
         disconnectB.isEnabled = true
@@ -81,11 +79,11 @@ class HomeViewController: UIViewController, UpdateConnectionIndicators, LiveAnal
             {
             case true:
                 UIView.transition(with: images[index], duration: 1, options: .transitionCrossDissolve, animations: {
-                    self.rightImage.image = UIImage(named: "Connected")
+                    images[index].image = UIImage(named: "Connected")
                 }, completion: nil)
             case false:
                 UIView.transition(with: images[index], duration: 1, options: .transitionCrossDissolve, animations: {
-                    self.rightImage.image = UIImage.init(named: "Connecting")
+                    images[index].image = UIImage.init(named: "Connecting")
                 }, completion: nil)
             }
         }
@@ -97,12 +95,12 @@ class HomeViewController: UIViewController, UpdateConnectionIndicators, LiveAnal
     /// - Parameter isConnected: Connection status of both Microbits
     public func updateConnectionIndicators(isConnected: [Bool])
     {
-        labelUpdate(labels: [connectionRightL, connectionLeftL], isConnected)
+        //labelUpdate(labels: [connectionRightL, connectionLeftL], isConnected)
         updateImage(images: [rightImage, leftImage], isConnected)
         
         if isConnected.first == true && isConnected.last == true
         {
-            connectB.setTitle("Connected", for: .normal)
+            headerL.text = "Connected"
             connectB.isEnabled = false
             HomeViewController.delegate?.changeMeasuringStatusUpdateButtonStatus(true)
             disconnectB.isEnabled = true
@@ -113,11 +111,11 @@ class HomeViewController: UIViewController, UpdateConnectionIndicators, LiveAnal
     public func disconnectMicrobits()
     {
         let microbit = ViewController.microbitController?.microbit
-        if connectB.currentTitle == "Connecting"
+        if headerL.text == "Connecting"
         {
             microbit!.stopScanning()
             disconnectB.isEnabled = false
-            connectB.setTitle("Connect", for: .normal)
+            headerL.text = "Not Connected"
             connectB.isEnabled = true
             microbit!.disconnect()
         }
@@ -128,7 +126,7 @@ class HomeViewController: UIViewController, UpdateConnectionIndicators, LiveAnal
             DispatchQueue.main.asyncAfter(deadline: after)
             {
                 self.connectB.isEnabled = true
-                self.connectB.setTitle("Connect", for: .normal)
+                self.headerL.text = "Connect"
                 self.disconnectB.isEnabled = false
             }
         }
@@ -141,15 +139,15 @@ class HomeViewController: UIViewController, UpdateConnectionIndicators, LiveAnal
     {
         super.viewDidLoad()
     
-        headerL.isHidden = true
+//        headerL.isHidden = true
         disconnectB.isEnabled = false
         ViewController.updateConnectionIndicators = self
         LiveAnalysisViewController.liveAnalysisDelegate = self
         
-        connectionLeftL.text = "Not Connected"
+       /* connectionLeftL.text = "Not Connected"
         connectionLeftL.textColor = UIColor.red
         connectionRightL.text = "Not Connected"
-        connectionRightL.textColor = UIColor.red
+        connectionRightL.textColor = UIColor.red*/
         
         disconnectB.setTitleColor(UIColor.gray, for: .disabled)
         connectB.setTitleColor(UIColor.gray, for: .disabled)

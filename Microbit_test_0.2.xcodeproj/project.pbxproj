@@ -131,6 +131,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		021E189D22636588009B8DE8 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				02A943F921D43073001E925A /* Similarity.swift */,
+				02A943FC21D43074001E925A /* DetectPause.swift */,
+				024EA95121D81B410050CCAD /* Speed.swift */,
+				024EA94F21D705690050CCAD /* RangeOfMotion.swift */,
+				02A943FD21D43074001E925A /* RepCount.swift */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
 		022E028C21D3865D0052501A = {
 			isa = PBXGroup;
 			children = (
@@ -160,6 +172,7 @@
 				02D2765421D61C41003B2B7B /* Photos */,
 				02A943EF21D4301B001E925A /* Microbit */,
 				02A943F821D43054001E925A /* DataHandlers */,
+				021E189D22636588009B8DE8 /* Features */,
 				02A943EE21D42F79001E925A /* Views */,
 				0255E74B22544821003033D7 /* Feedback */,
 				022E029821D3865D0052501A /* AppDelegate.swift */,
@@ -227,11 +240,6 @@
 			children = (
 				02A943FA21D43073001E925A /* DataHolder.swift */,
 				02A943FB21D43074001E925A /* DataCollecter.swift */,
-				02A943F921D43073001E925A /* Similarity.swift */,
-				02A943FC21D43074001E925A /* DetectPause.swift */,
-				024EA95121D81B410050CCAD /* Speed.swift */,
-				024EA94F21D705690050CCAD /* RangeOfMotion.swift */,
-				02A943FD21D43074001E925A /* RepCount.swift */,
 			);
 			path = DataHandlers;
 			sourceTree = "<group>";
@@ -340,6 +348,7 @@
 				TargetAttributes = {
 					022E029421D3865D0052501A = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1020;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -348,10 +357,12 @@
 					};
 					022E02A821D3865F0052501A = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1020;
 						TestTargetID = 022E029421D3865D0052501A;
 					};
 					022E02B321D3865F0052501A = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1020;
 						TestTargetID = 022E029421D3865D0052501A;
 					};
 				};
@@ -693,7 +704,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "cis.Microbit-test-0-Crit";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -715,7 +726,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "cis.Microbit-test-0-Crit";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -735,7 +746,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "cis.Microbit-test-0-2Tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Microbit_test_0.2.app/Microbit_test_0.2";
 			};
@@ -756,7 +767,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "cis.Microbit-test-0-2Tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Microbit_test_0.2.app/Microbit_test_0.2";
 			};
@@ -776,7 +787,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "cis.Microbit-test-0-2UITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = Microbit_test_0.2;
 			};
@@ -796,7 +807,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "cis.Microbit-test-0-2UITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = Microbit_test_0.2;
 			};
